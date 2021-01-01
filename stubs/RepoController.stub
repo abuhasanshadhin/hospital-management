@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Repositories\_RepositoryName;
+use Illuminate\Http\Request;
+
+class _ModelNameController extends Controller
+{
+    private $_repoName;
+
+    public function __construct()
+    {
+        $this->_repoName = new _RepositoryName;
+    }
+
+    public function get_ModelNames()
+    {
+        $_repoInfos = $this->_repoName->Get();
+        return response()->json(['_repo_infos' => $_repoInfos], 200);
+    }
+
+    public function add_ModelName(Request $request)
+    {
+        $res = $this->_repoName->Insert($request);
+        return response()->json(['message' => $res->message], $res->code);
+    }
+
+    public function update_ModelName(Request $request)
+    {
+        $res = $this->_repoName->Update($request);
+        return response()->json(['message' => $res->message], $res->code);
+    }
+
+    public function delete_ModelName(Request $request)
+    {
+        $res = $this->_repoName->Delete($request);
+        return response()->json(['message' => $res->message], $res->code);
+    }
+}
