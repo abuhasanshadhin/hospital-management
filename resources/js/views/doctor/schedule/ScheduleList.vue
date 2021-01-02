@@ -22,9 +22,29 @@
                     </div>
 
                     <div class="custom-modal-content">
-                        <table
-                            class="table table-sm text-center table-bordered"
-                        >
+                        <div class="clearfix mb-2">
+                            <div class="float-left">
+                                <div style="line-height: 1">
+                                    <b>D-0004 : </b> Brig. Gen. Dr. Md. Amzad
+                                    Hossain Fakir (Rtd.)
+                                </div>
+                                <div style="line-height: 1.1">
+                                    <small
+                                        class="text-uppercase"
+                                        style="font-size: 75%"
+                                    >
+                                        <b>
+                                            <i class="fa fa-building"></i>
+                                            Cardiology Department
+                                        </b>
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="float-right">
+                                <schedule-modal></schedule-modal>
+                            </div>
+                        </div>
+                        <table class="table table-sm table-bordered">
                             <thead>
                                 <tr>
                                     <th>SL</th>
@@ -41,8 +61,11 @@
                                     <td>{{ item.startTime }}</td>
                                     <td>{{ item.endTime }}</td>
                                     <td>
-                                        <edit-modal></edit-modal>
-                                        <button class="btn btn-sm btn-danger">
+                                        <schedule-modal
+                                            edit
+                                            small
+                                        ></schedule-modal>
+                                        <button class="btn-action text-danger">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </td>
@@ -51,35 +74,7 @@
                         </table>
                     </div>
 
-                    <div class="custom-modal-footer info">
-                        <div class="row">
-                            <div class="col-md-9">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <div class="">
-                                            <img
-                                                height="72"
-                                                src="http://localhost/hospital-management/public/images/image-not-available.png"
-                                                alt=""
-                                            />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <div class="font-weight-bold">
-                                            Dr. Taraki Ahamed Mehedi
-                                        </div>
-                                        <div><b>Phone : </b> 02923432964</div>
-                                        <div>
-                                            <b>Department : </b> Cardiology
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <create-modal></create-modal>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="custom-modal-footer"></div>
                 </div>
             </div>
         </transition>
@@ -87,13 +82,11 @@
 </template>
 
 <script>
-import CreateModal from "./Create";
-import EditModal from "./Edit";
+import ScheduleModal from "./Schedule";
 
 export default {
     components: {
-        CreateModal,
-        EditModal,
+        ScheduleModal,
     },
     data() {
         return {

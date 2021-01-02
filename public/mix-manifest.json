@@ -12,13 +12,12 @@
     "/js/chunks/department~doctor.js": "/js/chunks/department~doctor.js",
     "/js/chunks/doctor.js": "/js/chunks/doctor.js",
     "/js/chunks/doctors.js": "/js/chunks/doctors.js",
+    "/js/chunks/doctors~patient.js": "/js/chunks/doctors~patient.js",
     "/js/chunks/patient.js": "/js/chunks/patient.js",
     "/js/chunks/patient-add.js": "/js/chunks/patient-add.js",
     "/js/chunks/patient-edit.js": "/js/chunks/patient-edit.js",
     "/js/chunks/prescription.js": "/js/chunks/prescription.js",
-    "/js/chunks/vendors~doctors.js": "/js/chunks/vendors~doctors.js",
-    "/js/chunks/vendors~patient.js": "/js/chunks/vendors~patient.js",
-    "/js/chunks/doctors~patient.js": "/js/chunks/doctors~patient.js",
     "/js/chunks/vendors~doctor.js": "/js/chunks/vendors~doctor.js",
-    "/js/chunks/acl~appointment~department~patient~prescription.js": "/js/chunks/acl~appointment~department~patient~prescription.js"
+    "/js/chunks/vendors~doctors.js": "/js/chunks/vendors~doctors.js",
+    "/js/chunks/vendors~patient.js": "/js/chunks/vendors~patient.js"
 }

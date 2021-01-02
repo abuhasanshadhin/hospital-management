@@ -64,7 +64,7 @@
 
 <script>
 import DataTable from "../../components/DataTable";
-import DoctorSchedule from "./schedule/Index";
+import DoctorSchedule from "./schedule/ScheduleList";
 import DoctorDetails from "./Show";
 import DeleteConfirm from "../../components/Confirm";
 

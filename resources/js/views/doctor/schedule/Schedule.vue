@@ -1,10 +1,20 @@
 <template>
-    <div>
+    <div class="d-inline-block">
         <button
-            @click="isModalShow = true"
-            class="btn btn-block btn-primary btn-sm"
+            type="button"
+            @click.prevent="isModalShow = true"
+            :class="[
+                edit
+                    ? 'btn-action text-primary'
+                    : 'btn btn-sm btn-primary text-center',
+                small ? 'rounded-circle' : '',
+            ]"
         >
-            <i class="fa fa-plus"></i> Add New
+            <template v-if="edit"> <i class="fa fa-edit"></i> </template>
+            <template v-else>
+                <i class="fa fa-plus"></i>
+                <template v-if="!small">Add New</template>
+            </template>
         </button>
 
         <transition name="scale">
@@ -13,7 +23,8 @@
                     <div class="custom-modal-header">
                         <div class="clearfix">
                             <div class="custom-modal-title">
-                                Add New Schedule
+                                <template v-if="edit">Edit Schedule</template>
+                                <template v-else>Add New Schedule</template>
                             </div>
                             <div
                                 @click="isModalShow = false"
@@ -60,8 +71,26 @@
                     </div>
 
                     <div class="custom-modal-footer">
-                        <button class="btn btn-secondary">Reset</button>
-                        <button class="btn btn-primary">Save</button>
+                        <button
+                            type="button"
+                            @click="resetForm"
+                            v-if="!edit"
+                            class="btn btn-dark"
+                            :disabled="btnDisabled"
+                        >
+                            <i class="fa fa-undo"></i> Reset
+                        </button>
+                        <button
+                            type="submit"
+                            :disabled="btnDisabled"
+                            class="btn btn-primary"
+                        >
+                            <i v-if="loading" class="fa fa-spin fa-spinner"></i>
+                            <span v-else>
+                                <i class="fa fa-save"></i> Save
+                                <template v-if="edit">Changes</template>
+                            </span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -74,6 +103,11 @@ import VueTimepicker from "vue2-timepicker";
 import "vue2-timepicker/dist/VueTimepicker.css";
 
 export default {
+    props: {
+        small: Boolean,
+        edit: Boolean,
+        data: null,
+    },
     components: {
         VueTimepicker,
     },
@@ -81,9 +115,13 @@ export default {
         return {
             isModalShow: false,
             availableTimeFrom: "",
+            loading: false,
+            btnDisabled: false,
         };
     },
-    methods: {},
+    methods: {
+        resetForm() {},
+    },
 };
 </script>
 
