@@ -36,11 +36,22 @@
                         </div>
                     </template>
                     <template v-slot:[`action`]="{ item }">
-                        <doctor-schedule></doctor-schedule>
-                        <doctor-details :doctor="item"></doctor-details>
+                        <button
+                            @click.prevent="doctorSchedule(item)"
+                            type="button"
+                            class="btn-action text-dark"
+                            title="Doctor Schedule"
+                        >
+                            <i class="fa fa-clock"></i>
+                        </button>
+                        <doctor-details
+                            :doctor="item"
+                            title="Doctor Details"
+                        ></doctor-details>
                         <router-link
                             :to="`/doctor/${item.id}`"
                             class="btn-action text-info"
+                            title="Edit"
                         >
                             <i class="fa fa-edit"></i>
                         </router-link>
@@ -48,6 +59,7 @@
                             @click.prevent="showDeleteDialog(item.id)"
                             type="button"
                             class="btn-action text-danger"
+                            title="Delete"
                         >
                             <i class="fa fa-trash"></i>
                         </button>
@@ -55,17 +67,25 @@
                 </data-table>
             </div>
         </div>
+
         <delete-confirm
             ref="deleteConfirm"
             @confirm="deleteDoctor"
         ></delete-confirm>
+
+        <doctor-schedule
+            :doctor="doctor"
+            :doctor_id="doctorId"
+            :modal_show="scheduleModalShow"
+            @closeModal="scheduleModalShow = false"
+        ></doctor-schedule>
     </div>
 </template>
 
 <script>
 import DataTable from "../../components/DataTable";
 import DoctorSchedule from "./schedule/ScheduleList";
-import DoctorDetails from "./Show";
+import DoctorDetails from "./DoctorDetails";
 import DeleteConfirm from "../../components/Confirm";
 
 export default {
@@ -88,6 +108,9 @@ export default {
                 { text: "Action", key: "action" },
             ],
             doctorDeleteId: null,
+            doctorId: null,
+            doctor: null,
+            scheduleModalShow: false,
         };
     },
     created() {
@@ -109,6 +132,11 @@ export default {
                 data: { id: this.doctorDeleteId },
             });
             if (res) this.doctorDeleteId = null;
+        },
+        doctorSchedule(_doctor) {
+            this.doctor = _doctor;
+            this.doctorId = _doctor.id;
+            this.scheduleModalShow = true;
         },
     },
 };
