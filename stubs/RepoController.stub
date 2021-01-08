@@ -14,9 +14,9 @@ class _ModelNameController extends Controller
         $this->_repoName = new _RepositoryName;
     }
 
-    public function get_ModelNames()
+    public function get_ModelNames(Request $request)
     {
-        $_repoInfos = $this->_repoName->Get();
+        $_repoInfos = $this->_repoName->Get($request);
         return response()->json(['_repo_infos' => $_repoInfos], 200);
     }
 

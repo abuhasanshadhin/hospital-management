@@ -31,10 +31,15 @@
                         </div>
                     </template>
                     <template v-slot:[`action`]="{ item }">
-                        <department-modal edit :data="item"></department-modal>
+                        <department-modal
+                            edit
+                            :data="item"
+                            title="Edit"
+                        ></department-modal>
                         <button
                             @click="showDeleteConfirm(item.id)"
                             class="btn-action text-danger"
+                            title="Delete"
                         >
                             <i class="fa fa-trash"></i>
                         </button>

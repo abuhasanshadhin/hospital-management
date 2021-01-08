@@ -1,5 +1,6 @@
 <?php
-
+ 
+use App\Http\Controllers\DoctorScheduleController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\DepartmentController;
 use Illuminate\Http\Request;
@@ -32,3 +33,10 @@ Route::get('/get_doctor/{id}', [DoctorController::class, 'getDoctor']);
 Route::post('/add_doctor', [DoctorController::class, 'addDoctor']);
 Route::post('/update_doctor', [DoctorController::class, 'updateDoctor']);
 Route::post('/delete_doctor', [DoctorController::class, 'deleteDoctor']);
+
+
+// doctor schedule
+Route::post('/get_doctor_schedules', [DoctorScheduleController::class, 'getDoctorSchedules']);
+Route::post('/add_doctor_schedule', [DoctorScheduleController::class, 'addDoctorSchedule']);
+Route::post('/update_doctor_schedule', [DoctorScheduleController::class, 'updateDoctorSchedule']);
+Route::post('/delete_doctor_schedule', [DoctorScheduleController::class, 'deleteDoctorSchedule']);

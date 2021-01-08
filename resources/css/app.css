@@ -4771,14 +4771,14 @@ input[type="button"].btn-block {
 
 .page-item:first-child .page-link {
   margin-left: 0;
-  border-top-left-radius: 0.35rem;
-  border-bottom-left-radius: 0.35rem;
+  /* border-top-left-radius: 0.35rem;
+  border-bottom-left-radius: 0.35rem; */
 }
 
-.page-item:last-child .page-link {
+/* .page-item:last-child .page-link {
   border-top-right-radius: 0.35rem;
   border-bottom-right-radius: 0.35rem;
-}
+} */
 
 .page-item.active .page-link {
   z-index: 3;
@@ -11359,6 +11359,17 @@ body {
 	width: 100% !important;
 }
 
+.vue__time-picker input.display-time {
+    border: 1px solid #d1d3e2;
+    border-radius: 0.35rem;
+    outline: 0;
+}
+
+.vue__time-picker .time-picker:focus,
+.vue__time-picker input.display-time:focus {
+    border: 1px solid #8a8a8a;
+}
+
 
 .education p {
   margin-bottom: 0;
@@ -11463,3 +11474,5 @@ legend {
 .data-table .page-link {
   padding: 3px 8px;
 }
+
+

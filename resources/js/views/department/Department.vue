@@ -35,7 +35,7 @@
                         </div>
                     </div>
 
-                    <form @submit.prevent="saveDepartment" method="POST">
+                    <form @submit.prevent="saveDepartment" method="post">
                         <div class="custom-modal-content">
                             <div class="form-group">
                                 <label for="name"
@@ -134,7 +134,7 @@ export default {
     props: {
         small: Boolean,
         edit: Boolean,
-        data: null,
+        data: Object,
     },
     data() {
         return {

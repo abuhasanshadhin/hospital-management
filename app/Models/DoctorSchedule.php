@@ -6,19 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Doctor extends Model
+class DoctorSchedule extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $guarded = [];
 
-    public function department()
+    public function doctor()
     {
-        return $this->belongsTo(Department::class);
-    }
-
-    public function shedules()
-    {
-        return $this->hasMany(DoctorSchedule::class);
+        return $this->belongsTo(Doctor::class);
     }
 }

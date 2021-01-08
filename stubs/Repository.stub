@@ -7,7 +7,7 @@ use stdClass;
 
 class _RepositoryName
 {
-    public function Get()
+    public function Get($req)
     {
         return _ModelName::latest()->get();
     }
