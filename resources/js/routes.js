@@ -16,16 +16,12 @@ export default [
         component: () => import(/* webpackChunkName: "doctor" */ './views/doctor/Doctor')
     },
     {
-        path: '/patient',
-        component: () => import(/* webpackChunkName: "patient" */ './views/patient/Index')
+        path: '/patients',
+        component: () => import(/* webpackChunkName: "patients" */ './views/patient/PatientList')
     },
     {
-        path: '/patient/add',
-        component: () => import(/* webpackChunkName: "patient-add" */ './views/patient/Create')
-    },
-    {
-        path: '/patient/:id/edit',
-        component: () => import(/* webpackChunkName: "patient-edit" */ './views/patient/Edit')
+        path: '/patient/:id?',
+        component: () => import(/* webpackChunkName: "patient" */ './views/patient/Patient')
     },
     {
         path: '/appointment',
