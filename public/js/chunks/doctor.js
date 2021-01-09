@@ -1212,7 +1212,7 @@ var render = function() {
                   _vm._m(3),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-8" }, [
-                    _c("input", {
+                    _c("textarea", {
                       directives: [
                         {
                           name: "model",
@@ -1223,7 +1223,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { type: "text" },
+                      attrs: { rows: "1" },
                       domProps: { value: _vm.doctor.address },
                       on: {
                         input: function($event) {

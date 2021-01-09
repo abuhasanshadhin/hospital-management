@@ -140,11 +140,11 @@
                                     <span class="text-danger">*</span></label
                                 >
                                 <div class="col-md-8">
-                                    <input
-                                        type="text"
+                                    <textarea
                                         v-model.trim="doctor.address"
+                                        rows="1"
                                         class="form-control"
-                                    />
+                                    ></textarea>
                                 </div>
                             </div>
                         </div>
