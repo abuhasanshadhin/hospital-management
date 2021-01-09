@@ -152,7 +152,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   props: {
     small: Boolean,
     edit: Boolean,
-    data: null
+    data: Object
   },
   data: function data() {
     return {
@@ -349,7 +349,7 @@ var render = function() {
                 _c(
                   "form",
                   {
-                    attrs: { method: "POST" },
+                    attrs: { method: "post" },
                     on: {
                       submit: function($event) {
                         $event.preventDefault()

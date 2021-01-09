@@ -177,6 +177,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -499,13 +504,14 @@ var render = function() {
                       var item = ref.item
                       return [
                         _c("department-modal", {
-                          attrs: { edit: "", data: item }
+                          attrs: { edit: "", data: item, title: "Edit" }
                         }),
                         _vm._v(" "),
                         _c(
                           "button",
                           {
                             staticClass: "btn-action text-danger",
+                            attrs: { title: "Delete" },
                             on: {
                               click: function($event) {
                                 return _vm.showDeleteConfirm(item.id)

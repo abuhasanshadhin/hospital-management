@@ -58,7 +58,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_DataTable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/DataTable */ "./resources/js/components/DataTable.vue");
 /* harmony import */ var _schedule_ScheduleList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./schedule/ScheduleList */ "./resources/js/views/doctor/schedule/ScheduleList.vue");
-/* harmony import */ var _Show__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Show */ "./resources/js/views/doctor/Show.vue");
+/* harmony import */ var _DoctorDetails__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./DoctorDetails */ "./resources/js/views/doctor/DoctorDetails.vue");
 /* harmony import */ var _components_Confirm__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/Confirm */ "./resources/js/components/Confirm.vue");
 
 
@@ -66,6 +66,26 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -138,7 +158,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   components: {
     DataTable: _components_DataTable__WEBPACK_IMPORTED_MODULE_1__["default"],
     DoctorSchedule: _schedule_ScheduleList__WEBPACK_IMPORTED_MODULE_2__["default"],
-    DoctorDetails: _Show__WEBPACK_IMPORTED_MODULE_3__["default"],
+    DoctorDetails: _DoctorDetails__WEBPACK_IMPORTED_MODULE_3__["default"],
     DeleteConfirm: _components_Confirm__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   data: function data() {
@@ -174,7 +194,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         text: "Action",
         key: "action"
       }],
-      doctorDeleteId: null
+      doctorDeleteId: null,
+      doctorId: null,
+      doctor: null,
+      scheduleModalShow: false
     };
   },
   created: function created() {
@@ -224,6 +247,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee);
       }))();
+    },
+    doctorSchedule: function doctorSchedule(_doctor) {
+      this.doctor = _doctor;
+      this.doctorId = _doctor.id;
+      this.scheduleModalShow = true;
     }
   }
 });
@@ -239,10 +267,78 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue2_timepicker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue2-timepicker */ "./node_modules/vue2-timepicker/dist/VueTimepicker.common.js");
-/* harmony import */ var vue2_timepicker__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue2_timepicker__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue2_timepicker_dist_VueTimepicker_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue2-timepicker/dist/VueTimepicker.css */ "./node_modules/vue2-timepicker/dist/VueTimepicker.css");
-/* harmony import */ var vue2_timepicker_dist_VueTimepicker_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue2_timepicker_dist_VueTimepicker_css__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue2_timepicker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue2-timepicker */ "./node_modules/vue2-timepicker/dist/VueTimepicker.common.js");
+/* harmony import */ var vue2_timepicker__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue2_timepicker__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue2_timepicker_dist_VueTimepicker_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue2-timepicker/dist/VueTimepicker.css */ "./node_modules/vue2-timepicker/dist/VueTimepicker.css");
+/* harmony import */ var vue2_timepicker_dist_VueTimepicker_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue2_timepicker_dist_VueTimepicker_css__WEBPACK_IMPORTED_MODULE_2__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -349,21 +445,158 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     small: Boolean,
     edit: Boolean,
-    data: null
+    doctorID: Number,
+    data: Object
   },
   components: {
-    VueTimepicker: vue2_timepicker__WEBPACK_IMPORTED_MODULE_0___default.a
+    VueTimepicker: vue2_timepicker__WEBPACK_IMPORTED_MODULE_1___default.a
   },
   data: function data() {
     return {
       isModalShow: false,
-      availableTimeFrom: "",
+      schedule: {
+        available_day: "",
+        total_serial: 0,
+        start_time: "",
+        end_time: ""
+      },
       loading: false,
-      btnDisabled: false
+      btnDisabled: false,
+      editId: null
     };
   },
+  computed: {
+    availableDays: function availableDays() {
+      var schedules = this.$store.getters["doctorSchedule/schedules"].map(function (item) {
+        return item.available_day;
+      });
+      var availableDays = [];
+      this.$store.getters["doctorSchedule/days"].forEach(function (day) {
+        if (schedules.indexOf(day) == -1) availableDays.push(day);
+      });
+      return availableDays;
+    }
+  },
+  watch: {
+    data: function data(schedule) {
+      var _this = this;
+
+      if (schedule == null) return;
+      Object.keys(this.data).map(function (k) {
+        return _this.schedule[k] = _this.data[k];
+      });
+      this.editId = this.data.id;
+    }
+  },
+  created: function created() {
+    var _this2 = this;
+
+    if (this.data != null) {
+      Object.keys(this.data).map(function (k) {
+        return _this2.schedule[k] = _this2.data[k];
+      });
+      this.editId = this.data.id;
+    }
+  },
   methods: {
-    resetForm: function resetForm() {}
+    saveDoctorSchedule: function saveDoctorSchedule() {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var doctorSchedule, res, _doctorSchedule, _res;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                if (!_this3.validate()) {
+                  _context.next = 2;
+                  break;
+                }
+
+                return _context.abrupt("return");
+
+              case 2:
+                _this3.btnDisabled = _this3.loading = true;
+
+                if (!(_this3.editId == null)) {
+                  _context.next = 12;
+                  break;
+                }
+
+                doctorSchedule = _this3.schedule;
+                doctorSchedule.doctor_id = _this3.doctorID;
+                _context.next = 8;
+                return _this3.$store.dispatch("doctorSchedule/processSchedule", {
+                  url: "add_doctor_schedule",
+                  data: doctorSchedule
+                });
+
+              case 8:
+                res = _context.sent;
+
+                if (res) {
+                  _this3.resetForm();
+
+                  _this3.isModalShow = false;
+                }
+
+                _context.next = 18;
+                break;
+
+              case 12:
+                _doctorSchedule = _this3.schedule;
+                _doctorSchedule.id = _this3.editId;
+                _context.next = 16;
+                return _this3.$store.dispatch("doctorSchedule/processSchedule", {
+                  url: "update_doctor_schedule",
+                  data: _doctorSchedule
+                });
+
+              case 16:
+                _res = _context.sent;
+
+                if (_res) {
+                  _this3.resetForm();
+
+                  _this3.isModalShow = false;
+                }
+
+              case 18:
+                _this3.btnDisabled = _this3.loading = false;
+
+              case 19:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    validate: function validate() {
+      var _this4 = this;
+
+      var props = ["available_day", "total_serial", "start_time", "end_time"];
+      var errorCount = 0;
+      props.forEach(function (prop) {
+        if (!_this4.schedule[prop]) {
+          errorCount++;
+          var propName = prop.replace("_id", "");
+          propName = propName.replace("_", " ");
+          var message = "The ".concat(propName, " field is required");
+          snackbar.warning(message, "topRight");
+        }
+      });
+      return errorCount ? true : false;
+    },
+    resetForm: function resetForm() {
+      var _this5 = this;
+
+      Object.keys(this.schedule).map(function (k) {
+        return _this5.schedule[k] = "";
+      });
+      this.schedule.total_serial = 0;
+    }
   }
 });
 
@@ -378,7 +611,32 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Schedule__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Schedule */ "./resources/js/views/doctor/schedule/Schedule.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_Confirm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/Confirm */ "./resources/js/components/Confirm.vue");
+/* harmony import */ var _Schedule__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Schedule */ "./resources/js/views/doctor/schedule/Schedule.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -463,33 +721,65 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    doctor: Object,
+    modal_show: Boolean,
+    doctor_id: Number
+  },
   components: {
-    ScheduleModal: _Schedule__WEBPACK_IMPORTED_MODULE_0__["default"]
+    ScheduleModal: _Schedule__WEBPACK_IMPORTED_MODULE_2__["default"],
+    Confirm: _components_Confirm__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
-      isModalShow: false,
-      availableDays: [{
-        day: "Sunday",
-        startTime: "4:15 AM",
-        endTime: "7:30 AM"
-      }, {
-        day: "Monday",
-        startTime: "2:00 AM",
-        endTime: "5:00 AM"
-      }, {
-        day: "Wednesday",
-        startTime: "5:00 AM",
-        endTime: "9:00 AM"
-      }, {
-        day: "Friday",
-        startTime: "9:00 AM",
-        endTime: "9:00 AM"
-      }]
+      deleteId: null
     };
   },
-  methods: {}
+  watch: {
+    doctor_id: function doctor_id(id) {
+      this.$store.dispatch("doctorSchedule/getSchedules", {
+        doctor_id: id
+      });
+    }
+  },
+  methods: {
+    showDeleteConfirm: function showDeleteConfirm(id) {
+      this.deleteId = id;
+      this.$refs.deleteConfirm.show = true;
+    },
+    deleteSchedule: function deleteSchedule() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _this.$refs.deleteConfirm.show = false;
+                _context.next = 3;
+                return _this.$store.dispatch("doctorSchedule/processSchedule", {
+                  url: "delete_doctor_schedule",
+                  data: {
+                    id: _this.deleteId
+                  }
+                });
+
+              case 3:
+                res = _context.sent;
+                if (res) _this.deleteId = null;
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    }
+  }
 });
 
 /***/ }),
@@ -710,15 +1000,30 @@ var render = function() {
                     fn: function(ref) {
                       var item = ref.item
                       return [
-                        _c("doctor-schedule"),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn-action text-dark",
+                            attrs: { type: "button", title: "Doctor Schedule" },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.doctorSchedule(item)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fa fa-clock" })]
+                        ),
                         _vm._v(" "),
-                        _c("doctor-details", { attrs: { doctor: item } }),
+                        _c("doctor-details", {
+                          attrs: { doctor: item, title: "Doctor Details" }
+                        }),
                         _vm._v(" "),
                         _c(
                           "router-link",
                           {
                             staticClass: "btn-action text-info",
-                            attrs: { to: "/doctor/" + item.id }
+                            attrs: { to: "/doctor/" + item.id, title: "Edit" }
                           },
                           [_c("i", { staticClass: "fa fa-edit" })]
                         ),
@@ -727,7 +1032,7 @@ var render = function() {
                           "button",
                           {
                             staticClass: "btn-action text-danger",
-                            attrs: { type: "button" },
+                            attrs: { type: "button", title: "Delete" },
                             on: {
                               click: function($event) {
                                 $event.preventDefault()
@@ -753,6 +1058,19 @@ var render = function() {
       _c("delete-confirm", {
         ref: "deleteConfirm",
         on: { confirm: _vm.deleteDoctor }
+      }),
+      _vm._v(" "),
+      _c("doctor-schedule", {
+        attrs: {
+          doctor: _vm.doctor,
+          doctor_id: _vm.doctorId,
+          modal_show: _vm.scheduleModalShow
+        },
+        on: {
+          closeModal: function($event) {
+            _vm.scheduleModalShow = false
+          }
+        }
       })
     ],
     1
@@ -800,7 +1118,7 @@ var render = function() {
         {
           class: [
             _vm.edit
-              ? "btn-action text-primary"
+              ? "btn-action text-info"
               : "btn btn-sm btn-primary text-center",
             _vm.small ? "rounded-circle" : ""
           ],
@@ -856,107 +1174,246 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "custom-modal-content" }, [
-                  _c(
-                    "div",
-                    { staticClass: "form-group" },
-                    [
-                      _c("label", { attrs: { for: "" } }, [
-                        _vm._v("Available Day")
+                _c(
+                  "form",
+                  {
+                    attrs: { method: "post" },
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.saveDoctorSchedule($event)
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "custom-modal-content" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-md-6" }, [
+                          _c(
+                            "div",
+                            { staticClass: "form-group" },
+                            [
+                              _c("label", { attrs: { for: "" } }, [
+                                _vm._v(
+                                  "Available Day\n                                        "
+                                ),
+                                _c("span", { staticClass: "text-danger" }, [
+                                  _vm._v("*")
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("v-select", {
+                                attrs: { options: _vm.availableDays },
+                                model: {
+                                  value: _vm.schedule.available_day,
+                                  callback: function($$v) {
+                                    _vm.$set(
+                                      _vm.schedule,
+                                      "available_day",
+                                      typeof $$v === "string" ? $$v.trim() : $$v
+                                    )
+                                  },
+                                  expression:
+                                    "\n                                            schedule.available_day\n                                        "
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-6" }, [
+                          _c("div", { staticClass: "form-group" }, [
+                            _c("label", { attrs: { for: "" } }, [
+                              _vm._v(
+                                "Total Serial\n                                        "
+                              ),
+                              _c("span", { staticClass: "text-danger" }, [
+                                _vm._v("*")
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model.number",
+                                  value: _vm.schedule.total_serial,
+                                  expression:
+                                    "\n                                            schedule.total_serial\n                                        ",
+                                  modifiers: { number: true }
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { type: "number", min: "0", id: "" },
+                              domProps: { value: _vm.schedule.total_serial },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.schedule,
+                                    "total_serial",
+                                    _vm._n($event.target.value)
+                                  )
+                                },
+                                blur: function($event) {
+                                  return _vm.$forceUpdate()
+                                }
+                              }
+                            })
+                          ])
+                        ])
                       ]),
                       _vm._v(" "),
-                      _c("v-select", {
-                        attrs: {
-                          options: ["Sunday", "Monday", "Tuesday", "Wednesday"]
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "" } }, [
-                      _vm._v("Available Time")
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-md-6" }, [
+                          _c(
+                            "div",
+                            { staticClass: "form-group" },
+                            [
+                              _c("label", { attrs: { for: "" } }, [
+                                _vm._v(
+                                  "Start Time\n                                        "
+                                ),
+                                _c("span", { staticClass: "text-danger" }, [
+                                  _vm._v("*")
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("vue-timepicker", {
+                                attrs: {
+                                  format: "hh:mm A",
+                                  "minute-interval": 5,
+                                  "close-on-complete": ""
+                                },
+                                model: {
+                                  value: _vm.schedule.start_time,
+                                  callback: function($$v) {
+                                    _vm.$set(
+                                      _vm.schedule,
+                                      "start_time",
+                                      typeof $$v === "string" ? $$v.trim() : $$v
+                                    )
+                                  },
+                                  expression: "schedule.start_time"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-6" }, [
+                          _c(
+                            "div",
+                            { staticClass: "form-group" },
+                            [
+                              _c("label", { attrs: { for: "" } }, [
+                                _vm._v(
+                                  "End Time\n                                        "
+                                ),
+                                _c("span", { staticClass: "text-danger" }, [
+                                  _vm._v("*")
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("vue-timepicker", {
+                                attrs: {
+                                  format: "hh:mm A",
+                                  "minute-interval": 5,
+                                  "close-on-complete": ""
+                                },
+                                model: {
+                                  value: _vm.schedule.end_time,
+                                  callback: function($$v) {
+                                    _vm.$set(
+                                      _vm.schedule,
+                                      "end_time",
+                                      typeof $$v === "string" ? $$v.trim() : $$v
+                                    )
+                                  },
+                                  expression: "schedule.end_time"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ])
+                      ])
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "row" }, [
-                      _c(
-                        "div",
-                        { staticClass: "col" },
-                        [
-                          _c("vue-timepicker", {
-                            attrs: {
-                              format: "hh:mm A",
-                              "minute-interval": 5,
-                              "close-on-complete": ""
-                            },
-                            model: {
-                              value: _vm.availableTimeFrom,
-                              callback: function($$v) {
-                                _vm.availableTimeFrom = $$v
+                    _c("div", { staticClass: "custom-modal-footer mt-1" }, [
+                      _vm.edit
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-dark",
+                              attrs: {
+                                type: "button",
+                                disabled: _vm.btnDisabled
                               },
-                              expression: "availableTimeFrom"
-                            }
-                          })
-                        ],
-                        1
-                      ),
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.$store.dispatch(
+                                    "doctorSchedule/getSchedules",
+                                    { doctor_id: _vm.doctorID }
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c("i", { staticClass: "fas fa-sync" }),
+                              _vm._v(" Refresh\n                        ")
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      !_vm.edit
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-dark",
+                              attrs: {
+                                type: "reset",
+                                disabled: _vm.btnDisabled
+                              },
+                              on: { click: _vm.resetForm }
+                            },
+                            [
+                              _c("i", { staticClass: "fa fa-undo" }),
+                              _vm._v(" Reset\n                        ")
+                            ]
+                          )
+                        : _vm._e(),
                       _vm._v(" "),
                       _c(
-                        "div",
-                        { staticClass: "col" },
-                        [
-                          _c("vue-timepicker", {
-                            attrs: {
-                              format: "hh:mm A",
-                              "minute-interval": 5,
-                              "close-on-complete": ""
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "custom-modal-footer" }, [
-                  !_vm.edit
-                    ? _c(
                         "button",
                         {
-                          staticClass: "btn btn-dark",
-                          attrs: { type: "button", disabled: _vm.btnDisabled },
-                          on: { click: _vm.resetForm }
+                          staticClass: "btn btn-primary",
+                          attrs: { type: "submit", disabled: _vm.btnDisabled }
                         },
                         [
-                          _c("i", { staticClass: "fa fa-undo" }),
-                          _vm._v(" Reset\n                    ")
+                          _vm.loading
+                            ? _c("i", { staticClass: "fa fa-spin fa-spinner" })
+                            : _c(
+                                "span",
+                                [
+                                  _c("i", { staticClass: "fa fa-save" }),
+                                  _vm._v(
+                                    " Save\n                                "
+                                  ),
+                                  _vm.edit ? [_vm._v("Changes")] : _vm._e()
+                                ],
+                                2
+                              )
                         ]
                       )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary",
-                      attrs: { type: "submit", disabled: _vm.btnDisabled }
-                    },
-                    [
-                      _vm.loading
-                        ? _c("i", { staticClass: "fa fa-spin fa-spinner" })
-                        : _c(
-                            "span",
-                            [
-                              _c("i", { staticClass: "fa fa-save" }),
-                              _vm._v(" Save\n                            "),
-                              _vm.edit ? [_vm._v("Changes")] : _vm._e()
-                            ],
-                            2
-                          )
-                    ]
-                  )
-                ])
+                    ])
+                  ]
+                )
               ])
             ])
           : _vm._e()
@@ -991,21 +1448,8 @@ var render = function() {
     "div",
     { staticClass: "d-inline-block" },
     [
-      _c(
-        "button",
-        {
-          staticClass: "btn-action text-dark",
-          on: {
-            click: function($event) {
-              _vm.isModalShow = true
-            }
-          }
-        },
-        [_c("i", { staticClass: "fa fa-clock" })]
-      ),
-      _vm._v(" "),
       _c("transition", { attrs: { name: "scale" } }, [
-        _vm.isModalShow
+        _vm.modal_show
           ? _c("div", { staticClass: "custom-modal" }, [
               _c("div", { staticClass: "custom-modal-body col-md-6" }, [
                 _c("div", { staticClass: "custom-modal-header" }, [
@@ -1022,7 +1466,7 @@ var render = function() {
                         staticClass: "custom-close",
                         on: {
                           click: function($event) {
-                            _vm.isModalShow = false
+                            return _vm.$emit("closeModal")
                           }
                         }
                       },
@@ -1035,9 +1479,11 @@ var render = function() {
                   _c("div", { staticClass: "clearfix mb-2" }, [
                     _c("div", { staticClass: "float-left" }, [
                       _c("div", { staticStyle: { "line-height": "1" } }, [
-                        _c("b", [_vm._v("D-0004 : ")]),
+                        _c("b", [_vm._v(_vm._s(_vm.doctor.code) + " : ")]),
                         _vm._v(
-                          " Brig. Gen. Dr. Md. Amzad\n                                Hossain Fakir (Rtd.)\n                            "
+                          "\n                                " +
+                            _vm._s(_vm.doctor.name) +
+                            "\n                            "
                         )
                       ]),
                       _vm._v(" "),
@@ -1052,9 +1498,14 @@ var render = function() {
                             _c("b", [
                               _c("i", { staticClass: "fa fa-building" }),
                               _vm._v(
-                                "\n                                        Cardiology Department\n                                    "
+                                "\n                                        Department :"
                               )
-                            ])
+                            ]),
+                            _vm._v(
+                              "\n                                    " +
+                                _vm._s(_vm.doctor.department_name) +
+                                "\n                                "
+                            )
                           ]
                         )
                       ])
@@ -1063,7 +1514,11 @@ var render = function() {
                     _c(
                       "div",
                       { staticClass: "float-right" },
-                      [_c("schedule-modal")],
+                      [
+                        _c("schedule-modal", {
+                          attrs: { doctorID: _vm.doctor_id }
+                        })
+                      ],
                       1
                     )
                   ]),
@@ -1082,39 +1537,62 @@ var render = function() {
                           _vm._v(" "),
                           _c("th", [_vm._v("End Time")]),
                           _vm._v(" "),
+                          _c("th", [_vm._v("T. Sl")]),
+                          _vm._v(" "),
                           _c("th", [_vm._v("Action")])
                         ])
                       ]),
                       _vm._v(" "),
                       _c(
                         "tbody",
-                        _vm._l(_vm.availableDays, function(item, i) {
-                          return _c("tr", { key: i }, [
-                            _c("td", [_vm._v(_vm._s(i + 1))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(item.day))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(item.startTime))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(item.endTime))]),
-                            _vm._v(" "),
-                            _c(
-                              "td",
-                              [
-                                _c("schedule-modal", {
-                                  attrs: { edit: "", small: "" }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "button",
-                                  { staticClass: "btn-action text-danger" },
-                                  [_c("i", { staticClass: "fa fa-trash" })]
-                                )
-                              ],
-                              1
-                            )
-                          ])
-                        }),
+                        _vm._l(
+                          _vm.$store.getters["doctorSchedule/schedules"],
+                          function(item, i) {
+                            return _c("tr", { key: i }, [
+                              _c("td", [_vm._v(_vm._s(i + 1))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(item.available_day))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(item.start_time))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(item.end_time))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(item.total_serial))]),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                [
+                                  _c("schedule-modal", {
+                                    attrs: {
+                                      edit: "",
+                                      data: item,
+                                      title: "Edit"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn-action text-danger",
+                                      attrs: {
+                                        type: "button",
+                                        title: "Delete"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                          return _vm.showDeleteConfirm(item.id)
+                                        }
+                                      }
+                                    },
+                                    [_c("i", { staticClass: "fa fa-trash" })]
+                                  )
+                                ],
+                                1
+                              )
+                            ])
+                          }
+                        ),
                         0
                       )
                     ]
@@ -1125,7 +1603,12 @@ var render = function() {
               ])
             ])
           : _vm._e()
-      ])
+      ]),
+      _vm._v(" "),
+      _c("confirm", {
+        ref: "deleteConfirm",
+        on: { confirm: _vm.deleteSchedule }
+      })
     ],
     1
   )

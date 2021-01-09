@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "js/chunks/" + ({"acl~appointment~department~doctors~patient~prescription":"acl~appointment~department~doctors~patient~prescription","acl":"acl","appointment":"appointment","department~doctor":"department~doctor","department":"department","prescription":"prescription","appointment-add":"appointment-add","appointment-edit":"appointment-edit","appointment-report":"appointment-report","dashboard":"dashboard","patient-add":"patient-add","patient-edit":"patient-edit","vendors~doctor":"vendors~doctor","doctor":"doctor","vendors~doctors":"vendors~doctors","doctors~patient":"doctors~patient","doctors":"doctors","vendors~patient":"vendors~patient","patient":"patient"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "js/chunks/" + ({"acl~appointment~department~doctors~patients~prescription":"acl~appointment~department~doctors~patients~prescription","acl":"acl","appointment":"appointment","department~doctor":"department~doctor","department":"department","prescription":"prescription","appointment-add":"appointment-add","appointment-edit":"appointment-edit","appointment-report":"appointment-report","dashboard":"dashboard","patient":"patient","vendors~doctor":"vendors~doctor","doctor":"doctor","vendors~doctors":"vendors~doctors","doctors~patients":"doctors~patients","doctors":"doctors","vendors~patients":"vendors~patients","patients":"patients"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -2366,6 +2366,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   directives: {
@@ -2388,7 +2392,7 @@ __webpack_require__.r(__webpack_exports__);
         icon: "fa fa-user-md"
       }, {
         text: "Patient",
-        link: "/patient",
+        link: "/patients",
         icon: "fa fa-wheelchair"
       }, {
         text: "Appointment",
@@ -2560,7 +2564,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.cursor-pointer {\r\n  cursor: pointer;\r\n  user-select: none;\n}\r\n", ""]);
+exports.push([module.i, "\n.cursor-pointer {\n    cursor: pointer;\n    user-select: none;\n}\n", ""]);
 
 // exports
 
@@ -7158,9 +7162,9 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n              " +
+                                      "\n                            " +
                                         _vm._s(child.text) +
-                                        "\n            "
+                                        "\n                        "
                                     )
                                   ]
                                 )
@@ -27922,12 +27926,12 @@ __webpack_require__.r(__webpack_exports__);
 }, {
   path: '/department',
   component: function component() {
-    return Promise.all(/*! import() | department */[__webpack_require__.e("acl~appointment~department~doctors~patient~prescription"), __webpack_require__.e("department~doctor"), __webpack_require__.e("department")]).then(__webpack_require__.bind(null, /*! ./views/department/DepartmentList */ "./resources/js/views/department/DepartmentList.vue"));
+    return Promise.all(/*! import() | department */[__webpack_require__.e("acl~appointment~department~doctors~patients~prescription"), __webpack_require__.e("department~doctor"), __webpack_require__.e("department")]).then(__webpack_require__.bind(null, /*! ./views/department/DepartmentList */ "./resources/js/views/department/DepartmentList.vue"));
   }
 }, {
   path: '/doctors',
   component: function component() {
-    return Promise.all(/*! import() | doctors */[__webpack_require__.e("vendors~doctors"), __webpack_require__.e("acl~appointment~department~doctors~patient~prescription"), __webpack_require__.e("doctors~patient"), __webpack_require__.e("doctors")]).then(__webpack_require__.bind(null, /*! ./views/doctor/DoctorList */ "./resources/js/views/doctor/DoctorList.vue"));
+    return Promise.all(/*! import() | doctors */[__webpack_require__.e("vendors~doctors"), __webpack_require__.e("acl~appointment~department~doctors~patients~prescription"), __webpack_require__.e("doctors~patients"), __webpack_require__.e("doctors")]).then(__webpack_require__.bind(null, /*! ./views/doctor/DoctorList */ "./resources/js/views/doctor/DoctorList.vue"));
   }
 }, {
   path: '/doctor/:id?',
@@ -27935,24 +27939,19 @@ __webpack_require__.r(__webpack_exports__);
     return Promise.all(/*! import() | doctor */[__webpack_require__.e("vendors~doctor"), __webpack_require__.e("department~doctor"), __webpack_require__.e("doctor")]).then(__webpack_require__.bind(null, /*! ./views/doctor/Doctor */ "./resources/js/views/doctor/Doctor.vue"));
   }
 }, {
-  path: '/patient',
+  path: '/patients',
   component: function component() {
-    return Promise.all(/*! import() | patient */[__webpack_require__.e("vendors~patient"), __webpack_require__.e("acl~appointment~department~doctors~patient~prescription"), __webpack_require__.e("doctors~patient"), __webpack_require__.e("patient")]).then(__webpack_require__.bind(null, /*! ./views/patient/Index */ "./resources/js/views/patient/Index.vue"));
+    return Promise.all(/*! import() | patients */[__webpack_require__.e("vendors~patients"), __webpack_require__.e("acl~appointment~department~doctors~patients~prescription"), __webpack_require__.e("doctors~patients"), __webpack_require__.e("patients")]).then(__webpack_require__.bind(null, /*! ./views/patient/PatientList */ "./resources/js/views/patient/PatientList.vue"));
   }
 }, {
-  path: '/patient/add',
+  path: '/patient/:id?',
   component: function component() {
-    return __webpack_require__.e(/*! import() | patient-add */ "patient-add").then(__webpack_require__.bind(null, /*! ./views/patient/Create */ "./resources/js/views/patient/Create.vue"));
-  }
-}, {
-  path: '/patient/:id/edit',
-  component: function component() {
-    return __webpack_require__.e(/*! import() | patient-edit */ "patient-edit").then(__webpack_require__.bind(null, /*! ./views/patient/Edit */ "./resources/js/views/patient/Edit.vue"));
+    return __webpack_require__.e(/*! import() | patient */ "patient").then(__webpack_require__.bind(null, /*! ./views/patient/Patient */ "./resources/js/views/patient/Patient.vue"));
   }
 }, {
   path: '/appointment',
   component: function component() {
-    return Promise.all(/*! import() | appointment */[__webpack_require__.e("acl~appointment~department~doctors~patient~prescription"), __webpack_require__.e("appointment")]).then(__webpack_require__.bind(null, /*! ./views/appointment/Index */ "./resources/js/views/appointment/Index.vue"));
+    return Promise.all(/*! import() | appointment */[__webpack_require__.e("acl~appointment~department~doctors~patients~prescription"), __webpack_require__.e("appointment")]).then(__webpack_require__.bind(null, /*! ./views/appointment/Index */ "./resources/js/views/appointment/Index.vue"));
   }
 }, {
   path: '/appointment/add',
@@ -27972,12 +27971,12 @@ __webpack_require__.r(__webpack_exports__);
 }, {
   path: '/prescription',
   component: function component() {
-    return Promise.all(/*! import() | prescription */[__webpack_require__.e("acl~appointment~department~doctors~patient~prescription"), __webpack_require__.e("prescription")]).then(__webpack_require__.bind(null, /*! ./views/prescription/Index */ "./resources/js/views/prescription/Index.vue"));
+    return Promise.all(/*! import() | prescription */[__webpack_require__.e("acl~appointment~department~doctors~patients~prescription"), __webpack_require__.e("prescription")]).then(__webpack_require__.bind(null, /*! ./views/prescription/Index */ "./resources/js/views/prescription/Index.vue"));
   }
 }, {
   path: '/settings/acl',
   component: function component() {
-    return Promise.all(/*! import() | acl */[__webpack_require__.e("acl~appointment~department~doctors~patient~prescription"), __webpack_require__.e("acl")]).then(__webpack_require__.bind(null, /*! ./views/settings/acl/Index */ "./resources/js/views/settings/acl/Index.vue"));
+    return Promise.all(/*! import() | acl */[__webpack_require__.e("acl~appointment~department~doctors~patients~prescription"), __webpack_require__.e("acl")]).then(__webpack_require__.bind(null, /*! ./views/settings/acl/Index */ "./resources/js/views/settings/acl/Index.vue"));
   }
 }]);
 
@@ -28209,6 +28208,112 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /***/ }),
 
+/***/ "./resources/js/store/doctor_schedule.js":
+/*!***********************************************!*\
+  !*** ./resources/js/store/doctor_schedule.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: function state() {
+    return {
+      days: ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      schedules: [],
+      loading: false
+    };
+  },
+  getters: {
+    days: function days(state) {
+      return state.days;
+    },
+    schedules: function schedules(state) {
+      return state.schedules;
+    },
+    loading: function loading(state) {
+      return state.loading;
+    }
+  },
+  mutations: {
+    populateSchedules: function populateSchedules(state, payload) {
+      return state.schedules = payload;
+    },
+    changeLoadingStatus: function changeLoadingStatus(state, status) {
+      return state.loading = status;
+    }
+  },
+  actions: {
+    getSchedules: function getSchedules(context, payload) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                context.commit('changeLoadingStatus', true);
+                _context.next = 3;
+                return axios.post("get_doctor_schedules", payload).then(function (res) {
+                  context.commit('populateSchedules', res.data.doctor_schedules);
+                })["catch"](function (e) {
+                  return snackbar.error(e.response.statusText);
+                });
+
+              case 3:
+                context.commit('changeLoadingStatus', false);
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    processSchedule: function processSchedule(context, payload) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var isSuccess;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                isSuccess = false;
+                _context2.next = 3;
+                return axios.post(payload.url, payload.data).then(function (res) {
+                  isSuccess = true;
+                  context.dispatch('getSchedules', {
+                    doctor_id: res.data.doctor_id
+                  });
+                  snackbar.success(res.data.message);
+                })["catch"](function (e) {
+                  return snackbar.error(e.response.data.message);
+                });
+
+              case 3:
+                return _context2.abrupt("return", isSuccess);
+
+              case 4:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/store/index.js":
 /*!*************************************!*\
   !*** ./resources/js/store/index.js ***!
@@ -28223,6 +28328,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _department__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./department */ "./resources/js/store/department.js");
 /* harmony import */ var _doctor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./doctor */ "./resources/js/store/doctor.js");
+/* harmony import */ var _doctor_schedule__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./doctor_schedule */ "./resources/js/store/doctor_schedule.js");
+
 
 
 
@@ -28231,7 +28338,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   modules: {
     department: _department__WEBPACK_IMPORTED_MODULE_2__["default"],
-    doctor: _doctor__WEBPACK_IMPORTED_MODULE_3__["default"]
+    doctor: _doctor__WEBPACK_IMPORTED_MODULE_3__["default"],
+    doctorSchedule: _doctor_schedule__WEBPACK_IMPORTED_MODULE_4__["default"]
   }
 });
 /* harmony default export */ __webpack_exports__["default"] = (store);
