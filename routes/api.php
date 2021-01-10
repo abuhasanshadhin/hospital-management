@@ -1,5 +1,6 @@
 <?php
- 
+
+use App\Http\Controllers\PatientController;
 use App\Http\Controllers\DoctorScheduleController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\DepartmentController;
@@ -40,3 +41,10 @@ Route::post('/get_doctor_schedules', [DoctorScheduleController::class, 'getDocto
 Route::post('/add_doctor_schedule', [DoctorScheduleController::class, 'addDoctorSchedule']);
 Route::post('/update_doctor_schedule', [DoctorScheduleController::class, 'updateDoctorSchedule']);
 Route::post('/delete_doctor_schedule', [DoctorScheduleController::class, 'deleteDoctorSchedule']);
+
+// patient
+Route::post('/get_patients', [PatientController::class, 'getPatients']);
+Route::get('/get_patient/{id}', [PatientController::class, 'getPatient']);
+Route::post('/add_patient', [PatientController::class, 'addPatient']);
+Route::post('/update_patient', [PatientController::class, 'updatePatient']);
+Route::post('/delete_patient', [PatientController::class, 'deletePatient']);

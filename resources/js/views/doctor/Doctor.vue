@@ -68,6 +68,8 @@
                                 <div class="col-md-8">
                                     <date-picker
                                         v-model.trim="doctor.date_of_birth"
+                                        :disabled-date="disabledAfterToday"
+                                        :editable="false"
                                     ></date-picker>
                                 </div>
                             </div>
@@ -315,6 +317,7 @@
 <script>
 import moment from "moment";
 import DepartmentModal from "../department/Department";
+import V from "../../utils/validation";
 
 export default {
     components: {
@@ -362,7 +365,15 @@ export default {
             this.doctor.photo = file;
         },
         async saveDoctor() {
-            if (this.validate()) return;
+            let props = [
+                "name",
+                "phone",
+                "gender",
+                "address",
+                "department_id",
+                "specialization",
+            ];
+            if (V.empty(props, this.doctor)) return;
 
             this.loading = this.btnDisabled = true;
             let doctorData = { ...this.doctor };
@@ -393,29 +404,6 @@ export default {
             }
 
             this.loading = this.btnDisabled = false;
-        },
-        validate() {
-            let props = [
-                "name",
-                "phone",
-                "gender",
-                "address",
-                "department_id",
-                "specialization",
-            ];
-
-            let errorCount = 0;
-
-            props.forEach((prop) => {
-                if (!this.doctor[prop]) {
-                    errorCount++;
-                    let propName = prop.replace("_id", "");
-                    let message = `The ${propName} field is required`;
-                    snackbar.warning(message, "topRight");
-                }
-            });
-
-            return errorCount ? true : false;
         },
         resetForm() {
             Object.keys(this.doctor).map((k) => (this.doctor[k] = ""));
@@ -448,6 +436,11 @@ export default {
             if (doctor.date_of_birth) {
                 this.doctor.date_of_birth = new Date(doctor.date_of_birth);
             }
+        },
+        disabledAfterToday(date) {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            return date > today;
         },
     },
 };

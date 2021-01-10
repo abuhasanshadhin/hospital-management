@@ -3,7 +3,12 @@
         <div v-show="cameraShow" class="custom-modal">
             <div class="custom-modal-body">
                 <div class="v-wrapper">
-                    <video id="webcam" autoplay playsinline></video>
+                    <video
+                        id="webcam"
+                        autoplay
+                        playsinline
+                        oncontextmenu="return false"
+                    ></video>
                     <canvas id="canvas" class="d-none"></canvas>
                     <audio
                         id="snapSound"
@@ -121,7 +126,7 @@ export default {
             let picture = this.webCamObj.snap();
             this.closeWebCam();
             let file = await this.dataUrlToFile(picture);
-            this.$parent.getCapturedFile(file);
+            this.$parent.getCapturedFile(file); // parent component method called
         },
         stopWebCam() {
             if (this.webCamObj == null) return;
@@ -163,6 +168,7 @@ export default {
             border: none;
             color: #fff;
             background: rgba(0, 0, 0, 0.6);
+            padding-top: 3px;
         }
         .flip-webcam:focus {
             outline: 0;

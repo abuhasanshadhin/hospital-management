@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <form method="POST">
+                <form @submit.prevent="savePatient" method="POST">
                     <div class="row">
                         <div class="col-md-5">
                             <div class="form-group row">
@@ -33,7 +33,10 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="" class="col-md-4 text-right"
+                                <label
+                                    for=""
+                                    class="col-md-4 text-right"
+                                    style="margin-bottom: 3px"
                                     >Gender
                                     <span class="text-danger">*</span></label
                                 >
@@ -76,12 +79,16 @@
                                 <label for="" class="col-md-4 text-right"
                                     >Date of Birth</label
                                 >
-                                <div class="col-md-5">
+                                <div class="col-md-4 pr-0">
                                     <date-picker
                                         v-model.trim="patient.date_of_birth"
+                                        :disabled-date="disabledAfterToday"
+                                        :editable="false"
                                     ></date-picker>
                                 </div>
-                                <div class="col-md-1 px-0">Age</div>
+                                <div class="col-md-2 text-right">
+                                    Age <span class="text-danger">*</span>
+                                </div>
                                 <div class="col-md-2 pl-0">
                                     <input
                                         type="number"
@@ -118,11 +125,37 @@
                                 <div class="col-md-8">
                                     <input
                                         type="text"
-                                        v-model.trim="patient.phone"
+                                        v-model.trim="patient.phone_number"
                                         class="form-control"
                                     />
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label for="" class="col-md-4 text-right"
+                                    >Phone No 2</label
+                                >
+                                <div class="col-md-8">
+                                    <input
+                                        type="text"
+                                        v-model.trim="patient.phone_number_2"
+                                        class="form-control"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="" class="col-md-4 text-right"
+                                    >Email</label
+                                >
+                                <div class="col-md-8">
+                                    <input
+                                        type="email"
+                                        v-model.trim="patient.email"
+                                        class="form-control"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
                             <div class="form-group row">
                                 <label for="" class="col-md-4 text-right"
                                     >Address
@@ -136,24 +169,9 @@
                                     ></textarea>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="col-md-5">
-                            <div class="form-group row">
-                                <label for="" class="col-md-4 text-right"
-                                    >Email</label
-                                >
-                                <div class="col-md-8">
-                                    <input
-                                        type="email"
-                                        v-model.trim="patient.email"
-                                        class="form-control"
-                                    />
-                                </div>
-                            </div>
                             <div class="form-group row">
                                 <label class="col-md-4 text-right">Photo</label>
-                                <div class="col-md-6">
+                                <div class="col-md-6 pr-0">
                                     <input
                                         @change="onPhotoChange"
                                         type="file"
@@ -193,7 +211,7 @@
                                         <input
                                             type="radio"
                                             value="1"
-                                            v-model.number="patient.status"
+                                            v-model="patient.status"
                                             id="s1"
                                             class="custom-control-input"
                                         />
@@ -209,7 +227,7 @@
                                         <input
                                             type="radio"
                                             value="0"
-                                            v-model.number="patient.status"
+                                            v-model="patient.status"
                                             id="s2"
                                             class="custom-control-input"
                                         />
@@ -224,11 +242,30 @@
 
                             <div class="form-group row">
                                 <div class="col-md-8 offset-md-4 text-right">
-                                    <button class="btn btn-dark c-btn">
+                                    <button
+                                        type="button"
+                                        @click.prevent="resetForm"
+                                        class="btn btn-dark c-btn"
+                                        :disabled="btnDisabled"
+                                        v-if="!patientEditId"
+                                    >
                                         <i class="fa fa-undo"></i> Reset
                                     </button>
-                                    <button class="btn btn-primary c-btn">
-                                        <i class="fa fa-save"></i> Save
+                                    <button
+                                        type="submit"
+                                        class="btn btn-primary c-btn"
+                                        :disabled="btnDisabled"
+                                    >
+                                        <i
+                                            v-if="loading"
+                                            class="fa fa-spinner fa-spin"
+                                        ></i>
+                                        <template v-else
+                                            ><i class="fa fa-save"></i> Save
+                                            <template v-if="patientEditId"
+                                                >Changes</template
+                                            >
+                                        </template>
                                     </button>
                                 </div>
                             </div>
@@ -253,7 +290,9 @@
 </template>
 
 <script>
+import moment from "moment";
 import Webcam from "../../components/Webcam";
+import V from "../../utils/validation";
 
 export default {
     components: { Webcam },
@@ -263,9 +302,10 @@ export default {
                 name: "",
                 gender: "",
                 date_of_birth: "",
-                age: null,
+                age: 0,
                 blood_group: "",
-                phone: "",
+                phone_number: "",
+                phone_number_2: "",
                 address: "",
                 email: "",
                 note: "",
@@ -274,28 +314,74 @@ export default {
             photo: null,
             photoPreview: null,
             notFoundImage: `${window.publicPath}/images/image-not-available.png`,
+            loading: false,
+            btnDisabled: false,
+            patientEditId: null,
         };
     },
     watch: {
         "patient.date_of_birth": function (val) {
             if (!val) return;
-            let dob = new Date(val).toISOString().slice(0, 10);
+            let dob = moment(val).format("YYYY-MM-DD");
             this.patient.age = this.getAge(dob);
         },
     },
     methods: {
+        async savePatient() {
+            let props = ["name", "gender", "age", "phone_number", "address"];
+            if (V.empty(props, this.patient)) return;
+
+            this.loading = this.btnDisabled = true;
+            let patientInfo = { ...this.patient };
+
+            if (patientInfo.date_of_birth) {
+                patientInfo.date_of_birth = moment(
+                    patientInfo.date_of_birth
+                ).format("YYYY-MM-DD");
+            }
+
+            let patientForm = new FormData();
+            Object.keys(patientInfo).map((k) => {
+                if (patientInfo[k]) patientForm.append(k, patientInfo[k]);
+            });
+
+            if (this.photo) patientForm.append("photo", this.photo);
+
+            if (this.patientEditId) {
+                patientForm.append("id", this.patientEditId);
+                await this.$store.dispatch("patient/processPatient", {
+                    url: "update_patient",
+                    data: patientForm,
+                });
+            } else {
+                let res = await this.$store.dispatch("patient/processPatient", {
+                    url: "add_patient",
+                    data: patientForm,
+                });
+                if (res) this.resetForm();
+            }
+
+            this.loading = this.btnDisabled = false;
+        },
+        resetForm() {
+            Object.keys(this.patient).map((k) => (this.patient[k] = ""));
+            this.patient.age = 0;
+            this.patient.status = 1;
+            this.photo = this.photoPreview = null;
+        },
         onPhotoChange() {
             if (event.target.files.length == 0) return;
             let file = event.target.files[0];
-            console.log(file);
+            this.photo = file;
             this.photoPreview = URL.createObjectURL(file);
         },
         webCamEnable() {
             this.$refs.webCam.cameraShow = true;
-            this.$refs.webCam.openCamera();
+            this.$refs.webCam.init();
         },
+        // This method called from Webcam component
         getCapturedFile(file) {
-            console.log(file);
+            this.photo = file;
             this.photoPreview = URL.createObjectURL(file);
         },
         getAge(fromDate) {
@@ -306,6 +392,11 @@ export default {
             let year = ageDate.getUTCFullYear();
             let age = Math.abs(year - 1970);
             return age;
+        },
+        disabledAfterToday(date) {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            return date > today;
         },
     },
 };

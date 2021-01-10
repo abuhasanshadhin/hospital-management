@@ -19,7 +19,10 @@
                 </div>
             </div>
             <div class="card-body">
-                <data-table :headers="headers" :resources="posts">
+                <data-table
+                    :headers="headers"
+                    :resources="$store.getters['patient/patients']"
+                >
                     <template v-slot:[`sl`]="{ i, start }">{{
                         i + start + 1
                     }}</template>
@@ -64,22 +67,18 @@ export default {
             posts: [],
             headers: [
                 { text: "SL", key: "sl" },
-                { text: "Title", key: "title", search: true },
-                { text: "Description", key: "description", search: true },
+                { text: "ID", key: "code", search: true },
+                { text: "Name", key: "name", search: true },
+                { text: "Gender", key: "gender", search: true },
+                { text: "Age", key: "age", search: true },
+                { text: "Phone", key: "phone_number", search: true },
                 { text: "Status", key: "status" },
                 { text: "Action", key: "action" },
             ],
         };
     },
     created() {
-        for (let i = 0; i < 50; i++) {
-            this.posts.push({
-                id: i + 1,
-                title: "Title " + (i + 1),
-                description: "Description " + (i + 1),
-                status: [0, 1][Math.floor(Math.random() * 2)],
-            });
-        }
+        this.$store.dispatch("patient/getPatients");
     },
 };
 </script>

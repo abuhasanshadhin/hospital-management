@@ -104,7 +104,7 @@ export default {
                 { text: "Department", key: "department_name", search: true },
                 { text: "Phone", key: "phone", search: true },
                 { text: "Gender", key: "gender", search: true },
-                { text: "Status", key: "status", search: true },
+                { text: "Status", key: "status" },
                 { text: "Action", key: "action" },
             ],
             doctorDeleteId: null,

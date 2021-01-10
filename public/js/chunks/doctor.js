@@ -14,6 +14,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _department_Department__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../department/Department */ "./resources/js/views/department/Department.vue");
+/* harmony import */ var _utils_validation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/validation */ "./resources/js/utils/validation.js");
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -340,6 +341,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -391,19 +395,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var doctorData, doctorForm, res;
+        var props, doctorData, doctorForm, res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (!_this.validate()) {
-                  _context.next = 2;
+                props = ["name", "phone", "gender", "address", "department_id", "specialization"];
+
+                if (!_utils_validation__WEBPACK_IMPORTED_MODULE_3__["default"].empty(props, _this.doctor)) {
+                  _context.next = 3;
                   break;
                 }
 
                 return _context.abrupt("return");
 
-              case 2:
+              case 3:
                 _this.loading = _this.btnDisabled = true;
                 doctorData = _objectSpread({}, _this.doctor);
 
@@ -417,36 +423,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
 
                 if (!_this.doctorEditId) {
-                  _context.next = 13;
+                  _context.next = 14;
                   break;
                 }
 
                 doctorForm.append("id", _this.doctorEditId);
-                _context.next = 11;
+                _context.next = 12;
                 return _this.$store.dispatch("doctor/processDoctor", {
                   url: "update_doctor",
                   data: doctorForm
                 });
 
-              case 11:
-                _context.next = 17;
+              case 12:
+                _context.next = 18;
                 break;
 
-              case 13:
-                _context.next = 15;
+              case 14:
+                _context.next = 16;
                 return _this.$store.dispatch("doctor/processDoctor", {
                   url: "add_doctor",
                   data: doctorForm
                 });
 
-              case 15:
+              case 16:
                 res = _context.sent;
                 if (res) _this.resetForm();
 
-              case 17:
+              case 18:
                 _this.loading = _this.btnDisabled = false;
 
-              case 18:
+              case 19:
               case "end":
                 return _context.stop();
             }
@@ -454,26 +460,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    validate: function validate() {
+    resetForm: function resetForm() {
       var _this2 = this;
 
-      var props = ["name", "phone", "gender", "address", "department_id", "specialization"];
-      var errorCount = 0;
-      props.forEach(function (prop) {
-        if (!_this2.doctor[prop]) {
-          errorCount++;
-          var propName = prop.replace("_id", "");
-          var message = "The ".concat(propName, " field is required");
-          snackbar.warning(message, "topRight");
-        }
-      });
-      return errorCount ? true : false;
-    },
-    resetForm: function resetForm() {
-      var _this3 = this;
-
       Object.keys(this.doctor).map(function (k) {
-        return _this3.doctor[k] = "";
+        return _this2.doctor[k] = "";
       });
       this.selectedDepartment = this.doctor.department_id = null;
       this.doctor.photo = this.photoPreview = null;
@@ -481,7 +472,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.doctor.status = 1;
     },
     editDoctor: function editDoctor(doctor_id) {
-      var _this4 = this;
+      var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
         var doctor;
@@ -489,31 +480,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _this4.doctorEditId = doctor_id;
+                _this3.doctorEditId = doctor_id;
                 _context2.next = 3;
-                return _this4.$store.dispatch("department/getDepartments");
+                return _this3.$store.dispatch("department/getDepartments");
 
               case 3:
                 _context2.next = 5;
-                return _this4.$store.dispatch("doctor/getDoctor", doctor_id);
+                return _this3.$store.dispatch("doctor/getDoctor", doctor_id);
 
               case 5:
                 doctor = _context2.sent;
-                Object.keys(_this4.doctor).map(function (k) {
-                  return _this4.doctor[k] = doctor[k];
+                Object.keys(_this3.doctor).map(function (k) {
+                  return _this3.doctor[k] = doctor[k];
                 });
 
-                if (_this4.doctor.photo) {
-                  _this4.photoPreview = "".concat(window.publicPath, "/").concat(_this4.doctor.photo);
-                  _this4.doctor.photo = null;
+                if (_this3.doctor.photo) {
+                  _this3.photoPreview = "".concat(window.publicPath, "/").concat(_this3.doctor.photo);
+                  _this3.doctor.photo = null;
                 }
 
-                _this4.$store.getters["department/departments"].forEach(function (dept) {
-                  if (dept.id == doctor.department_id) _this4.selectedDepartment = dept;
+                _this3.$store.getters["department/departments"].forEach(function (dept) {
+                  if (dept.id == doctor.department_id) _this3.selectedDepartment = dept;
                 });
 
                 if (doctor.date_of_birth) {
-                  _this4.doctor.date_of_birth = new Date(doctor.date_of_birth);
+                  _this3.doctor.date_of_birth = new Date(doctor.date_of_birth);
                 }
 
               case 10:
@@ -523,6 +514,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee2);
       }))();
+    },
+    disabledAfterToday: function disabledAfterToday(date) {
+      var today = new Date();
+      today.setHours(0, 0, 0, 0);
+      return date > today;
     }
   }
 });
@@ -1072,6 +1068,10 @@ var render = function() {
                     { staticClass: "col-md-8" },
                     [
                       _c("date-picker", {
+                        attrs: {
+                          "disabled-date": _vm.disabledAfterToday,
+                          editable: false
+                        },
                         model: {
                           value: _vm.doctor.date_of_birth,
                           callback: function($$v) {
@@ -1597,6 +1597,38 @@ var staticRenderFns = [
 render._withStripped = true
 
 
+
+/***/ }),
+
+/***/ "./resources/js/utils/validation.js":
+/*!******************************************!*\
+  !*** ./resources/js/utils/validation.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  empty: function empty(propsArray, dataObject) {
+    var hasError = 0;
+
+    for (var i = 0; i < propsArray.length; i++) {
+      var prop = propsArray[i];
+
+      if (!dataObject[prop]) {
+        hasError++;
+        var propName = prop.replace("_id", "");
+        propName = prop.replace("_", " ");
+        var message = "The ".concat(propName, " field is required");
+        snackbar.warning(message, "topRight");
+        break;
+      }
+    }
+
+    return hasError ? true : false;
+  }
+});
 
 /***/ }),
 

@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 import department from './department'
 import doctor from './doctor'
 import doctorSchedule from './doctor_schedule'
+import patient from './patient'
 
 Vue.use(Vuex)
 
@@ -12,6 +13,7 @@ const store = new Vuex.Store({
         department,
         doctor,
         doctorSchedule,
+        patient,
     }
 })
 

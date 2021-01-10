@@ -63,6 +63,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -77,12 +80,24 @@ __webpack_require__.r(__webpack_exports__);
         text: "SL",
         key: "sl"
       }, {
-        text: "Title",
-        key: "title",
+        text: "ID",
+        key: "code",
         search: true
       }, {
-        text: "Description",
-        key: "description",
+        text: "Name",
+        key: "name",
+        search: true
+      }, {
+        text: "Gender",
+        key: "gender",
+        search: true
+      }, {
+        text: "Age",
+        key: "age",
+        search: true
+      }, {
+        text: "Phone",
+        key: "phone_number",
         search: true
       }, {
         text: "Status",
@@ -94,14 +109,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    for (var i = 0; i < 50; i++) {
-      this.posts.push({
-        id: i + 1,
-        title: "Title " + (i + 1),
-        description: "Description " + (i + 1),
-        status: [0, 1][Math.floor(Math.random() * 2)]
-      });
-    }
+    this.$store.dispatch("patient/getPatients");
   }
 });
 
@@ -592,7 +600,10 @@ var render = function() {
         { staticClass: "card-body" },
         [
           _c("data-table", {
-            attrs: { headers: _vm.headers, resources: _vm.posts },
+            attrs: {
+              headers: _vm.headers,
+              resources: _vm.$store.getters["patient/patients"]
+            },
             scopedSlots: _vm._u(
               [
                 {

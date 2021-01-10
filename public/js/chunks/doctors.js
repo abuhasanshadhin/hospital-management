@@ -188,8 +188,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         search: true
       }, {
         text: "Status",
-        key: "status",
-        search: true
+        key: "status"
       }, {
         text: "Action",
         key: "action"
