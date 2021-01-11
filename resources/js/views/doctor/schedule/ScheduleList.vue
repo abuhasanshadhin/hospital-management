@@ -55,33 +55,49 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr
-                                    v-for="(item, i) in $store.getters[
-                                        'doctorSchedule/schedules'
-                                    ]"
-                                    :key="i"
+                                <template
+                                    v-if="
+                                        $store.getters[
+                                            'doctorSchedule/schedules'
+                                        ].length
+                                    "
                                 >
-                                    <td>{{ i + 1 }}</td>
-                                    <td>{{ item.available_day }}</td>
-                                    <td>{{ item.start_time }}</td>
-                                    <td>{{ item.end_time }}</td>
-                                    <td>{{ item.total_serial }}</td>
-                                    <td>
-                                        <schedule-modal
-                                            edit
-                                            :data="item"
-                                            title="Edit"
-                                        ></schedule-modal>
-                                        <button
-                                            @click.prevent="
-                                                showDeleteConfirm(item.id)
-                                            "
-                                            type="button"
-                                            class="btn-action text-danger"
-                                            title="Delete"
-                                        >
-                                            <i class="fa fa-trash"></i>
-                                        </button>
+                                    <tr
+                                        v-for="(item, i) in $store.getters[
+                                            'doctorSchedule/schedules'
+                                        ]"
+                                        :key="i"
+                                    >
+                                        <td>{{ i + 1 }}</td>
+                                        <td>{{ item.available_day }}</td>
+                                        <td>{{ item.start_time }}</td>
+                                        <td>{{ item.end_time }}</td>
+                                        <td>{{ item.total_serial }}</td>
+                                        <td>
+                                            <schedule-modal
+                                                edit
+                                                :data="item"
+                                                title="Edit"
+                                            ></schedule-modal>
+                                            <button
+                                                @click.prevent="
+                                                    showDeleteConfirm(item.id)
+                                                "
+                                                type="button"
+                                                class="btn-action text-danger"
+                                                title="Delete"
+                                            >
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </template>
+                                <tr v-else>
+                                    <td
+                                        colspan="6"
+                                        class="text-center text-danger"
+                                    >
+                                        No schedule found
                                     </td>
                                 </tr>
                             </tbody>

@@ -533,6 +533,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 
 
@@ -569,6 +572,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var dob = moment__WEBPACK_IMPORTED_MODULE_1___default()(val).format("YYYY-MM-DD");
       this.patient.age = this.getAge(dob);
     }
+  },
+  created: function created() {
+    var patientId = this.$route.params.id;
+    if (patientId != undefined) this.editPatient(patientId);
   },
   methods: {
     savePatient: function savePatient() {
@@ -641,11 +648,57 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    resetForm: function resetForm() {
+    editPatient: function editPatient(patient_id) {
       var _this2 = this;
 
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var patient;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return _this2.$store.dispatch("patient/getPatient", patient_id);
+
+              case 2:
+                patient = _context2.sent;
+
+                if (!(patient == null)) {
+                  _context2.next = 6;
+                  break;
+                }
+
+                _this2.$router.push("/patients");
+
+                return _context2.abrupt("return");
+
+              case 6:
+                _this2.patientEditId = patient_id;
+                Object.keys(_this2.patient).map(function (k) {
+                  return _this2.patient[k] = patient[k];
+                });
+
+                if (patient.photo) {
+                  _this2.photoPreview = "".concat(window.publicPath, "/").concat(patient.photo);
+                }
+
+                if (patient.date_of_birth) {
+                  _this2.patient.date_of_birth = new Date(patient.date_of_birth);
+                }
+
+              case 10:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    resetForm: function resetForm() {
+      var _this3 = this;
+
       Object.keys(this.patient).map(function (k) {
-        return _this2.patient[k] = "";
+        return _this3.patient[k] = "";
       });
       this.patient.age = 0;
       this.patient.status = 1;
@@ -1249,7 +1302,18 @@ var render = function() {
     _c("div", { staticClass: "card shadow mb-4" }, [
       _c("div", { staticClass: "card-header py-3" }, [
         _c("div", { staticClass: "clearfix" }, [
-          _vm._m(0),
+          _c("div", { staticClass: "float-left" }, [
+            _c(
+              "h4",
+              { staticClass: "m-0 font-weight-bold text-primary" },
+              [
+                _vm.patientEditId
+                  ? [_vm._v("Edit Patient")]
+                  : [_vm._v("Add New Patient")]
+              ],
+              2
+            )
+          ]),
           _vm._v(" "),
           _c(
             "div",
@@ -1291,7 +1355,7 @@ var render = function() {
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "col-md-5" }, [
                   _c("div", { staticClass: "form-group row" }, [
-                    _vm._m(1),
+                    _vm._m(0),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-8" }, [
                       _c("input", {
@@ -1327,7 +1391,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group row" }, [
-                    _vm._m(2),
+                    _vm._m(1),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-8" }, [
                       _c(
@@ -1447,7 +1511,7 @@ var render = function() {
                       1
                     ),
                     _vm._v(" "),
-                    _vm._m(3),
+                    _vm._m(2),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-2 pl-0" }, [
                       _c("input", {
@@ -1527,7 +1591,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group row" }, [
-                    _vm._m(4),
+                    _vm._m(3),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-8" }, [
                       _c("input", {
@@ -1651,7 +1715,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-5" }, [
                   _c("div", { staticClass: "form-group row" }, [
-                    _vm._m(5),
+                    _vm._m(4),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-8" }, [
                       _c("textarea", {
@@ -1932,18 +1996,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "float-left" }, [
-      _c("h4", { staticClass: "m-0 font-weight-bold text-primary" }, [
-        _vm._v(
-          "\n                        Add New Patient\n                    "
-        )
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

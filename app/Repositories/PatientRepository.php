@@ -52,6 +52,14 @@ class PatientRepository
         try {
             $item = Patient::find($req->id);
             $inputs = $req->all();
+
+            if ($req->hasFile('photo')) {
+                if (!empty($item->photo) && file_exists('public/' . $item->photo)) {
+                    unlink('public/' . $item->photo);
+                }
+                $inputs['photo'] = $this->fileUpload($req, 'photo', 'uploads/patient');
+            }
+
             $item->update($inputs);
 
             $res->code = 200;

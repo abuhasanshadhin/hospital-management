@@ -6,7 +6,7 @@
                 showName ? 'btn btn-sm btn-primary' : 'btn-action text-dark'
             "
         >
-            <span v-if="showName">{{ doctor.name }}</span>
+            <span v-if="showName">Dr. Jhon Doe</span>
             <i v-else class="fa fa-eye"></i>
         </button>
 

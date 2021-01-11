@@ -1,50 +1,5 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["doctors"],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Confirm.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Confirm.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      show: false
-    };
-  }
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/doctor/DoctorList.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/doctor/DoctorList.vue?vue&type=script&lang=js& ***!
@@ -272,6 +227,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue2_timepicker__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue2_timepicker__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var vue2_timepicker_dist_VueTimepicker_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue2-timepicker/dist/VueTimepicker.css */ "./node_modules/vue2-timepicker/dist/VueTimepicker.css");
 /* harmony import */ var vue2_timepicker_dist_VueTimepicker_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue2_timepicker_dist_VueTimepicker_css__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _utils_validation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../utils/validation */ "./resources/js/utils/validation.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -438,6 +394,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -502,36 +466,38 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var doctorSchedule, res, _doctorSchedule, _res;
+        var props, doctorSchedule, res, _doctorSchedule, _res;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (!_this3.validate()) {
-                  _context.next = 2;
+                props = ["available_day", "total_serial", "start_time", "end_time"];
+
+                if (!_utils_validation__WEBPACK_IMPORTED_MODULE_3__["default"].empty(props, _this3.schedule)) {
+                  _context.next = 3;
                   break;
                 }
 
                 return _context.abrupt("return");
 
-              case 2:
+              case 3:
                 _this3.btnDisabled = _this3.loading = true;
 
                 if (!(_this3.editId == null)) {
-                  _context.next = 12;
+                  _context.next = 13;
                   break;
                 }
 
                 doctorSchedule = _this3.schedule;
                 doctorSchedule.doctor_id = _this3.doctorID;
-                _context.next = 8;
+                _context.next = 9;
                 return _this3.$store.dispatch("doctorSchedule/processSchedule", {
                   url: "add_doctor_schedule",
                   data: doctorSchedule
                 });
 
-              case 8:
+              case 9:
                 res = _context.sent;
 
                 if (res) {
@@ -540,19 +506,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this3.isModalShow = false;
                 }
 
-                _context.next = 18;
+                _context.next = 19;
                 break;
 
-              case 12:
+              case 13:
                 _doctorSchedule = _this3.schedule;
                 _doctorSchedule.id = _this3.editId;
-                _context.next = 16;
+                _context.next = 17;
                 return _this3.$store.dispatch("doctorSchedule/processSchedule", {
                   url: "update_doctor_schedule",
                   data: _doctorSchedule
                 });
 
-              case 16:
+              case 17:
                 _res = _context.sent;
 
                 if (_res) {
@@ -561,10 +527,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this3.isModalShow = false;
                 }
 
-              case 18:
+              case 19:
                 _this3.btnDisabled = _this3.loading = false;
 
-              case 19:
+              case 20:
               case "end":
                 return _context.stop();
             }
@@ -572,29 +538,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    validate: function validate() {
-      var _this4 = this;
-
-      var props = ["available_day", "total_serial", "start_time", "end_time"];
-      var errorCount = 0;
-      props.forEach(function (prop) {
-        if (!_this4.schedule[prop]) {
-          errorCount++;
-          var propName = prop.replace("_id", "");
-          propName = propName.replace("_", " ");
-          var message = "The ".concat(propName, " field is required");
-          snackbar.warning(message, "topRight");
-        }
-      });
-      return errorCount ? true : false;
-    },
     resetForm: function resetForm() {
-      var _this5 = this;
-
-      Object.keys(this.schedule).map(function (k) {
-        return _this5.schedule[k] = "";
+      var s = this.schedule;
+      s.available_day = s.start_time = s.end_time = "";
+      s.total_serial = 0;
+    },
+    doctorScheduleReload: function doctorScheduleReload() {
+      if (this.data == null) return;
+      this.$store.dispatch("doctorSchedule/getSchedules", {
+        doctor_id: this.data.doctor_id
       });
-      this.schedule.total_serial = 0;
     }
   }
 });
@@ -620,6 +573,22 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -829,81 +798,6 @@ var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/li
 if(content.locals) module.exports = content.locals;
 
 if(false) {}
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Confirm.vue?vue&type=template&id=27f69fb6&":
-/*!**********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Confirm.vue?vue&type=template&id=27f69fb6& ***!
-  \**********************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm.show
-      ? _c("div", { staticClass: "custom-modal" }, [
-          _c("div", { staticClass: "custom-modal-body rounded col-md-4" }, [
-            _c("div", { staticClass: "custom-modal-content py-5" }, [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("h3", { staticClass: "text-center text-dark mt-2" }, [
-                _vm._v("Are you sure?")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "text-center mt-4" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-sm btn-success px-3 mr-2",
-                    on: {
-                      click: function($event) {
-                        return _vm.$emit("confirm")
-                      }
-                    }
-                  },
-                  [_vm._v("\n            Yes\n          ")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-sm btn-dark px-3",
-                    on: {
-                      click: function($event) {
-                        _vm.show = false
-                      }
-                    }
-                  },
-                  [_vm._v("\n            Cancel\n          ")]
-                )
-              ])
-            ])
-          ])
-        ])
-      : _vm._e()
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "text-center text-danger" }, [
-      _c("i", { staticClass: "fa fa-question-circle fa-3x" })
-    ])
-  }
-]
-render._withStripped = true
-
-
 
 /***/ }),
 
@@ -1351,21 +1245,28 @@ var render = function() {
                               staticClass: "btn btn-dark",
                               attrs: {
                                 type: "button",
-                                disabled: _vm.btnDisabled
+                                disabled:
+                                  _vm.btnDisabled ||
+                                  _vm.$store.getters["doctorSchedule/loading"]
                               },
                               on: {
                                 click: function($event) {
                                   $event.preventDefault()
-                                  return _vm.$store.dispatch(
-                                    "doctorSchedule/getSchedules",
-                                    { doctor_id: _vm.doctorID }
-                                  )
+                                  return _vm.doctorScheduleReload($event)
                                 }
                               }
                             },
                             [
-                              _c("i", { staticClass: "fas fa-sync" }),
-                              _vm._v(" Refresh\n                        ")
+                              _c("i", {
+                                staticClass: "fas fa-sync",
+                                class: {
+                                  "fa-spin":
+                                    _vm.$store.getters["doctorSchedule/loading"]
+                                }
+                              }),
+                              _vm._v(
+                                "\n                            Refresh\n                        "
+                              )
                             ]
                           )
                         : _vm._e(),
@@ -1376,10 +1277,15 @@ var render = function() {
                             {
                               staticClass: "btn btn-dark",
                               attrs: {
-                                type: "reset",
+                                type: "button",
                                 disabled: _vm.btnDisabled
                               },
-                              on: { click: _vm.resetForm }
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.resetForm($event)
+                                }
+                              }
                             },
                             [
                               _c("i", { staticClass: "fa fa-undo" }),
@@ -1544,55 +1450,83 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "tbody",
-                        _vm._l(
-                          _vm.$store.getters["doctorSchedule/schedules"],
-                          function(item, i) {
-                            return _c("tr", { key: i }, [
-                              _c("td", [_vm._v(_vm._s(i + 1))]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(item.available_day))]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(item.start_time))]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(item.end_time))]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(item.total_serial))]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                [
-                                  _c("schedule-modal", {
-                                    attrs: {
-                                      edit: "",
-                                      data: item,
-                                      title: "Edit"
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "button",
-                                    {
-                                      staticClass: "btn-action text-danger",
-                                      attrs: {
-                                        type: "button",
-                                        title: "Delete"
-                                      },
-                                      on: {
-                                        click: function($event) {
-                                          $event.preventDefault()
-                                          return _vm.showDeleteConfirm(item.id)
-                                        }
-                                      }
-                                    },
-                                    [_c("i", { staticClass: "fa fa-trash" })]
-                                  )
-                                ],
-                                1
+                        [
+                          _vm.$store.getters["doctorSchedule/schedules"].length
+                            ? _vm._l(
+                                _vm.$store.getters["doctorSchedule/schedules"],
+                                function(item, i) {
+                                  return _c("tr", { key: i }, [
+                                    _c("td", [_vm._v(_vm._s(i + 1))]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(_vm._s(item.available_day))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [_vm._v(_vm._s(item.start_time))]),
+                                    _vm._v(" "),
+                                    _c("td", [_vm._v(_vm._s(item.end_time))]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(_vm._s(item.total_serial))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "td",
+                                      [
+                                        _c("schedule-modal", {
+                                          attrs: {
+                                            edit: "",
+                                            data: item,
+                                            title: "Edit"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass:
+                                              "btn-action text-danger",
+                                            attrs: {
+                                              type: "button",
+                                              title: "Delete"
+                                            },
+                                            on: {
+                                              click: function($event) {
+                                                $event.preventDefault()
+                                                return _vm.showDeleteConfirm(
+                                                  item.id
+                                                )
+                                              }
+                                            }
+                                          },
+                                          [
+                                            _c("i", {
+                                              staticClass: "fa fa-trash"
+                                            })
+                                          ]
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ])
+                                }
                               )
-                            ])
-                          }
-                        ),
-                        0
+                            : _c("tr", [
+                                _c(
+                                  "td",
+                                  {
+                                    staticClass: "text-center text-danger",
+                                    attrs: { colspan: "6" }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                    No schedule found\n                                "
+                                    )
+                                  ]
+                                )
+                              ])
+                        ],
+                        2
                       )
                     ]
                   )
@@ -1619,72 +1553,35 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/Confirm.vue":
-/*!*********************************************!*\
-  !*** ./resources/js/components/Confirm.vue ***!
-  \*********************************************/
+/***/ "./resources/js/utils/validation.js":
+/*!******************************************!*\
+  !*** ./resources/js/utils/validation.js ***!
+  \******************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Confirm_vue_vue_type_template_id_27f69fb6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Confirm.vue?vue&type=template&id=27f69fb6& */ "./resources/js/components/Confirm.vue?vue&type=template&id=27f69fb6&");
-/* harmony import */ var _Confirm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Confirm.vue?vue&type=script&lang=js& */ "./resources/js/components/Confirm.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony default export */ __webpack_exports__["default"] = ({
+  empty: function empty(propsArray, dataObject) {
+    var hasError = 0;
 
+    for (var i = 0; i < propsArray.length; i++) {
+      var prop = propsArray[i];
 
+      if (!dataObject[prop]) {
+        hasError++;
+        var propName = prop.replace("_id", "");
+        propName = prop.replace("_", " ");
+        var message = "The ".concat(propName, " field is required");
+        snackbar.warning(message, "topRight");
+        break;
+      }
+    }
 
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Confirm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Confirm_vue_vue_type_template_id_27f69fb6___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Confirm_vue_vue_type_template_id_27f69fb6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/Confirm.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/Confirm.vue?vue&type=script&lang=js&":
-/*!**********************************************************************!*\
-  !*** ./resources/js/components/Confirm.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Confirm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Confirm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Confirm.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Confirm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/Confirm.vue?vue&type=template&id=27f69fb6&":
-/*!****************************************************************************!*\
-  !*** ./resources/js/components/Confirm.vue?vue&type=template&id=27f69fb6& ***!
-  \****************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Confirm_vue_vue_type_template_id_27f69fb6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Confirm.vue?vue&type=template&id=27f69fb6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Confirm.vue?vue&type=template&id=27f69fb6&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Confirm_vue_vue_type_template_id_27f69fb6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Confirm_vue_vue_type_template_id_27f69fb6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
+    return hasError ? true : false;
+  }
+});
 
 /***/ }),
 

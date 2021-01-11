@@ -9,8 +9,57 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_DataTable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/DataTable */ "./resources/js/components/DataTable.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _document_Index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./document/Index */ "./resources/js/views/patient/document/Index.vue");
+/* harmony import */ var _components_Confirm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/Confirm */ "./resources/js/components/Confirm.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -70,46 +119,62 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    DataTable: _components_DataTable__WEBPACK_IMPORTED_MODULE_0__["default"],
-    PatientDocument: _document_Index__WEBPACK_IMPORTED_MODULE_1__["default"]
+    PatientDocument: _document_Index__WEBPACK_IMPORTED_MODULE_1__["default"],
+    DeleteConfirm: _components_Confirm__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
-      posts: [],
-      headers: [{
-        text: "SL",
-        key: "sl"
-      }, {
-        text: "ID",
-        key: "code",
-        search: true
-      }, {
-        text: "Name",
-        key: "name",
-        search: true
-      }, {
-        text: "Gender",
-        key: "gender",
-        search: true
-      }, {
-        text: "Age",
-        key: "age",
-        search: true
-      }, {
-        text: "Phone",
-        key: "phone_number",
-        search: true
-      }, {
-        text: "Status",
-        key: "status"
-      }, {
-        text: "Action",
-        key: "action"
-      }]
+      patientDeleteId: null
     };
   },
   created: function created() {
     this.$store.dispatch("patient/getPatients");
+  },
+  methods: {
+    showDeleteDialog: function showDeleteDialog(patient_id) {
+      this.patientDeleteId = patient_id;
+      this.$refs.deleteConfirm.show = true;
+    },
+    deletePatient: function deletePatient() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _this.$refs.deleteConfirm.show = false;
+
+                if (_this.patientDeleteId) {
+                  _context.next = 4;
+                  break;
+                }
+
+                snackbar.error("Something went wrong :(", "topRight");
+                return _context.abrupt("return");
+
+              case 4:
+                _context.next = 6;
+                return _this.$store.dispatch("patient/processPatient", {
+                  url: "delete_patient",
+                  data: {
+                    id: _this.patientDeleteId
+                  }
+                });
+
+              case 6:
+                res = _context.sent;
+                if (res) _this.patientDeleteId = null;
+
+              case 8:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    }
   }
 });
 
@@ -568,115 +633,127 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "card shadow mb-4" }, [
-      _c("div", { staticClass: "card-header py-3" }, [
-        _c("div", { staticClass: "clearfix" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "float-right" },
-            [
-              _c(
-                "router-link",
-                {
-                  staticClass: "btn btn-sm btn-primary",
-                  attrs: { to: "/patient" }
-                },
-                [
-                  _c("i", { staticClass: "fa fa-plus" }),
-                  _vm._v(" Add New\n                    ")
-                ]
-              )
-            ],
-            1
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "card-body" },
-        [
-          _c("data-table", {
-            attrs: {
-              headers: _vm.headers,
-              resources: _vm.$store.getters["patient/patients"]
-            },
-            scopedSlots: _vm._u(
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "card shadow mb-4" }, [
+        _c("div", { staticClass: "card-header py-3" }, [
+          _c("div", { staticClass: "clearfix" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "float-right" },
               [
-                {
-                  key: "sl",
-                  fn: function(ref) {
-                    var i = ref.i
-                    var start = ref.start
-                    return [_vm._v(_vm._s(i + start + 1))]
-                  }
-                },
-                {
-                  key: "status",
-                  fn: function(ref) {
-                    var item = ref.item
-                    return [
-                      item.status
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "btn btn-sm btn-primary",
+                    attrs: { to: "/patient" }
+                  },
+                  [
+                    _c("i", { staticClass: "fa fa-plus" }),
+                    _vm._v(" Add New\n                    ")
+                  ]
+                )
+              ],
+              1
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "table-responsive" }, [
+            _c("table", { staticClass: "table table-bordered" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.$store.getters["patient/patients"], function(
+                  patient,
+                  i
+                ) {
+                  return _c("tr", { key: i }, [
+                    _c("td", [_vm._v(_vm._s(i + 1))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(patient.code))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(patient.name))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(patient.gender))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(patient.age))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(patient.phone_number))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      patient.status
                         ? _c("div", { staticClass: "badge badge-success" }, [
                             _vm._v(
-                              "\n                        Active\n                    "
+                              "\n                                    Active\n                                "
                             )
                           ])
                         : _vm._e(),
                       _vm._v(" "),
-                      !item.status
+                      !patient.status
                         ? _c("div", { staticClass: "badge badge-danger" }, [
                             _vm._v(
-                              "\n                        Inactive\n                    "
+                              "\n                                    Inactive\n                                "
                             )
                           ])
                         : _vm._e()
-                    ]
-                  }
-                },
-                {
-                  key: "action",
-                  fn: function(ref) {
-                    var item = ref.item
-                    return [
-                      _c("patient-document"),
-                      _vm._v(" "),
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "btn btn-sm btn-info",
-                          attrs: {
-                            to: "/patient/" + item.id + "/edit",
-                            title: "Edit"
-                          }
-                        },
-                        [_c("i", { staticClass: "fa fa-edit" })]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-sm btn-danger",
-                          attrs: { title: "Delete" }
-                        },
-                        [_c("i", { staticClass: "fa fa-trash" })]
-                      )
-                    ]
-                  }
-                }
-              ],
-              null,
-              true
-            )
-          })
-        ],
-        1
-      )
-    ])
-  ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      [
+                        _c("patient-document"),
+                        _vm._v(" "),
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "btn-action text-info",
+                            attrs: {
+                              to: "/patient/" + patient.id,
+                              title: "Edit"
+                            }
+                          },
+                          [_c("i", { staticClass: "fa fa-edit" })]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn-action text-danger",
+                            attrs: { type: "button", title: "Delete" },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.showDeleteDialog(patient.id)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fa fa-trash" })]
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                }),
+                0
+              )
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("delete-confirm", {
+        ref: "deleteConfirm",
+        on: { confirm: _vm.deletePatient }
+      })
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -686,6 +763,30 @@ var staticRenderFns = [
     return _c("div", { staticClass: "float-left" }, [
       _c("h4", { staticClass: "m-0 font-weight-bold text-primary" }, [
         _vm._v("\n                        Patient List\n                    ")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("SL")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("ID")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Gender")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Age")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Phone")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Status")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Action")])
       ])
     ])
   }

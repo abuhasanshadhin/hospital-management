@@ -19,66 +19,115 @@
                 </div>
             </div>
             <div class="card-body">
-                <data-table
-                    :headers="headers"
-                    :resources="$store.getters['patient/patients']"
-                >
-                    <template v-slot:[`sl`]="{ i, start }">{{
-                        i + start + 1
-                    }}</template>
-                    <template v-slot:[`status`]="{ item }">
-                        <div class="badge badge-success" v-if="item.status">
-                            Active
-                        </div>
-                        <div class="badge badge-danger" v-if="!item.status">
-                            Inactive
-                        </div>
-                    </template>
-                    <template v-slot:[`action`]="{ item }">
-                        <patient-document></patient-document>
-                        <router-link
-                            :to="`/patient/${item.id}/edit`"
-                            class="btn btn-sm btn-info"
-                            title="Edit"
-                        >
-                            <i class="fa fa-edit"></i>
-                        </router-link>
-                        <button class="btn btn-sm btn-danger" title="Delete">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    </template>
-                </data-table>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>SL</th>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Gender</th>
+                                <th>Age</th>
+                                <th>Phone</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                v-for="(patient, i) in $store.getters[
+                                    'patient/patients'
+                                ]"
+                                :key="i"
+                            >
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ patient.code }}</td>
+                                <td>{{ patient.name }}</td>
+                                <td>{{ patient.gender }}</td>
+                                <td>{{ patient.age }}</td>
+                                <td>{{ patient.phone_number }}</td>
+                                <td>
+                                    <div
+                                        class="badge badge-success"
+                                        v-if="patient.status"
+                                    >
+                                        Active
+                                    </div>
+                                    <div
+                                        class="badge badge-danger"
+                                        v-if="!patient.status"
+                                    >
+                                        Inactive
+                                    </div>
+                                </td>
+                                <td>
+                                    <patient-document></patient-document>
+                                    <router-link
+                                        :to="`/patient/${patient.id}`"
+                                        class="btn-action text-info"
+                                        title="Edit"
+                                    >
+                                        <i class="fa fa-edit"></i>
+                                    </router-link>
+                                    <button
+                                        @click.prevent="
+                                            showDeleteDialog(patient.id)
+                                        "
+                                        type="button"
+                                        class="btn-action text-danger"
+                                        title="Delete"
+                                    >
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
+
+        <delete-confirm
+            ref="deleteConfirm"
+            @confirm="deletePatient"
+        ></delete-confirm>
     </div>
 </template>
 
 <script>
-import DataTable from "../../components/DataTable";
 import PatientDocument from "./document/Index";
+import DeleteConfirm from "../../components/Confirm";
 
 export default {
     components: {
-        DataTable,
         PatientDocument,
+        DeleteConfirm,
     },
     data() {
         return {
-            posts: [],
-            headers: [
-                { text: "SL", key: "sl" },
-                { text: "ID", key: "code", search: true },
-                { text: "Name", key: "name", search: true },
-                { text: "Gender", key: "gender", search: true },
-                { text: "Age", key: "age", search: true },
-                { text: "Phone", key: "phone_number", search: true },
-                { text: "Status", key: "status" },
-                { text: "Action", key: "action" },
-            ],
+            patientDeleteId: null,
         };
     },
     created() {
         this.$store.dispatch("patient/getPatients");
+    },
+    methods: {
+        showDeleteDialog(patient_id) {
+            this.patientDeleteId = patient_id;
+            this.$refs.deleteConfirm.show = true;
+        },
+        async deletePatient() {
+            this.$refs.deleteConfirm.show = false;
+            if (!this.patientDeleteId) {
+                snackbar.error("Something went wrong :(", "topRight");
+                return;
+            }
+            let res = await this.$store.dispatch("patient/processPatient", {
+                url: "delete_patient",
+                data: { id: this.patientDeleteId },
+            });
+            if (res) this.patientDeleteId = null;
+        },
     },
 };
 </script>

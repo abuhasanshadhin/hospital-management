@@ -413,13 +413,18 @@ export default {
             this.doctor.status = 1;
         },
         async editDoctor(doctor_id) {
-            this.doctorEditId = doctor_id;
-            await this.$store.dispatch("department/getDepartments");
-
             let doctor = await this.$store.dispatch(
                 "doctor/getDoctor",
                 doctor_id
             );
+
+            if (doctor == null) {
+                this.$router.push("/doctors");
+                return;
+            }
+
+            this.doctorEditId = doctor_id;
+            await this.$store.dispatch("department/getDepartments");
 
             Object.keys(this.doctor).map((k) => (this.doctor[k] = doctor[k]));
 

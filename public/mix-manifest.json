@@ -16,8 +16,8 @@
     "/js/chunks/patient.js": "/js/chunks/patient.js",
     "/js/chunks/patients.js": "/js/chunks/patients.js",
     "/js/chunks/prescription.js": "/js/chunks/prescription.js",
-    "/js/chunks/vendors~doctor.js": "/js/chunks/vendors~doctor.js",
     "/js/chunks/vendors~doctors.js": "/js/chunks/vendors~doctors.js",
+    "/js/chunks/vendors~doctor~patient.js": "/js/chunks/vendors~doctor~patient.js",
     "/js/chunks/vendors~patients.js": "/js/chunks/vendors~patients.js",
-    "/js/chunks/vendors~doctor~patient.js": "/js/chunks/vendors~doctor~patient.js"
+    "/js/chunks/vendors~doctor.js": "/js/chunks/vendors~doctor.js"
 }

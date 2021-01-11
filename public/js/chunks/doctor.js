@@ -480,16 +480,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _this3.doctorEditId = doctor_id;
-                _context2.next = 3;
-                return _this3.$store.dispatch("department/getDepartments");
-
-              case 3:
-                _context2.next = 5;
+                _context2.next = 2;
                 return _this3.$store.dispatch("doctor/getDoctor", doctor_id);
 
-              case 5:
+              case 2:
                 doctor = _context2.sent;
+
+                if (!(doctor == null)) {
+                  _context2.next = 6;
+                  break;
+                }
+
+                _this3.$router.push("/doctors");
+
+                return _context2.abrupt("return");
+
+              case 6:
+                _this3.doctorEditId = doctor_id;
+                _context2.next = 9;
+                return _this3.$store.dispatch("department/getDepartments");
+
+              case 9:
                 Object.keys(_this3.doctor).map(function (k) {
                   return _this3.doctor[k] = doctor[k];
                 });
@@ -507,7 +518,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this3.doctor.date_of_birth = new Date(doctor.date_of_birth);
                 }
 
-              case 10:
+              case 13:
               case "end":
                 return _context2.stop();
             }

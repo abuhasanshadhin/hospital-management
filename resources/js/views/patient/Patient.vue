@@ -5,7 +5,10 @@
                 <div class="clearfix">
                     <div class="float-left">
                         <h4 class="m-0 font-weight-bold text-primary">
-                            Add New Patient
+                            <template v-if="patientEditId"
+                                >Edit Patient</template
+                            >
+                            <template v-else>Add New Patient</template>
                         </h4>
                     </div>
                     <div class="float-right">
@@ -326,6 +329,10 @@ export default {
             this.patient.age = this.getAge(dob);
         },
     },
+    created() {
+        let patientId = this.$route.params.id;
+        if (patientId != undefined) this.editPatient(patientId);
+    },
     methods: {
         async savePatient() {
             let props = ["name", "gender", "age", "phone_number", "address"];
@@ -362,6 +369,31 @@ export default {
             }
 
             this.loading = this.btnDisabled = false;
+        },
+        async editPatient(patient_id) {
+            let patient = await this.$store.dispatch(
+                "patient/getPatient",
+                patient_id
+            );
+
+            if (patient == null) {
+                this.$router.push("/patients");
+                return;
+            }
+
+            this.patientEditId = patient_id;
+
+            Object.keys(this.patient).map(
+                (k) => (this.patient[k] = patient[k])
+            );
+
+            if (patient.photo) {
+                this.photoPreview = `${window.publicPath}/${patient.photo}`;
+            }
+
+            if (patient.date_of_birth) {
+                this.patient.date_of_birth = new Date(patient.date_of_birth);
+            }
         },
         resetForm() {
             Object.keys(this.patient).map((k) => (this.patient[k] = ""));

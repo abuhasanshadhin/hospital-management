@@ -100,7 +100,7 @@
                         <div class="custom-modal-footer">
                             <button
                                 type="button"
-                                @click="resetForm"
+                                @click.prevent="resetForm"
                                 v-if="!edit"
                                 class="btn btn-dark"
                                 :disabled="btnDisabled"

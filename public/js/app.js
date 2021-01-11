@@ -2524,7 +2524,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".access-denied[data-v-91ac6b5c] {\n  position: absolute;\n  top: 0;\n  height: 100%;\n  width: 100%;\n  background: rgba(0, 0, 0, 0.9);\n  z-index: 99999;\n}\n.access-denied .message-body[data-v-91ac6b5c] {\n  position: relative;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  max-width: 400px;\n  color: #ffffff;\n}\n.access-denied .message-body h1[data-v-91ac6b5c] {\n  font-size: 40px;\n  color: #ff1414;\n  text-align: center;\n}\n", ""]);
+exports.push([module.i, ".access-denied[data-v-91ac6b5c] {\n  position: fixed;\n  top: 0;\n  height: 100%;\n  width: 100%;\n  background: rgba(0, 0, 0, 0.9);\n  z-index: 99999;\n}\n.access-denied .message-body[data-v-91ac6b5c] {\n  position: relative;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  max-width: 400px;\n  color: #ffffff;\n}\n.access-denied .message-body h1[data-v-91ac6b5c] {\n  font-size: 40px;\n  color: #ff1414;\n  text-align: center;\n}\n", ""]);
 
 // exports
 

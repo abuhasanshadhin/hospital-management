@@ -114,22 +114,29 @@
 
                         <div class="custom-modal-footer mt-1">
                             <button
-                                @click.prevent="
-                                    $store.dispatch(
-                                        'doctorSchedule/getSchedules',
-                                        { doctor_id: doctorID }
-                                    )
-                                "
+                                @click.prevent="doctorScheduleReload"
                                 type="button"
                                 v-if="edit"
                                 class="btn btn-dark"
-                                :disabled="btnDisabled"
+                                :disabled="
+                                    btnDisabled ||
+                                    $store.getters['doctorSchedule/loading']
+                                "
                             >
-                                <i class="fas fa-sync"></i> Refresh
+                                <i
+                                    class="fas fa-sync"
+                                    :class="{
+                                        'fa-spin':
+                                            $store.getters[
+                                                'doctorSchedule/loading'
+                                            ],
+                                    }"
+                                ></i>
+                                Refresh
                             </button>
                             <button
-                                type="reset"
-                                @click="resetForm"
+                                type="button"
+                                @click.prevent="resetForm"
                                 v-if="!edit"
                                 class="btn btn-dark"
                                 :disabled="btnDisabled"
@@ -161,6 +168,7 @@
 <script>
 import VueTimepicker from "vue2-timepicker";
 import "vue2-timepicker/dist/VueTimepicker.css";
+import V from "../../../utils/validation";
 
 export default {
     props: {
@@ -220,7 +228,14 @@ export default {
     },
     methods: {
         async saveDoctorSchedule() {
-            if (this.validate()) return;
+            let props = [
+                "available_day",
+                "total_serial",
+                "start_time",
+                "end_time",
+            ];
+
+            if (V.empty(props, this.schedule)) return;
 
             this.btnDisabled = this.loading = true;
 
@@ -256,31 +271,16 @@ export default {
 
             this.btnDisabled = this.loading = false;
         },
-        validate() {
-            let props = [
-                "available_day",
-                "total_serial",
-                "start_time",
-                "end_time",
-            ];
-
-            let errorCount = 0;
-
-            props.forEach((prop) => {
-                if (!this.schedule[prop]) {
-                    errorCount++;
-                    let propName = prop.replace("_id", "");
-                    propName = propName.replace("_", " ");
-                    let message = `The ${propName} field is required`;
-                    snackbar.warning(message, "topRight");
-                }
-            });
-
-            return errorCount ? true : false;
-        },
         resetForm() {
-            Object.keys(this.schedule).map((k) => (this.schedule[k] = ""));
-            this.schedule.total_serial = 0;
+            let s = this.schedule;
+            s.available_day = s.start_time = s.end_time = "";
+            s.total_serial = 0;
+        },
+        doctorScheduleReload() {
+            if (this.data == null) return;
+            this.$store.dispatch("doctorSchedule/getSchedules", {
+                doctor_id: this.data.doctor_id,
+            });
         },
     },
 };

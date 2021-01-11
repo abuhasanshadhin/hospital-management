@@ -521,7 +521,12 @@ var render = function() {
                                 type: "button",
                                 disabled: _vm.btnDisabled
                               },
-                              on: { click: _vm.resetForm }
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.resetForm($event)
+                                }
+                              }
                             },
                             [
                               _c("i", { staticClass: "fa fa-undo" }),
