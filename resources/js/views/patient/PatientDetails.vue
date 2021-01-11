@@ -1,21 +1,13 @@
 <template>
     <div class="d-inline">
-        <button
-            @click="isModalShow = true"
-            :class="
-                showName ? 'btn btn-sm btn-primary' : 'btn-action text-dark'
-            "
-        >
-            <span v-if="showName">Dr. Jhon Doe</span>
-            <i v-else class="fa fa-eye"></i>
-        </button>
-
         <transition name="scale">
             <div class="custom-modal" v-if="isModalShow">
                 <div class="custom-modal-body col-md-7">
                     <div class="custom-modal-header">
                         <div class="clearfix">
-                            <div class="custom-modal-title">Doctor Details</div>
+                            <div class="custom-modal-title">
+                                Patient Details
+                            </div>
                             <div
                                 @click="isModalShow = false"
                                 class="custom-close"
@@ -30,15 +22,15 @@
                             <div class="col-md-5">
                                 <div class="text-center">
                                     <img
-                                        v-if="doctor.photo"
-                                        :src="`${apiPublicPath}/${doctor.photo}`"
-                                        class="doctor-image"
-                                        alt="Doctor Photo"
+                                        v-if="patient.photo"
+                                        :src="`${apiPublicPath}/${patient.photo}`"
+                                        class="patient-image"
+                                        alt="Patient Photo"
                                     />
                                     <img
                                         v-else
                                         :src="`${apiPublicPath}/images/image-not-available.png`"
-                                        class="doctor-image"
+                                        class="patient-image"
                                         alt="Not Available"
                                     />
                                 </div>
@@ -46,64 +38,111 @@
                             <div class="col-md-7">
                                 <table class="table table-sm table-borderless">
                                     <tr>
+                                        <th>Patient ID</th>
+                                        <td>:</td>
+                                        <td>{{ patient.code }}</td>
+                                    </tr>
+                                    <tr>
                                         <th>Full Name</th>
                                         <td>:</td>
-                                        <td>{{ doctor.name }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Department</th>
-                                        <td>:</td>
-                                        <td>{{ doctor.department_name }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Specialization</th>
-                                        <td>:</td>
-                                        <td>{{ doctor.specialization }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Phone No</th>
-                                        <td>:</td>
-                                        <td>{{ doctor.phone }}</td>
-                                    </tr>
-                                    <tr v-if="doctor.email">
-                                        <th>E-Mail</th>
-                                        <td>:</td>
-                                        <td>
-                                            {{ doctor.email }}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th style="width: 120px">
-                                            Date of Birth
-                                        </th>
-                                        <td>:</td>
-                                        <td>{{ doctor.date_of_birth }}</td>
+                                        <td>{{ patient.name }}</td>
                                     </tr>
                                     <tr>
                                         <th>Gender</th>
                                         <td>:</td>
-                                        <td>{{ doctor.gender }}</td>
+                                        <td>{{ patient.gender }}</td>
                                     </tr>
                                     <tr>
-                                        <th>B. Group</th>
+                                        <th>Date of Birth</th>
                                         <td>:</td>
-                                        <td>{{ doctor.blood_group }}</td>
+                                        <td>{{ patient.date_of_birth }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Address</th>
+                                        <th>Age</th>
                                         <td>:</td>
-                                        <td>{{ doctor.address }}</td>
+                                        <td>{{ patient.age }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Blood Group</th>
+                                        <td>:</td>
+                                        <td>{{ patient.blood_group }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Phone Number</th>
+                                        <td>:</td>
+                                        <td>{{ patient.phone_number }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Phone Number 2</th>
+                                        <td>:</td>
+                                        <td>{{ patient.phone_number_2 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>E-Mail</th>
+                                        <td>:</td>
+                                        <td>{{ patient.email }}</td>
                                     </tr>
                                 </table>
                             </div>
                         </div>
-                        <div class="px-1 mt-3">
-                            <div class="text-center">
-                                <b><u>Education / Degree</u></b>
+                        <div class="row mt-4">
+                            <div class="col-md-6">
+                                <table class="table table-sm table-borderless">
+                                    <tr>
+                                        <th>Address</th>
+                                        <td>:</td>
+                                        <td>{{ patient.address }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Entry Date</th>
+                                        <td>:</td>
+                                        <td>
+                                            {{
+                                                String(
+                                                    new Date(patient.created_at)
+                                                ).slice(0, 25)
+                                            }}
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
-                            <div class="education text-center">
-                                {{ doctor.education }}
+                            <div class="col-md-6">
+                                <table class="table table-sm table-borderless">
+                                    <tr>
+                                        <th>Status</th>
+                                        <td>:</td>
+                                        <td>
+                                            <div
+                                                class="badge badge-success"
+                                                v-if="patient.status"
+                                            >
+                                                Active
+                                            </div>
+                                            <div
+                                                class="badge badge-danger"
+                                                v-if="!patient.status"
+                                            >
+                                                Inactive
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Created By</th>
+                                        <td>:</td>
+                                        <td>
+                                            {{
+                                                patient.created_by
+                                                    ? patient.created_by.name
+                                                    : ""
+                                            }}
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
+                        </div>
+                        <div class="px-2 text-center mt-4">
+                            <div class="font-weight-bold"><u>Note :</u></div>
+                            {{ patient.note }}
                         </div>
                     </div>
 
@@ -116,7 +155,7 @@
 
 <script>
 export default {
-    props: ["showName", "doctor"],
+    props: ["patient"],
     data() {
         return {
             isModalShow: false,
@@ -127,4 +166,8 @@ export default {
 </script>
 
 <style scoped>
+.patient-image {
+    height: 150px;
+    margin-top: 50px;
+}
 </style>

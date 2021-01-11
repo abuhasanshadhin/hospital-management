@@ -62,6 +62,15 @@
                                 </td>
                                 <td>
                                     <patient-document></patient-document>
+                                    <button
+                                        type="button"
+                                        @click.prevent="
+                                            showPatientDetails(patient)
+                                        "
+                                        class="btn-action text-dark"
+                                    >
+                                        <i class="fa fa-eye"></i>
+                                    </button>
                                     <router-link
                                         :to="`/patient/${patient.id}`"
                                         class="btn-action text-info"
@@ -87,6 +96,11 @@
             </div>
         </div>
 
+        <patient-details
+            ref="patientDetails"
+            :patient="patientInfo"
+        ></patient-details>
+
         <delete-confirm
             ref="deleteConfirm"
             @confirm="deletePatient"
@@ -97,14 +111,17 @@
 <script>
 import PatientDocument from "./document/Index";
 import DeleteConfirm from "../../components/Confirm";
+import PatientDetails from "./PatientDetails";
 
 export default {
     components: {
         PatientDocument,
         DeleteConfirm,
+        PatientDetails,
     },
     data() {
         return {
+            patientInfo: null,
             patientDeleteId: null,
         };
     },
@@ -112,6 +129,10 @@ export default {
         this.$store.dispatch("patient/getPatients");
     },
     methods: {
+        showPatientDetails(patient) {
+            this.patientInfo = patient;
+            this.$refs.patientDetails.isModalShow = true;
+        },
         showDeleteDialog(patient_id) {
             this.patientDeleteId = patient_id;
             this.$refs.deleteConfirm.show = true;
