@@ -222,6 +222,7 @@
                                     <input
                                         type="file"
                                         @change="onPhotoChange"
+                                        ref="doctorPhoto"
                                         class="form-control"
                                     />
                                 </div>
@@ -409,6 +410,7 @@ export default {
             Object.keys(this.doctor).map((k) => (this.doctor[k] = ""));
             this.selectedDepartment = this.doctor.department_id = null;
             this.doctor.photo = this.photoPreview = null;
+            this.$refs.doctorPhoto.value = null;
             this.doctor.date_of_birth = new Date();
             this.doctor.status = 1;
         },

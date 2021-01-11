@@ -6,7 +6,7 @@ export default {
             if (!dataObject[prop]) {
                 hasError++;
                 let propName = prop.replace("_id", "");
-                propName = prop.replace("_", " ");
+                propName = propName.replace("_", " ");
                 let message = `The ${propName} field is required`;
                 snackbar.warning(message, "topRight");
                 break

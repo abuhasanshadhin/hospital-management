@@ -177,6 +177,7 @@
                                 <div class="col-md-6 pr-0">
                                     <input
                                         @change="onPhotoChange"
+                                        ref="patientPhoto"
                                         type="file"
                                         class="form-control"
                                     />
@@ -400,6 +401,7 @@ export default {
             this.patient.age = 0;
             this.patient.status = 1;
             this.photo = this.photoPreview = null;
+            this.$refs.patientPhoto.value = null;
         },
         onPhotoChange() {
             if (event.target.files.length == 0) return;

@@ -343,6 +343,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 
@@ -468,6 +469,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
       this.selectedDepartment = this.doctor.department_id = null;
       this.doctor.photo = this.photoPreview = null;
+      this.$refs.doctorPhoto.value = null;
       this.doctor.date_of_birth = new Date();
       this.doctor.status = 1;
     },
@@ -1388,6 +1390,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-8" }, [
                     _c("input", {
+                      ref: "doctorPhoto",
                       staticClass: "form-control",
                       attrs: { type: "file" },
                       on: { change: _vm.onPhotoChange }
@@ -1630,7 +1633,7 @@ __webpack_require__.r(__webpack_exports__);
       if (!dataObject[prop]) {
         hasError++;
         var propName = prop.replace("_id", "");
-        propName = prop.replace("_", " ");
+        propName = propName.replace("_", " ");
         var message = "The ".concat(propName, " field is required");
         snackbar.warning(message, "topRight");
         break;

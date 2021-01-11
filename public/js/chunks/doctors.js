@@ -1572,7 +1572,7 @@ __webpack_require__.r(__webpack_exports__);
       if (!dataObject[prop]) {
         hasError++;
         var propName = prop.replace("_id", "");
-        propName = prop.replace("_", " ");
+        propName = propName.replace("_", " ");
         var message = "The ".concat(propName, " field is required");
         snackbar.warning(message, "topRight");
         break;
