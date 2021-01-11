@@ -160,18 +160,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["showName", "doctor"],
+  props: ["doctor"],
   data: function data() {
     return {
       isModalShow: false,
@@ -274,27 +264,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "d-inline" },
     [
-      _c(
-        "button",
-        {
-          class: _vm.showName
-            ? "btn btn-sm btn-primary"
-            : "btn-action text-dark",
-          on: {
-            click: function($event) {
-              _vm.isModalShow = true
-            }
-          }
-        },
-        [
-          _vm.showName
-            ? _c("span", [_vm._v(_vm._s(_vm.doctor.name))])
-            : _c("i", { staticClass: "fa fa-eye" })
-        ]
-      ),
-      _vm._v(" "),
       _c("transition", { attrs: { name: "scale" } }, [
         _vm.isModalShow
           ? _c("div", { staticClass: "custom-modal" }, [

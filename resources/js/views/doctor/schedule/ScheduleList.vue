@@ -38,9 +38,13 @@
                                 </div>
                             </div>
                             <div class="float-right">
-                                <schedule-modal
-                                    :doctorID="doctor_id"
-                                ></schedule-modal>
+                                <button
+                                    @click.prevent="showAddModal"
+                                    type="button"
+                                    class="btn btn-primary btn-sm"
+                                >
+                                    <i class="fa fa-plus"></i> Add New
+                                </button>
                             </div>
                         </div>
                         <table class="table table-sm table-bordered">
@@ -74,11 +78,15 @@
                                         <td>{{ item.end_time }}</td>
                                         <td>{{ item.total_serial }}</td>
                                         <td>
-                                            <schedule-modal
-                                                edit
-                                                :data="item"
-                                                title="Edit"
-                                            ></schedule-modal>
+                                            <button
+                                                @click.prevent="
+                                                    showEditModal(item)
+                                                "
+                                                type="button"
+                                                class="btn-action text-info"
+                                            >
+                                                <i class="fa fa-edit"></i>
+                                            </button>
                                             <button
                                                 @click.prevent="
                                                     showDeleteConfirm(item.id)
@@ -109,6 +117,10 @@
             </div>
         </transition>
 
+        <schedule-modal ref="addModal" :doctorID="doctor_id"></schedule-modal>
+
+        <schedule-modal ref="editModal" :data="scheduleInfo"></schedule-modal>
+
         <confirm ref="deleteConfirm" @confirm="deleteSchedule"></confirm>
     </div>
 </template>
@@ -129,6 +141,7 @@ export default {
     },
     data() {
         return {
+            scheduleInfo: null,
             deleteId: null,
         };
     },
@@ -140,6 +153,13 @@ export default {
         },
     },
     methods: {
+        showEditModal(schedule) {
+            this.scheduleInfo = schedule;
+            this.$refs.editModal.isModalShow = true;
+        },
+        showAddModal() {
+            this.$refs.addModal.isModalShow = true;
+        },
         showDeleteConfirm(id) {
             this.deleteId = id;
             this.$refs.deleteConfirm.show = true;

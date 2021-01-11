@@ -1,15 +1,5 @@
 <template>
-    <div class="d-inline">
-        <button
-            @click="isModalShow = true"
-            :class="
-                showName ? 'btn btn-sm btn-primary' : 'btn-action text-dark'
-            "
-        >
-            <span v-if="showName">{{ doctor.name }}</span>
-            <i v-else class="fa fa-eye"></i>
-        </button>
-
+    <div>
         <transition name="scale">
             <div class="custom-modal" v-if="isModalShow">
                 <div class="custom-modal-body col-md-7">
@@ -116,7 +106,7 @@
 
 <script>
 export default {
-    props: ["showName", "doctor"],
+    props: ["doctor"],
     data() {
         return {
             isModalShow: false,

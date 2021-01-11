@@ -1,29 +1,12 @@
 <template>
-    <div class="d-inline-block">
-        <button
-            type="button"
-            @click.prevent="isModalShow = true"
-            :class="[
-                edit
-                    ? 'btn-action text-info'
-                    : 'btn btn-sm btn-primary text-center',
-                small ? 'rounded-circle' : '',
-            ]"
-        >
-            <template v-if="edit"> <i class="fa fa-edit"></i> </template>
-            <template v-else>
-                <i class="fa fa-plus"></i>
-                <template v-if="!small">Add New</template>
-            </template>
-        </button>
-
+    <div>
         <transition name="scale">
             <div class="custom-modal" v-if="isModalShow">
                 <div class="custom-modal-body col-md-4">
                     <div class="custom-modal-header">
                         <div class="clearfix">
                             <div class="custom-modal-title">
-                                <template v-if="edit">Edit Schedule</template>
+                                <template v-if="editId">Edit Schedule</template>
                                 <template v-else>Add New Schedule</template>
                             </div>
                             <div
@@ -114,30 +97,9 @@
 
                         <div class="custom-modal-footer mt-1">
                             <button
-                                @click.prevent="doctorScheduleReload"
-                                type="button"
-                                v-if="edit"
-                                class="btn btn-dark"
-                                :disabled="
-                                    btnDisabled ||
-                                    $store.getters['doctorSchedule/loading']
-                                "
-                            >
-                                <i
-                                    class="fas fa-sync"
-                                    :class="{
-                                        'fa-spin':
-                                            $store.getters[
-                                                'doctorSchedule/loading'
-                                            ],
-                                    }"
-                                ></i>
-                                Refresh
-                            </button>
-                            <button
                                 type="button"
                                 @click.prevent="resetForm"
-                                v-if="!edit"
+                                v-if="!editId"
                                 class="btn btn-dark"
                                 :disabled="btnDisabled"
                             >
@@ -154,7 +116,7 @@
                                 ></i>
                                 <span v-else>
                                     <i class="fa fa-save"></i> Save
-                                    <template v-if="edit">Changes</template>
+                                    <template v-if="editId">Changes</template>
                                 </span>
                             </button>
                         </div>
@@ -172,8 +134,6 @@ import V from "../../../utils/validation";
 
 export default {
     props: {
-        small: Boolean,
-        edit: Boolean,
         doctorID: Number,
         data: Object,
     },
@@ -217,14 +177,6 @@ export default {
             );
             this.editId = this.data.id;
         },
-    },
-    created() {
-        if (this.data != null) {
-            Object.keys(this.data).map(
-                (k) => (this.schedule[k] = this.data[k])
-            );
-            this.editId = this.data.id;
-        }
     },
     methods: {
         async saveDoctorSchedule() {
@@ -275,12 +227,6 @@ export default {
             let s = this.schedule;
             s.available_day = s.start_time = s.end_time = "";
             s.total_serial = 0;
-        },
-        doctorScheduleReload() {
-            if (this.data == null) return;
-            this.$store.dispatch("doctorSchedule/getSchedules", {
-                doctor_id: this.data.doctor_id,
-            });
         },
     },
 };

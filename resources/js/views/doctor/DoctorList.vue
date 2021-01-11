@@ -44,10 +44,13 @@
                         >
                             <i class="fa fa-clock"></i>
                         </button>
-                        <doctor-details
-                            :doctor="item"
+                        <button
+                            @click="showDoctorDetails(item)"
+                            class="btn-action text-dark"
                             title="Doctor Details"
-                        ></doctor-details>
+                        >
+                            <i class="fa fa-eye"></i>
+                        </button>
                         <router-link
                             :to="`/doctor/${item.id}`"
                             class="btn-action text-info"
@@ -67,6 +70,8 @@
                 </data-table>
             </div>
         </div>
+
+        <doctor-details ref="doctorDetails" :doctor="doctor"></doctor-details>
 
         <delete-confirm
             ref="deleteConfirm"
@@ -117,6 +122,10 @@ export default {
         this.$store.dispatch("doctor/getDoctors");
     },
     methods: {
+        showDoctorDetails(doctor) {
+            this.doctor = doctor;
+            this.$refs.doctorDetails.isModalShow = true;
+        },
         showDeleteDialog(doctor_id) {
             this.doctorDeleteId = doctor_id;
             this.$refs.deleteConfirm.show = true;

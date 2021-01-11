@@ -1,29 +1,14 @@
 <template>
-    <div class="d-inline-block">
-        <button
-            type="button"
-            @click.prevent="isModalShow = true"
-            :class="[
-                edit
-                    ? 'btn-action text-primary'
-                    : 'btn btn-sm btn-primary text-center',
-                small ? 'rounded-circle' : '',
-            ]"
-        >
-            <template v-if="edit"> <i class="fa fa-edit"></i> </template>
-            <template v-else>
-                <i class="fa fa-plus"></i>
-                <template v-if="!small">Add New</template>
-            </template>
-        </button>
-
+    <div>
         <transition name="scale">
             <div class="custom-modal" v-if="isModalShow">
                 <div class="custom-modal-body col-md-4">
                     <div class="custom-modal-header">
                         <div class="clearfix">
                             <div class="custom-modal-title">
-                                <template v-if="edit">Edit Department</template>
+                                <template v-if="editId"
+                                    >Edit Department</template
+                                >
                                 <template v-else>Add New Department</template>
                             </div>
                             <div
@@ -101,7 +86,7 @@
                             <button
                                 type="button"
                                 @click.prevent="resetForm"
-                                v-if="!edit"
+                                v-if="!editId"
                                 class="btn btn-dark"
                                 :disabled="btnDisabled"
                             >
@@ -118,7 +103,7 @@
                                 ></i>
                                 <span v-else>
                                     <i class="fa fa-save"></i> Save
-                                    <template v-if="edit">Changes</template>
+                                    <template v-if="editId">Changes</template>
                                 </span>
                             </button>
                         </div>
@@ -131,11 +116,7 @@
 
 <script>
 export default {
-    props: {
-        small: Boolean,
-        edit: Boolean,
-        data: Object,
-    },
+    props: ["data"],
     data() {
         return {
             isModalShow: false,
@@ -149,13 +130,14 @@ export default {
             editId: null,
         };
     },
-    created() {
-        if (this.data != null) {
+    watch: {
+        data(dept) {
+            if (dept == null) return;
             Object.keys(this.department).map(
-                (k) => (this.department[k] = this.data[k])
+                (k) => (this.department[k] = dept[k])
             );
             this.editId = this.data.id;
-        }
+        },
     },
     methods: {
         resetForm() {

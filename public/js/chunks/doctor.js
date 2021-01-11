@@ -344,6 +344,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -386,6 +394,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     if (doctorEditId != undefined) this.editDoctor(doctorEditId);
   },
   methods: {
+    showDepartmentAddModal: function showDepartmentAddModal() {
+      this.$refs.departmentAddModal.isModalShow = true;
+    },
     onPhotoChange: function onPhotoChange() {
       if (event.target.files.length == 0) return;
       var file = event.target.files[0];
@@ -904,653 +915,682 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "card shadow mb-4" }, [
-      _c("div", { staticClass: "card-header py-2" }, [
-        _c("div", { staticClass: "clearfix" }, [
-          _c("div", { staticClass: "float-left" }, [
-            _c(
-              "h5",
-              { staticClass: "m-0 font-weight-bold text-primary" },
-              [
-                _vm.doctorEditId
-                  ? [
-                      _vm._v(
-                        "\n                            Edit Doctor\n                        "
-                      )
-                    ]
-                  : [_vm._v(" Add New Doctor ")]
-              ],
-              2
-            )
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "float-right" },
-            [
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "card shadow mb-4" }, [
+        _c("div", { staticClass: "card-header py-2" }, [
+          _c("div", { staticClass: "clearfix" }, [
+            _c("div", { staticClass: "float-left" }, [
               _c(
-                "router-link",
-                {
-                  staticClass: "btn btn-sm btn-dark",
-                  attrs: { to: "/doctors" }
-                },
+                "h5",
+                { staticClass: "m-0 font-weight-bold text-primary" },
                 [
-                  _c("i", { staticClass: "fa fa-arrow-left" }),
-                  _vm._v(" Back\n                    ")
-                ]
+                  _vm.doctorEditId
+                    ? [
+                        _vm._v(
+                          "\n                            Edit Doctor\n                        "
+                        )
+                      ]
+                    : [_vm._v(" Add New Doctor ")]
+                ],
+                2
               )
-            ],
-            1
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "float-right" },
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "btn btn-sm btn-dark",
+                    attrs: { to: "/doctors" }
+                  },
+                  [
+                    _c("i", { staticClass: "fa fa-arrow-left" }),
+                    _vm._v(" Back\n                    ")
+                  ]
+                )
+              ],
+              1
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c(
+            "form",
+            {
+              attrs: { method: "POST" },
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.saveDoctor($event)
+                }
+              }
+            },
+            [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-md-5" }, [
+                  _c("div", { staticClass: "form-group row" }, [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-8" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model.trim",
+                            value: _vm.doctor.name,
+                            expression: "doctor.name",
+                            modifiers: { trim: true }
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text" },
+                        domProps: { value: _vm.doctor.name },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.doctor,
+                              "name",
+                              $event.target.value.trim()
+                            )
+                          },
+                          blur: function($event) {
+                            return _vm.$forceUpdate()
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-8" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model.trim",
+                            value: _vm.doctor.phone,
+                            expression: "doctor.phone",
+                            modifiers: { trim: true }
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text" },
+                        domProps: { value: _vm.doctor.phone },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.doctor,
+                              "phone",
+                              $event.target.value.trim()
+                            )
+                          },
+                          blur: function($event) {
+                            return _vm.$forceUpdate()
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c("label", { staticClass: "col-md-4 text-right" }, [
+                      _vm._v("Email")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-8" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model.trim",
+                            value: _vm.doctor.email,
+                            expression: "doctor.email",
+                            modifiers: { trim: true }
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text" },
+                        domProps: { value: _vm.doctor.email },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.doctor,
+                              "email",
+                              $event.target.value.trim()
+                            )
+                          },
+                          blur: function($event) {
+                            return _vm.$forceUpdate()
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c("label", { staticClass: "col-md-4 text-right" }, [
+                      _vm._v("Date of Birth")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-md-8" },
+                      [
+                        _c("date-picker", {
+                          attrs: {
+                            "disabled-date": _vm.disabledAfterToday,
+                            editable: false
+                          },
+                          model: {
+                            value: _vm.doctor.date_of_birth,
+                            callback: function($$v) {
+                              _vm.$set(
+                                _vm.doctor,
+                                "date_of_birth",
+                                typeof $$v === "string" ? $$v.trim() : $$v
+                              )
+                            },
+                            expression: "doctor.date_of_birth"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row mb-1" }, [
+                    _vm._m(2),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-8" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "custom-control custom-radio d-inline-block mr-3"
+                        },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.doctor.gender,
+                                expression: "doctor.gender"
+                              }
+                            ],
+                            staticClass: "custom-control-input",
+                            attrs: { type: "radio", value: "Male", id: "cr1" },
+                            domProps: {
+                              checked: _vm._q(_vm.doctor.gender, "Male")
+                            },
+                            on: {
+                              change: function($event) {
+                                return _vm.$set(_vm.doctor, "gender", "Male")
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-control-label",
+                              attrs: { for: "cr1" }
+                            },
+                            [_vm._v("Male")]
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "custom-control custom-radio d-inline-block"
+                        },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.doctor.gender,
+                                expression: "doctor.gender"
+                              }
+                            ],
+                            staticClass: "custom-control-input",
+                            attrs: {
+                              type: "radio",
+                              value: "Female",
+                              id: "cr2"
+                            },
+                            domProps: {
+                              checked: _vm._q(_vm.doctor.gender, "Female")
+                            },
+                            on: {
+                              change: function($event) {
+                                return _vm.$set(_vm.doctor, "gender", "Female")
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-control-label",
+                              attrs: { for: "cr2" }
+                            },
+                            [_vm._v("Female")]
+                          )
+                        ]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c("label", { staticClass: "col-md-4 text-right" }, [
+                      _vm._v("Blood Group")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-md-8" },
+                      [
+                        _c("v-select", {
+                          attrs: {
+                            options: [
+                              "A+",
+                              "A-",
+                              "B+",
+                              "B-",
+                              "O+",
+                              "O-",
+                              "AB+",
+                              "AB-"
+                            ]
+                          },
+                          model: {
+                            value: _vm.doctor.blood_group,
+                            callback: function($$v) {
+                              _vm.$set(_vm.doctor, "blood_group", $$v)
+                            },
+                            expression: "doctor.blood_group"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _vm._m(3),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-8" }, [
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model.trim",
+                            value: _vm.doctor.address,
+                            expression: "doctor.address",
+                            modifiers: { trim: true }
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { rows: "2" },
+                        domProps: { value: _vm.doctor.address },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.doctor,
+                              "address",
+                              $event.target.value.trim()
+                            )
+                          },
+                          blur: function($event) {
+                            return _vm.$forceUpdate()
+                          }
+                        }
+                      })
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-5" }, [
+                  _c("div", { staticClass: "form-group row" }, [
+                    _vm._m(4),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-md-7 pr-1" },
+                      [
+                        _c("v-select", {
+                          attrs: {
+                            options:
+                              _vm.$store.getters["department/departments"],
+                            label: "name"
+                          },
+                          on: {
+                            "search:focus": function($event) {
+                              return _vm.$store.dispatch(
+                                "department/getDepartments",
+                                { status: true }
+                              )
+                            }
+                          },
+                          model: {
+                            value: _vm.selectedDepartment,
+                            callback: function($$v) {
+                              _vm.selectedDepartment = $$v
+                            },
+                            expression: "selectedDepartment"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.$store.getters["department/loading"]
+                          ? _c("div", { staticClass: "slider slider-sm" }, [
+                              _c("div", { staticClass: "line" }),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "sub-line inc" }),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "sub-line dec" })
+                            ])
+                          : _vm._e()
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-1 pl-0" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary btn-sm rounded-circle",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.showDepartmentAddModal($event)
+                            }
+                          }
+                        },
+                        [_c("i", { staticClass: "fa fa-plus" })]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _vm._m(5),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-8" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model.trim",
+                            value: _vm.doctor.specialization,
+                            expression: "doctor.specialization",
+                            modifiers: { trim: true }
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text" },
+                        domProps: { value: _vm.doctor.specialization },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.doctor,
+                              "specialization",
+                              $event.target.value.trim()
+                            )
+                          },
+                          blur: function($event) {
+                            return _vm.$forceUpdate()
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c("label", { staticClass: "col-md-4 text-right" }, [
+                      _vm._v("Education")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-8" }, [
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model.trim",
+                            value: _vm.doctor.education,
+                            expression: "doctor.education",
+                            modifiers: { trim: true }
+                          }
+                        ],
+                        staticClass: "form-control",
+                        staticStyle: { height: "60px" },
+                        domProps: { value: _vm.doctor.education },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.doctor,
+                              "education",
+                              $event.target.value.trim()
+                            )
+                          },
+                          blur: function($event) {
+                            return _vm.$forceUpdate()
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c("label", { staticClass: "col-md-4 text-right" }, [
+                      _vm._v("Photo")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-8" }, [
+                      _c("input", {
+                        ref: "doctorPhoto",
+                        staticClass: "form-control",
+                        attrs: { type: "file" },
+                        on: { change: _vm.onPhotoChange }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c("label", { staticClass: "col-md-4 text-right" }, [
+                      _vm._v("Status")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-8" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "custom-control custom-radio d-inline-block mr-3"
+                        },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.doctor.status,
+                                expression: "doctor.status"
+                              }
+                            ],
+                            staticClass: "custom-control-input",
+                            attrs: { type: "radio", value: "1", id: "s1" },
+                            domProps: {
+                              checked: _vm._q(_vm.doctor.status, "1")
+                            },
+                            on: {
+                              change: function($event) {
+                                return _vm.$set(_vm.doctor, "status", "1")
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-control-label",
+                              attrs: { for: "s1" }
+                            },
+                            [_vm._v("Active")]
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "custom-control custom-radio d-inline-block"
+                        },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.doctor.status,
+                                expression: "doctor.status"
+                              }
+                            ],
+                            staticClass: "custom-control-input",
+                            attrs: { type: "radio", value: "0", id: "s2" },
+                            domProps: {
+                              checked: _vm._q(_vm.doctor.status, "0")
+                            },
+                            on: {
+                              change: function($event) {
+                                return _vm.$set(_vm.doctor, "status", "0")
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-control-label",
+                              attrs: { for: "s2" }
+                            },
+                            [_vm._v("Inactive")]
+                          )
+                        ]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c(
+                      "div",
+                      { staticClass: "col-md-8 offset-md-4 text-right" },
+                      [
+                        !_vm.doctorEditId
+                          ? _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-dark c-btn",
+                                attrs: {
+                                  type: "button",
+                                  disabled: _vm.btnDisabled
+                                },
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.resetForm($event)
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", { staticClass: "fa fa-undo" }),
+                                _vm._v(
+                                  " Reset\n                                "
+                                )
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary c-btn",
+                            attrs: { type: "submit", disabled: _vm.btnDisabled }
+                          },
+                          [
+                            _vm.loading
+                              ? _c("i", {
+                                  staticClass: "fa fa-spinner fa-spin"
+                                })
+                              : [
+                                  _c("i", { staticClass: "fa fa-save" }),
+                                  _vm._v(
+                                    " Save\n                                        "
+                                  ),
+                                  _vm.doctorEditId
+                                    ? [_vm._v("Changes")]
+                                    : _vm._e()
+                                ]
+                          ],
+                          2
+                        )
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-2" }, [
+                  _c("img", {
+                    staticClass: "doctor-image-preview",
+                    attrs: {
+                      src: _vm.photoPreview
+                        ? _vm.photoPreview
+                        : _vm.notFoundImage,
+                      alt: "Doctor Photo Preview"
+                    }
+                  })
+                ])
+              ])
+            ]
           )
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "card-body" }, [
-        _c(
-          "form",
-          {
-            attrs: { method: "POST" },
-            on: {
-              submit: function($event) {
-                $event.preventDefault()
-                return _vm.saveDoctor($event)
-              }
-            }
-          },
-          [
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-md-5" }, [
-                _c("div", { staticClass: "form-group row" }, [
-                  _vm._m(0),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-8" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model.trim",
-                          value: _vm.doctor.name,
-                          expression: "doctor.name",
-                          modifiers: { trim: true }
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { type: "text" },
-                      domProps: { value: _vm.doctor.name },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.doctor,
-                            "name",
-                            $event.target.value.trim()
-                          )
-                        },
-                        blur: function($event) {
-                          return _vm.$forceUpdate()
-                        }
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group row" }, [
-                  _vm._m(1),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-8" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model.trim",
-                          value: _vm.doctor.phone,
-                          expression: "doctor.phone",
-                          modifiers: { trim: true }
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { type: "text" },
-                      domProps: { value: _vm.doctor.phone },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.doctor,
-                            "phone",
-                            $event.target.value.trim()
-                          )
-                        },
-                        blur: function($event) {
-                          return _vm.$forceUpdate()
-                        }
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group row" }, [
-                  _c("label", { staticClass: "col-md-4 text-right" }, [
-                    _vm._v("Email")
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-8" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model.trim",
-                          value: _vm.doctor.email,
-                          expression: "doctor.email",
-                          modifiers: { trim: true }
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { type: "text" },
-                      domProps: { value: _vm.doctor.email },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.doctor,
-                            "email",
-                            $event.target.value.trim()
-                          )
-                        },
-                        blur: function($event) {
-                          return _vm.$forceUpdate()
-                        }
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group row" }, [
-                  _c("label", { staticClass: "col-md-4 text-right" }, [
-                    _vm._v("Date of Birth")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "col-md-8" },
-                    [
-                      _c("date-picker", {
-                        attrs: {
-                          "disabled-date": _vm.disabledAfterToday,
-                          editable: false
-                        },
-                        model: {
-                          value: _vm.doctor.date_of_birth,
-                          callback: function($$v) {
-                            _vm.$set(
-                              _vm.doctor,
-                              "date_of_birth",
-                              typeof $$v === "string" ? $$v.trim() : $$v
-                            )
-                          },
-                          expression: "doctor.date_of_birth"
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group row mb-1" }, [
-                  _vm._m(2),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-8" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "custom-control custom-radio d-inline-block mr-3"
-                      },
-                      [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.doctor.gender,
-                              expression: "doctor.gender"
-                            }
-                          ],
-                          staticClass: "custom-control-input",
-                          attrs: { type: "radio", value: "Male", id: "cr1" },
-                          domProps: {
-                            checked: _vm._q(_vm.doctor.gender, "Male")
-                          },
-                          on: {
-                            change: function($event) {
-                              return _vm.$set(_vm.doctor, "gender", "Male")
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "label",
-                          {
-                            staticClass: "custom-control-label",
-                            attrs: { for: "cr1" }
-                          },
-                          [_vm._v("Male")]
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "custom-control custom-radio d-inline-block"
-                      },
-                      [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.doctor.gender,
-                              expression: "doctor.gender"
-                            }
-                          ],
-                          staticClass: "custom-control-input",
-                          attrs: { type: "radio", value: "Female", id: "cr2" },
-                          domProps: {
-                            checked: _vm._q(_vm.doctor.gender, "Female")
-                          },
-                          on: {
-                            change: function($event) {
-                              return _vm.$set(_vm.doctor, "gender", "Female")
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "label",
-                          {
-                            staticClass: "custom-control-label",
-                            attrs: { for: "cr2" }
-                          },
-                          [_vm._v("Female")]
-                        )
-                      ]
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group row" }, [
-                  _c("label", { staticClass: "col-md-4 text-right" }, [
-                    _vm._v("Blood Group")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "col-md-8" },
-                    [
-                      _c("v-select", {
-                        attrs: {
-                          options: [
-                            "A+",
-                            "A-",
-                            "B+",
-                            "B-",
-                            "O+",
-                            "O-",
-                            "AB+",
-                            "AB-"
-                          ]
-                        },
-                        model: {
-                          value: _vm.doctor.blood_group,
-                          callback: function($$v) {
-                            _vm.$set(_vm.doctor, "blood_group", $$v)
-                          },
-                          expression: "doctor.blood_group"
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group row" }, [
-                  _vm._m(3),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-8" }, [
-                    _c("textarea", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model.trim",
-                          value: _vm.doctor.address,
-                          expression: "doctor.address",
-                          modifiers: { trim: true }
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { rows: "1" },
-                      domProps: { value: _vm.doctor.address },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.doctor,
-                            "address",
-                            $event.target.value.trim()
-                          )
-                        },
-                        blur: function($event) {
-                          return _vm.$forceUpdate()
-                        }
-                      }
-                    })
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-5" }, [
-                _c("div", { staticClass: "form-group row" }, [
-                  _vm._m(4),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "col-md-7 pr-1" },
-                    [
-                      _c("v-select", {
-                        attrs: {
-                          options: _vm.$store.getters["department/departments"],
-                          label: "name"
-                        },
-                        on: {
-                          "search:focus": function($event) {
-                            return _vm.$store.dispatch(
-                              "department/getDepartments",
-                              { status: true }
-                            )
-                          }
-                        },
-                        model: {
-                          value: _vm.selectedDepartment,
-                          callback: function($$v) {
-                            _vm.selectedDepartment = $$v
-                          },
-                          expression: "selectedDepartment"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm.$store.getters["department/loading"]
-                        ? _c("div", { staticClass: "slider slider-sm" }, [
-                            _c("div", { staticClass: "line" }),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "sub-line inc" }),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "sub-line dec" })
-                          ])
-                        : _vm._e()
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "col-md-1 pl-0" },
-                    [_c("department-modal", { attrs: { small: "" } })],
-                    1
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group row" }, [
-                  _vm._m(5),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-8" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model.trim",
-                          value: _vm.doctor.specialization,
-                          expression: "doctor.specialization",
-                          modifiers: { trim: true }
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { type: "text" },
-                      domProps: { value: _vm.doctor.specialization },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.doctor,
-                            "specialization",
-                            $event.target.value.trim()
-                          )
-                        },
-                        blur: function($event) {
-                          return _vm.$forceUpdate()
-                        }
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group row" }, [
-                  _c("label", { staticClass: "col-md-4 text-right" }, [
-                    _vm._v("Education")
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-8" }, [
-                    _c("textarea", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model.trim",
-                          value: _vm.doctor.education,
-                          expression: "doctor.education",
-                          modifiers: { trim: true }
-                        }
-                      ],
-                      staticClass: "form-control",
-                      staticStyle: { height: "60px" },
-                      domProps: { value: _vm.doctor.education },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.doctor,
-                            "education",
-                            $event.target.value.trim()
-                          )
-                        },
-                        blur: function($event) {
-                          return _vm.$forceUpdate()
-                        }
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group row" }, [
-                  _c("label", { staticClass: "col-md-4 text-right" }, [
-                    _vm._v("Photo")
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-8" }, [
-                    _c("input", {
-                      ref: "doctorPhoto",
-                      staticClass: "form-control",
-                      attrs: { type: "file" },
-                      on: { change: _vm.onPhotoChange }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group row" }, [
-                  _c("label", { staticClass: "col-md-4 text-right" }, [
-                    _vm._v("Status")
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-8" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "custom-control custom-radio d-inline-block mr-3"
-                      },
-                      [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.doctor.status,
-                              expression: "doctor.status"
-                            }
-                          ],
-                          staticClass: "custom-control-input",
-                          attrs: { type: "radio", value: "1", id: "s1" },
-                          domProps: { checked: _vm._q(_vm.doctor.status, "1") },
-                          on: {
-                            change: function($event) {
-                              return _vm.$set(_vm.doctor, "status", "1")
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "label",
-                          {
-                            staticClass: "custom-control-label",
-                            attrs: { for: "s1" }
-                          },
-                          [_vm._v("Active")]
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "custom-control custom-radio d-inline-block"
-                      },
-                      [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.doctor.status,
-                              expression: "doctor.status"
-                            }
-                          ],
-                          staticClass: "custom-control-input",
-                          attrs: { type: "radio", value: "0", id: "s2" },
-                          domProps: { checked: _vm._q(_vm.doctor.status, "0") },
-                          on: {
-                            change: function($event) {
-                              return _vm.$set(_vm.doctor, "status", "0")
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "label",
-                          {
-                            staticClass: "custom-control-label",
-                            attrs: { for: "s2" }
-                          },
-                          [_vm._v("Inactive")]
-                        )
-                      ]
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group row" }, [
-                  _c(
-                    "div",
-                    { staticClass: "col-md-8 offset-md-4 text-right" },
-                    [
-                      !_vm.doctorEditId
-                        ? _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-dark c-btn",
-                              attrs: {
-                                type: "button",
-                                disabled: _vm.btnDisabled
-                              },
-                              on: {
-                                click: function($event) {
-                                  $event.preventDefault()
-                                  return _vm.resetForm($event)
-                                }
-                              }
-                            },
-                            [
-                              _c("i", { staticClass: "fa fa-undo" }),
-                              _vm._v(" Reset\n                                ")
-                            ]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-primary c-btn",
-                          attrs: { type: "submit", disabled: _vm.btnDisabled }
-                        },
-                        [
-                          _vm.loading
-                            ? _c("i", { staticClass: "fa fa-spinner fa-spin" })
-                            : [
-                                _c("i", { staticClass: "fa fa-save" }),
-                                _vm._v(
-                                  " Save\n                                        "
-                                ),
-                                _vm.doctorEditId
-                                  ? [_vm._v("Changes")]
-                                  : _vm._e()
-                              ]
-                        ],
-                        2
-                      )
-                    ]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-2" }, [
-                _c("img", {
-                  staticClass: "doctor-image-preview",
-                  attrs: {
-                    src: _vm.photoPreview
-                      ? _vm.photoPreview
-                      : _vm.notFoundImage,
-                    alt: "Doctor Photo Preview"
-                  }
-                })
-              ])
-            ])
-          ]
-        )
-      ])
-    ])
-  ])
+      _c("department-modal", { ref: "departmentAddModal" })
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {

@@ -9,7 +9,13 @@
                         </h4>
                     </div>
                     <div class="float-right">
-                        <department-modal></department-modal>
+                        <button
+                            @click.prevent="showAddModal"
+                            type="button"
+                            class="btn btn-sm btn-primary"
+                        >
+                            <i class="fa fa-plus"></i> Add New
+                        </button>
                     </div>
                 </div>
             </div>
@@ -31,11 +37,14 @@
                         </div>
                     </template>
                     <template v-slot:[`action`]="{ item }">
-                        <department-modal
-                            edit
-                            :data="item"
+                        <button
+                            @click.prevent="showEditModal(item)"
+                            type="button"
+                            class="btn-action text-info"
                             title="Edit"
-                        ></department-modal>
+                        >
+                            <i class="fa fa-edit"></i>
+                        </button>
                         <button
                             @click="showDeleteConfirm(item.id)"
                             class="btn-action text-danger"
@@ -47,10 +56,19 @@
                 </data-table>
             </div>
         </div>
+
+        <department-modal ref="addModal"></department-modal>
+
+        <department-modal
+            ref="editModal"
+            :data="departmentInfo"
+        ></department-modal>
+
         <delete-confirm
             ref="deleteConfirm"
             @confirm="deleteDepartment"
         ></delete-confirm>
+
         <message
             :message="message"
             :show="messageShow"
@@ -83,6 +101,7 @@ export default {
                 { text: "Status", key: "status" },
                 { text: "Action", key: "action" },
             ],
+            departmentInfo: null,
             deleteId: null,
             messageShow: false,
             message: "",
@@ -92,6 +111,13 @@ export default {
         this.$store.dispatch("department/getDepartments");
     },
     methods: {
+        showEditModal(department) {
+            this.departmentInfo = department;
+            this.$refs.editModal.isModalShow = true;
+        },
+        showAddModal() {
+            this.$refs.addModal.isModalShow = true;
+        },
         showDeleteConfirm(id) {
             this.deleteId = id;
             this.$refs.deleteConfirm.show = true;

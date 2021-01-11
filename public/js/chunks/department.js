@@ -182,6 +182,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -214,6 +232,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         text: "Action",
         key: "action"
       }],
+      departmentInfo: null,
       deleteId: null,
       messageShow: false,
       message: ""
@@ -223,6 +242,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.$store.dispatch("department/getDepartments");
   },
   methods: {
+    showEditModal: function showEditModal(department) {
+      this.departmentInfo = department;
+      this.$refs.editModal.isModalShow = true;
+    },
+    showAddModal: function showAddModal() {
+      this.$refs.addModal.isModalShow = true;
+    },
     showDeleteConfirm: function showDeleteConfirm(id) {
       this.deleteId = id;
       this.$refs.deleteConfirm.show = true;
@@ -446,12 +472,25 @@ var render = function() {
           _c("div", { staticClass: "clearfix" }, [
             _vm._m(0),
             _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "float-right" },
-              [_c("department-modal")],
-              1
-            )
+            _c("div", { staticClass: "float-right" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-sm btn-primary",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.showAddModal($event)
+                    }
+                  }
+                },
+                [
+                  _c("i", { staticClass: "fa fa-plus" }),
+                  _vm._v(" Add New\n                    ")
+                ]
+              )
+            ])
           ])
         ]),
         _vm._v(" "),
@@ -503,9 +542,20 @@ var render = function() {
                     fn: function(ref) {
                       var item = ref.item
                       return [
-                        _c("department-modal", {
-                          attrs: { edit: "", data: item, title: "Edit" }
-                        }),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn-action text-info",
+                            attrs: { type: "button", title: "Edit" },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.showEditModal(item)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fa fa-edit" })]
+                        ),
                         _vm._v(" "),
                         _c(
                           "button",
@@ -532,6 +582,13 @@ var render = function() {
           1
         )
       ]),
+      _vm._v(" "),
+      _c("department-modal", { ref: "addModal" }),
+      _vm._v(" "),
+      _c("department-modal", {
+        ref: "editModal",
+        attrs: { data: _vm.departmentInfo }
+      }),
       _vm._v(" "),
       _c("delete-confirm", {
         ref: "deleteConfirm",

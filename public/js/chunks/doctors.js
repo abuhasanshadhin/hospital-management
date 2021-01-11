@@ -105,6 +105,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -158,6 +163,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.$store.dispatch("doctor/getDoctors");
   },
   methods: {
+    showDoctorDetails: function showDoctorDetails(doctor) {
+      this.doctor = doctor;
+      this.$refs.doctorDetails.isModalShow = true;
+    },
     showDeleteDialog: function showDeleteDialog(doctor_id) {
       this.doctorDeleteId = doctor_id;
       this.$refs.deleteConfirm.show = true;
@@ -363,51 +372,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    small: Boolean,
-    edit: Boolean,
     doctorID: Number,
     data: Object
   },
@@ -451,19 +420,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.editId = this.data.id;
     }
   },
-  created: function created() {
-    var _this2 = this;
-
-    if (this.data != null) {
-      Object.keys(this.data).map(function (k) {
-        return _this2.schedule[k] = _this2.data[k];
-      });
-      this.editId = this.data.id;
-    }
-  },
   methods: {
     saveDoctorSchedule: function saveDoctorSchedule() {
-      var _this3 = this;
+      var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var props, doctorSchedule, res, _doctorSchedule, _res;
@@ -474,7 +433,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 props = ["available_day", "total_serial", "start_time", "end_time"];
 
-                if (!_utils_validation__WEBPACK_IMPORTED_MODULE_3__["default"].empty(props, _this3.schedule)) {
+                if (!_utils_validation__WEBPACK_IMPORTED_MODULE_3__["default"].empty(props, _this2.schedule)) {
                   _context.next = 3;
                   break;
                 }
@@ -482,17 +441,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context.abrupt("return");
 
               case 3:
-                _this3.btnDisabled = _this3.loading = true;
+                _this2.btnDisabled = _this2.loading = true;
 
-                if (!(_this3.editId == null)) {
+                if (!(_this2.editId == null)) {
                   _context.next = 13;
                   break;
                 }
 
-                doctorSchedule = _this3.schedule;
-                doctorSchedule.doctor_id = _this3.doctorID;
+                doctorSchedule = _this2.schedule;
+                doctorSchedule.doctor_id = _this2.doctorID;
                 _context.next = 9;
-                return _this3.$store.dispatch("doctorSchedule/processSchedule", {
+                return _this2.$store.dispatch("doctorSchedule/processSchedule", {
                   url: "add_doctor_schedule",
                   data: doctorSchedule
                 });
@@ -501,19 +460,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 res = _context.sent;
 
                 if (res) {
-                  _this3.resetForm();
+                  _this2.resetForm();
 
-                  _this3.isModalShow = false;
+                  _this2.isModalShow = false;
                 }
 
                 _context.next = 19;
                 break;
 
               case 13:
-                _doctorSchedule = _this3.schedule;
-                _doctorSchedule.id = _this3.editId;
+                _doctorSchedule = _this2.schedule;
+                _doctorSchedule.id = _this2.editId;
                 _context.next = 17;
-                return _this3.$store.dispatch("doctorSchedule/processSchedule", {
+                return _this2.$store.dispatch("doctorSchedule/processSchedule", {
                   url: "update_doctor_schedule",
                   data: _doctorSchedule
                 });
@@ -522,13 +481,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _res = _context.sent;
 
                 if (_res) {
-                  _this3.resetForm();
+                  _this2.resetForm();
 
-                  _this3.isModalShow = false;
+                  _this2.isModalShow = false;
                 }
 
               case 19:
-                _this3.btnDisabled = _this3.loading = false;
+                _this2.btnDisabled = _this2.loading = false;
 
               case 20:
               case "end":
@@ -542,12 +501,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var s = this.schedule;
       s.available_day = s.start_time = s.end_time = "";
       s.total_serial = 0;
-    },
-    doctorScheduleReload: function doctorScheduleReload() {
-      if (this.data == null) return;
-      this.$store.dispatch("doctorSchedule/getSchedules", {
-        doctor_id: this.data.doctor_id
-      });
     }
   }
 });
@@ -688,6 +641,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -702,6 +667,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
+      scheduleInfo: null,
       deleteId: null
     };
   },
@@ -713,6 +679,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   methods: {
+    showEditModal: function showEditModal(schedule) {
+      this.scheduleInfo = schedule;
+      this.$refs.editModal.isModalShow = true;
+    },
+    showAddModal: function showAddModal() {
+      this.$refs.addModal.isModalShow = true;
+    },
     showDeleteConfirm: function showDeleteConfirm(id) {
       this.deleteId = id;
       this.$refs.deleteConfirm.show = true;
@@ -908,9 +881,19 @@ var render = function() {
                           [_c("i", { staticClass: "fa fa-clock" })]
                         ),
                         _vm._v(" "),
-                        _c("doctor-details", {
-                          attrs: { doctor: item, title: "Doctor Details" }
-                        }),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn-action text-dark",
+                            attrs: { title: "Doctor Details" },
+                            on: {
+                              click: function($event) {
+                                return _vm.showDoctorDetails(item)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fa fa-eye" })]
+                        ),
                         _vm._v(" "),
                         _c(
                           "router-link",
@@ -947,6 +930,11 @@ var render = function() {
           1
         )
       ]),
+      _vm._v(" "),
+      _c("doctor-details", {
+        ref: "doctorDetails",
+        attrs: { doctor: _vm.doctor }
+      }),
       _vm._v(" "),
       _c("delete-confirm", {
         ref: "deleteConfirm",
@@ -1004,37 +992,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "d-inline-block" },
     [
-      _c(
-        "button",
-        {
-          class: [
-            _vm.edit
-              ? "btn-action text-info"
-              : "btn btn-sm btn-primary text-center",
-            _vm.small ? "rounded-circle" : ""
-          ],
-          attrs: { type: "button" },
-          on: {
-            click: function($event) {
-              $event.preventDefault()
-              _vm.isModalShow = true
-            }
-          }
-        },
-        [
-          _vm.edit
-            ? [_c("i", { staticClass: "fa fa-edit" })]
-            : [
-                _c("i", { staticClass: "fa fa-plus" }),
-                _vm._v(" "),
-                !_vm.small ? [_vm._v("Add New")] : _vm._e()
-              ]
-        ],
-        2
-      ),
-      _vm._v(" "),
       _c("transition", { attrs: { name: "scale" } }, [
         _vm.isModalShow
           ? _c("div", { staticClass: "custom-modal" }, [
@@ -1045,7 +1003,7 @@ var render = function() {
                       "div",
                       { staticClass: "custom-modal-title" },
                       [
-                        _vm.edit
+                        _vm.editId
                           ? [_vm._v("Edit Schedule")]
                           : [_vm._v("Add New Schedule")]
                       ],
@@ -1238,40 +1196,7 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "custom-modal-footer mt-1" }, [
-                      _vm.edit
-                        ? _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-dark",
-                              attrs: {
-                                type: "button",
-                                disabled:
-                                  _vm.btnDisabled ||
-                                  _vm.$store.getters["doctorSchedule/loading"]
-                              },
-                              on: {
-                                click: function($event) {
-                                  $event.preventDefault()
-                                  return _vm.doctorScheduleReload($event)
-                                }
-                              }
-                            },
-                            [
-                              _c("i", {
-                                staticClass: "fas fa-sync",
-                                class: {
-                                  "fa-spin":
-                                    _vm.$store.getters["doctorSchedule/loading"]
-                                }
-                              }),
-                              _vm._v(
-                                "\n                            Refresh\n                        "
-                              )
-                            ]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      !_vm.edit
+                      !_vm.editId
                         ? _c(
                             "button",
                             {
@@ -1310,7 +1235,7 @@ var render = function() {
                                   _vm._v(
                                     " Save\n                                "
                                   ),
-                                  _vm.edit ? [_vm._v("Changes")] : _vm._e()
+                                  _vm.editId ? [_vm._v("Changes")] : _vm._e()
                                 ],
                                 2
                               )
@@ -1416,16 +1341,25 @@ var render = function() {
                       ])
                     ]),
                     _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "float-right" },
-                      [
-                        _c("schedule-modal", {
-                          attrs: { doctorID: _vm.doctor_id }
-                        })
-                      ],
-                      1
-                    )
+                    _c("div", { staticClass: "float-right" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary btn-sm",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.showAddModal($event)
+                            }
+                          }
+                        },
+                        [
+                          _c("i", { staticClass: "fa fa-plus" }),
+                          _vm._v(" Add New\n                            ")
+                        ]
+                      )
+                    ])
                   ]),
                   _vm._v(" "),
                   _c(
@@ -1470,44 +1404,46 @@ var render = function() {
                                       _vm._v(_vm._s(item.total_serial))
                                     ]),
                                     _vm._v(" "),
-                                    _c(
-                                      "td",
-                                      [
-                                        _c("schedule-modal", {
-                                          attrs: {
-                                            edit: "",
-                                            data: item,
-                                            title: "Edit"
-                                          }
-                                        }),
-                                        _vm._v(" "),
-                                        _c(
-                                          "button",
-                                          {
-                                            staticClass:
-                                              "btn-action text-danger",
-                                            attrs: {
-                                              type: "button",
-                                              title: "Delete"
-                                            },
-                                            on: {
-                                              click: function($event) {
-                                                $event.preventDefault()
-                                                return _vm.showDeleteConfirm(
-                                                  item.id
-                                                )
-                                              }
+                                    _c("td", [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn-action text-info",
+                                          attrs: { type: "button" },
+                                          on: {
+                                            click: function($event) {
+                                              $event.preventDefault()
+                                              return _vm.showEditModal(item)
                                             }
+                                          }
+                                        },
+                                        [_c("i", { staticClass: "fa fa-edit" })]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn-action text-danger",
+                                          attrs: {
+                                            type: "button",
+                                            title: "Delete"
                                           },
-                                          [
-                                            _c("i", {
-                                              staticClass: "fa fa-trash"
-                                            })
-                                          ]
-                                        )
-                                      ],
-                                      1
-                                    )
+                                          on: {
+                                            click: function($event) {
+                                              $event.preventDefault()
+                                              return _vm.showDeleteConfirm(
+                                                item.id
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass: "fa fa-trash"
+                                          })
+                                        ]
+                                      )
+                                    ])
                                   ])
                                 }
                               )
@@ -1537,6 +1473,16 @@ var render = function() {
             ])
           : _vm._e()
       ]),
+      _vm._v(" "),
+      _c("schedule-modal", {
+        ref: "addModal",
+        attrs: { doctorID: _vm.doctor_id }
+      }),
+      _vm._v(" "),
+      _c("schedule-modal", {
+        ref: "editModal",
+        attrs: { data: _vm.scheduleInfo }
+      }),
       _vm._v(" "),
       _c("confirm", {
         ref: "deleteConfirm",

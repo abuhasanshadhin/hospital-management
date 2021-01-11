@@ -144,7 +144,7 @@
                                 <div class="col-md-8">
                                     <textarea
                                         v-model.trim="doctor.address"
-                                        rows="1"
+                                        rows="2"
                                         class="form-control"
                                     ></textarea>
                                 </div>
@@ -185,7 +185,13 @@
                                     </div>
                                 </div>
                                 <div class="col-md-1 pl-0">
-                                    <department-modal small></department-modal>
+                                    <button
+                                        @click.prevent="showDepartmentAddModal"
+                                        type="button"
+                                        class="btn btn-primary btn-sm rounded-circle"
+                                    >
+                                        <i class="fa fa-plus"></i>
+                                    </button>
                                 </div>
                             </div>
 
@@ -312,6 +318,8 @@
                 </form>
             </div>
         </div>
+
+        <department-modal ref="departmentAddModal"></department-modal>
     </div>
 </template>
 
@@ -359,6 +367,9 @@ export default {
         if (doctorEditId != undefined) this.editDoctor(doctorEditId);
     },
     methods: {
+        showDepartmentAddModal() {
+            this.$refs.departmentAddModal.isModalShow = true;
+        },
         onPhotoChange() {
             if (event.target.files.length == 0) return;
             let file = event.target.files[0];

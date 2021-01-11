@@ -133,27 +133,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: {
-    small: Boolean,
-    edit: Boolean,
-    data: Object
-  },
+  props: ["data"],
   data: function data() {
     return {
       isModalShow: false,
@@ -167,12 +148,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       editId: null
     };
   },
-  created: function created() {
-    var _this = this;
+  watch: {
+    data: function data(dept) {
+      var _this = this;
 
-    if (this.data != null) {
+      if (dept == null) return;
       Object.keys(this.department).map(function (k) {
-        return _this.department[k] = _this.data[k];
+        return _this.department[k] = dept[k];
       });
       this.editId = this.data.id;
     }
@@ -283,37 +265,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "d-inline-block" },
     [
-      _c(
-        "button",
-        {
-          class: [
-            _vm.edit
-              ? "btn-action text-primary"
-              : "btn btn-sm btn-primary text-center",
-            _vm.small ? "rounded-circle" : ""
-          ],
-          attrs: { type: "button" },
-          on: {
-            click: function($event) {
-              $event.preventDefault()
-              _vm.isModalShow = true
-            }
-          }
-        },
-        [
-          _vm.edit
-            ? [_c("i", { staticClass: "fa fa-edit" })]
-            : [
-                _c("i", { staticClass: "fa fa-plus" }),
-                _vm._v(" "),
-                !_vm.small ? [_vm._v("Add New")] : _vm._e()
-              ]
-        ],
-        2
-      ),
-      _vm._v(" "),
       _c("transition", { attrs: { name: "scale" } }, [
         _vm.isModalShow
           ? _c("div", { staticClass: "custom-modal" }, [
@@ -324,7 +276,7 @@ var render = function() {
                       "div",
                       { staticClass: "custom-modal-title" },
                       [
-                        _vm.edit
+                        _vm.editId
                           ? [_vm._v("Edit Department")]
                           : [_vm._v("Add New Department")]
                       ],
@@ -512,7 +464,7 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "custom-modal-footer" }, [
-                      !_vm.edit
+                      !_vm.editId
                         ? _c(
                             "button",
                             {
@@ -551,7 +503,7 @@ var render = function() {
                                   _vm._v(
                                     " Save\n                                "
                                   ),
-                                  _vm.edit ? [_vm._v("Changes")] : _vm._e()
+                                  _vm.editId ? [_vm._v("Changes")] : _vm._e()
                                 ],
                                 2
                               )
