@@ -336,8 +336,12 @@ export default {
     },
     methods: {
         async savePatient() {
-            let props = ["name", "gender", "age", "phone_number", "address"];
+            let props = ["name", "gender", "phone_number", "address"];
             if (V.empty(props, this.patient)) return;
+            if (this.patient.age === "") {
+                snackbar.warning("The age field is required", "topRight");
+                return;
+            }
 
             this.loading = this.btnDisabled = true;
             let patientInfo = { ...this.patient };

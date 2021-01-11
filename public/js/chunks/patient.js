@@ -588,7 +588,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                props = ["name", "gender", "age", "phone_number", "address"];
+                props = ["name", "gender", "phone_number", "address"];
 
                 if (!_utils_validation__WEBPACK_IMPORTED_MODULE_3__["default"].empty(props, _this.patient)) {
                   _context.next = 3;
@@ -598,6 +598,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context.abrupt("return");
 
               case 3:
+                if (!(_this.patient.age === "")) {
+                  _context.next = 6;
+                  break;
+                }
+
+                snackbar.warning("The age field is required", "topRight");
+                return _context.abrupt("return");
+
+              case 6:
                 _this.loading = _this.btnDisabled = true;
                 patientInfo = _objectSpread({}, _this.patient);
 
@@ -612,36 +621,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 if (_this.photo) patientForm.append("photo", _this.photo);
 
                 if (!_this.patientEditId) {
-                  _context.next = 15;
+                  _context.next = 18;
                   break;
                 }
 
                 patientForm.append("id", _this.patientEditId);
-                _context.next = 13;
+                _context.next = 16;
                 return _this.$store.dispatch("patient/processPatient", {
                   url: "update_patient",
                   data: patientForm
                 });
 
-              case 13:
-                _context.next = 19;
+              case 16:
+                _context.next = 22;
                 break;
 
-              case 15:
-                _context.next = 17;
+              case 18:
+                _context.next = 20;
                 return _this.$store.dispatch("patient/processPatient", {
                   url: "add_patient",
                   data: patientForm
                 });
 
-              case 17:
+              case 20:
                 res = _context.sent;
                 if (res) _this.resetForm();
 
-              case 19:
+              case 22:
                 _this.loading = _this.btnDisabled = false;
 
-              case 20:
+              case 23:
               case "end":
                 return _context.stop();
             }
