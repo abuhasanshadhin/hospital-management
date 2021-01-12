@@ -45,6 +45,11 @@
                                         <td>:</td>
                                         <td>{{ doctor.department_name }}</td>
                                     </tr>
+                                    <tr v-if="doctor.joining_date">
+                                        <th>Joining Date</th>
+                                        <td>:</td>
+                                        <td>{{ doctor.joining_date }}</td>
+                                    </tr>
                                     <tr>
                                         <th>Specialization</th>
                                         <td>:</td>
@@ -62,7 +67,7 @@
                                             {{ doctor.email }}
                                         </td>
                                     </tr>
-                                    <tr>
+                                    <tr v-if="doctor.date_of_birth">
                                         <th style="width: 120px">
                                             Date of Birth
                                         </th>
@@ -74,7 +79,7 @@
                                         <td>:</td>
                                         <td>{{ doctor.gender }}</td>
                                     </tr>
-                                    <tr>
+                                    <tr v-if="doctor.blood_group">
                                         <th>B. Group</th>
                                         <td>:</td>
                                         <td>{{ doctor.blood_group }}</td>

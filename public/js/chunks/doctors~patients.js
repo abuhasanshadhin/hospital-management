@@ -160,6 +160,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["doctor"],
   data: function data() {
@@ -337,6 +342,18 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
+                          _vm.doctor.joining_date
+                            ? _c("tr", [
+                                _c("th", [_vm._v("Joining Date")]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(":")]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(_vm._s(_vm.doctor.joining_date))
+                                ])
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
                           _c("tr", [
                             _c("th", [_vm._v("Specialization")]),
                             _vm._v(" "),
@@ -371,17 +388,21 @@ var render = function() {
                               ])
                             : _vm._e(),
                           _vm._v(" "),
-                          _c("tr", [
-                            _c("th", { staticStyle: { width: "120px" } }, [
-                              _vm._v(
-                                "\n                                        Date of Birth\n                                    "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(":")]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(_vm.doctor.date_of_birth))])
-                          ]),
+                          _vm.doctor.date_of_birth
+                            ? _c("tr", [
+                                _c("th", { staticStyle: { width: "120px" } }, [
+                                  _vm._v(
+                                    "\n                                        Date of Birth\n                                    "
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(":")]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(_vm._s(_vm.doctor.date_of_birth))
+                                ])
+                              ])
+                            : _vm._e(),
                           _vm._v(" "),
                           _c("tr", [
                             _c("th", [_vm._v("Gender")]),
@@ -391,13 +412,17 @@ var render = function() {
                             _c("td", [_vm._v(_vm._s(_vm.doctor.gender))])
                           ]),
                           _vm._v(" "),
-                          _c("tr", [
-                            _c("th", [_vm._v("B. Group")]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(":")]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(_vm.doctor.blood_group))])
-                          ]),
+                          _vm.doctor.blood_group
+                            ? _c("tr", [
+                                _c("th", [_vm._v("B. Group")]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(":")]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(_vm._s(_vm.doctor.blood_group))
+                                ])
+                              ])
+                            : _vm._e(),
                           _vm._v(" "),
                           _c("tr", [
                             _c("th", [_vm._v("Address")]),

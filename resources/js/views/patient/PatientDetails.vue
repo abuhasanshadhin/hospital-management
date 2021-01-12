@@ -2,7 +2,7 @@
     <div class="d-inline">
         <transition name="scale">
             <div class="custom-modal" v-if="isModalShow">
-                <div class="custom-modal-body col-md-7">
+                <div class="custom-modal-body col-md-8">
                     <div class="custom-modal-header">
                         <div class="clearfix">
                             <div class="custom-modal-title">
@@ -18,24 +18,22 @@
                     </div>
 
                     <div class="custom-modal-content">
+                        <div class="text-center">
+                            <img
+                                v-if="patient.photo"
+                                :src="`${apiPublicPath}/${patient.photo}`"
+                                class="patient-image"
+                                alt="Patient Photo"
+                            />
+                            <img
+                                v-else
+                                :src="`${apiPublicPath}/images/image-not-available.png`"
+                                class="patient-image"
+                                alt="Not Available"
+                            />
+                        </div>
                         <div class="row">
-                            <div class="col-md-5">
-                                <div class="text-center">
-                                    <img
-                                        v-if="patient.photo"
-                                        :src="`${apiPublicPath}/${patient.photo}`"
-                                        class="patient-image"
-                                        alt="Patient Photo"
-                                    />
-                                    <img
-                                        v-else
-                                        :src="`${apiPublicPath}/images/image-not-available.png`"
-                                        class="patient-image"
-                                        alt="Not Available"
-                                    />
-                                </div>
-                            </div>
-                            <div class="col-md-7">
+                            <div class="col-md-6">
                                 <table class="table table-sm table-borderless">
                                     <tr>
                                         <th>Patient ID</th>
@@ -60,7 +58,26 @@
                                     <tr>
                                         <th>Age</th>
                                         <td>:</td>
-                                        <td>{{ patient.age }}</td>
+                                        <td>
+                                            {{
+                                                patient.age_years
+                                                    ? patient.age_years +
+                                                      " year(s) "
+                                                    : ""
+                                            }}
+                                            {{
+                                                patient.age_months
+                                                    ? patient.age_months +
+                                                      " month(s) "
+                                                    : ""
+                                            }}
+                                            {{
+                                                patient.age_days
+                                                    ? patient.age_days +
+                                                      " day(s)"
+                                                    : ""
+                                            }}
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th>Blood Group</th>
@@ -68,12 +85,16 @@
                                         <td>{{ patient.blood_group }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Phone Number</th>
+                                        <th>Phone No.</th>
                                         <td>:</td>
                                         <td>{{ patient.phone_number }}</td>
                                     </tr>
+                                </table>
+                            </div>
+                            <div class="col-md-6">
+                                <table class="table table-sm table-borderless">
                                     <tr>
-                                        <th>Phone Number 2</th>
+                                        <th>Phone No. 2</th>
                                         <td>:</td>
                                         <td>{{ patient.phone_number_2 }}</td>
                                     </tr>
@@ -82,16 +103,15 @@
                                         <td>:</td>
                                         <td>{{ patient.email }}</td>
                                     </tr>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col-md-6">
-                                <table class="table table-sm table-borderless">
                                     <tr>
                                         <th>Address</th>
                                         <td>:</td>
                                         <td>{{ patient.address }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Note</th>
+                                        <td>:</td>
+                                        <td>{{ patient.note }}</td>
                                     </tr>
                                     <tr>
                                         <th>Entry Date</th>
@@ -104,10 +124,6 @@
                                             }}
                                         </td>
                                     </tr>
-                                </table>
-                            </div>
-                            <div class="col-md-6">
-                                <table class="table table-sm table-borderless">
                                     <tr>
                                         <th>Status</th>
                                         <td>:</td>
@@ -127,7 +143,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>Created By</th>
+                                        <th>Added By</th>
                                         <td>:</td>
                                         <td>
                                             {{
@@ -139,10 +155,6 @@
                                     </tr>
                                 </table>
                             </div>
-                        </div>
-                        <div class="px-2 text-center mt-4">
-                            <div class="font-weight-bold"><u>Note :</u></div>
-                            {{ patient.note }}
                         </div>
                     </div>
 
@@ -168,6 +180,6 @@ export default {
 <style scoped>
 .patient-image {
     height: 150px;
-    margin-top: 50px;
+    margin-bottom: 20px;
 }
 </style>

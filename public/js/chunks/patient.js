@@ -537,6 +537,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -550,7 +569,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         name: "",
         gender: "",
         date_of_birth: "",
-        age: 0,
+        age_years: 0,
+        age_months: 0,
+        age_days: 0,
         blood_group: "",
         phone_number: "",
         phone_number_2: "",
@@ -571,7 +592,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     "patient.date_of_birth": function patientDate_of_birth(val) {
       if (!val) return;
       var dob = moment__WEBPACK_IMPORTED_MODULE_1___default()(val).format("YYYY-MM-DD");
-      this.patient.age = this.getAge(dob);
+      var ageObj = this.getAge(dob);
+      this.patient.age_years = ageObj.years;
+      this.patient.age_months = ageObj.months;
+      this.patient.age_days = ageObj.days;
     }
   },
   created: function created() {
@@ -598,15 +622,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context.abrupt("return");
 
               case 3:
-                if (!(_this.patient.age === "")) {
-                  _context.next = 6;
-                  break;
-                }
+                if (_this.patient.age_years) {}
 
-                snackbar.warning("The age field is required", "topRight");
-                return _context.abrupt("return");
-
-              case 6:
                 _this.loading = _this.btnDisabled = true;
                 patientInfo = _objectSpread({}, _this.patient);
 
@@ -616,41 +633,45 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 patientForm = new FormData();
                 Object.keys(patientInfo).map(function (k) {
-                  if (patientInfo[k]) patientForm.append(k, patientInfo[k]);
+                  if (patientInfo[k] == null) {
+                    patientForm.append(k, "");
+                  } else {
+                    patientForm.append(k, patientInfo[k]);
+                  }
                 });
                 if (_this.photo) patientForm.append("photo", _this.photo);
 
                 if (!_this.patientEditId) {
-                  _context.next = 18;
+                  _context.next = 16;
                   break;
                 }
 
                 patientForm.append("id", _this.patientEditId);
-                _context.next = 16;
+                _context.next = 14;
                 return _this.$store.dispatch("patient/processPatient", {
                   url: "update_patient",
                   data: patientForm
                 });
 
-              case 16:
-                _context.next = 22;
+              case 14:
+                _context.next = 20;
                 break;
 
-              case 18:
-                _context.next = 20;
+              case 16:
+                _context.next = 18;
                 return _this.$store.dispatch("patient/processPatient", {
                   url: "add_patient",
                   data: patientForm
                 });
 
-              case 20:
+              case 18:
                 res = _context.sent;
                 if (res) _this.resetForm();
 
-              case 22:
+              case 20:
                 _this.loading = _this.btnDisabled = false;
 
-              case 23:
+              case 21:
               case "end":
                 return _context.stop();
             }
@@ -705,13 +726,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     resetForm: function resetForm() {
-      var _this3 = this;
-
-      Object.keys(this.patient).map(function (k) {
-        return _this3.patient[k] = "";
+      var p = this.patient;
+      Object.keys(p).map(function (k) {
+        return p[k] = "";
       });
-      this.patient.age = 0;
-      this.patient.status = 1;
+      p.age_years = p.age_months = p.age_days = 0;
+      p.status = 1;
       this.photo = this.photoPreview = null;
       this.$refs.patientPhoto.value = null;
     },
@@ -730,13 +750,44 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.photo = file;
       this.photoPreview = URL.createObjectURL(file);
     },
-    getAge: function getAge(fromDate) {
-      if (!fromDate) return null;
-      var dob = new Date(fromDate);
-      var monthDiff = Date.now() - dob.getTime();
-      var ageDate = new Date(monthDiff);
-      var year = ageDate.getUTCFullYear();
-      var age = Math.abs(year - 1970);
+    getAge: function getAge(dateString) {
+      var now = new Date();
+      var today = new Date(now.getYear(), now.getMonth(), now.getDate());
+      var yearNow = now.getYear();
+      var monthNow = now.getMonth();
+      var dateNow = now.getDate();
+      var dob = new Date(dateString);
+      var yearDob = dob.getYear();
+      var monthDob = dob.getMonth();
+      var dateDob = dob.getDate();
+      var age = {};
+      var yearAge = yearNow - yearDob;
+      var monthAge, dateAge;
+
+      if (monthNow >= monthDob) {
+        monthAge = monthNow - monthDob;
+      } else {
+        yearAge--;
+        monthAge = 12 + monthNow - monthDob;
+      }
+
+      if (dateNow >= dateDob) {
+        dateAge = dateNow - dateDob;
+      } else {
+        monthAge--;
+        dateAge = 31 + dateNow - dateDob;
+
+        if (monthAge < 0) {
+          monthAge = 11;
+          yearAge--;
+        }
+      }
+
+      age = {
+        years: yearAge,
+        months: monthAge,
+        days: dateAge
+      };
       return age;
     },
     disabledAfterToday: function disabledAfterToday(date) {
@@ -780,7 +831,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".patient-image-preview[data-v-491993ac] {\n  height: 150px;\n  width: 150px;\n  margin-top: 30px;\n  object-fit: contain;\n}\n", ""]);
+exports.push([module.i, ".patient-image-preview[data-v-491993ac] {\n  height: 150px;\n  width: 150px;\n  margin-top: 50px;\n  object-fit: contain;\n}\n", ""]);
 
 // exports
 
@@ -1499,7 +1550,7 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "col-md-4 pr-0" },
+                      { staticClass: "col-md-8" },
                       [
                         _c("date-picker", {
                           attrs: {
@@ -1520,24 +1571,28 @@ var render = function() {
                         })
                       ],
                       1
-                    ),
-                    _vm._v(" "),
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
                     _vm._m(2),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-md-2 pl-0" }, [
+                    _c("div", { staticClass: "col-md-8 d-flex" }, [
+                      _c("div", { staticClass: "mr-1" }, [_vm._v("Y")]),
+                      _vm._v(" "),
                       _c("input", {
                         directives: [
                           {
                             name: "model",
                             rawName: "v-model.number",
-                            value: _vm.patient.age,
-                            expression: "patient.age",
+                            value: _vm.patient.age_years,
+                            expression: "patient.age_years",
                             modifiers: { number: true }
                           }
                         ],
                         staticClass: "form-control text-center",
-                        attrs: { type: "number" },
-                        domProps: { value: _vm.patient.age },
+                        attrs: { type: "number", min: "0" },
+                        domProps: { value: _vm.patient.age_years },
                         on: {
                           input: function($event) {
                             if ($event.target.composing) {
@@ -1545,7 +1600,71 @@ var render = function() {
                             }
                             _vm.$set(
                               _vm.patient,
-                              "age",
+                              "age_years",
+                              _vm._n($event.target.value)
+                            )
+                          },
+                          blur: function($event) {
+                            return _vm.$forceUpdate()
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "ml-1" }, [_vm._v("M")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model.number",
+                            value: _vm.patient.age_months,
+                            expression: "patient.age_months",
+                            modifiers: { number: true }
+                          }
+                        ],
+                        staticClass: "form-control text-center ml-1",
+                        attrs: { type: "number", min: "0" },
+                        domProps: { value: _vm.patient.age_months },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.patient,
+                              "age_months",
+                              _vm._n($event.target.value)
+                            )
+                          },
+                          blur: function($event) {
+                            return _vm.$forceUpdate()
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "ml-1" }, [_vm._v("D")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model.number",
+                            value: _vm.patient.age_days,
+                            expression: "patient.age_days",
+                            modifiers: { number: true }
+                          }
+                        ],
+                        staticClass: "form-control text-center ml-1",
+                        attrs: { type: "number", min: "0" },
+                        domProps: { value: _vm.patient.age_days },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.patient,
+                              "age_days",
                               _vm._n($event.target.value)
                             )
                           },
@@ -1678,8 +1797,10 @@ var render = function() {
                         }
                       })
                     ])
-                  ]),
-                  _vm._v(" "),
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-5" }, [
                   _c("div", { staticClass: "form-group row" }, [
                     _c(
                       "label",
@@ -1721,10 +1842,8 @@ var render = function() {
                         }
                       })
                     ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-5" }, [
+                  ]),
+                  _vm._v(" "),
                   _c("div", { staticClass: "form-group row" }, [
                     _vm._m(4),
                     _vm._v(" "),
@@ -2038,10 +2157,14 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-2 text-right" }, [
-      _vm._v("\n                                Age "),
-      _c("span", { staticClass: "text-danger" }, [_vm._v("*")])
-    ])
+    return _c(
+      "label",
+      { staticClass: "col-md-4 text-right", attrs: { for: "" } },
+      [
+        _vm._v("Age\n                                "),
+        _c("span", { staticClass: "text-danger" }, [_vm._v("*")])
+      ]
+    )
   },
   function() {
     var _vm = this

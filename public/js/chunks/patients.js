@@ -164,6 +164,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["patient"],
   data: function data() {
@@ -196,8 +208,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
-//
 //
 //
 //
@@ -779,7 +789,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.patient-image[data-v-3e1047b4] {\n    height: 150px;\n    margin-top: 50px;\n}\n", ""]);
+exports.push([module.i, "\n.patient-image[data-v-3e1047b4] {\n    height: 150px;\n    margin-bottom: 20px;\n}\n", ""]);
 
 // exports
 
@@ -887,7 +897,7 @@ var render = function() {
       _c("transition", { attrs: { name: "scale" } }, [
         _vm.isModalShow
           ? _c("div", { staticClass: "custom-modal" }, [
-              _c("div", { staticClass: "custom-modal-body col-md-7" }, [
+              _c("div", { staticClass: "custom-modal-body col-md-8" }, [
                 _c("div", { staticClass: "custom-modal-header" }, [
                   _c("div", { staticClass: "clearfix" }, [
                     _c("div", { staticClass: "custom-modal-title" }, [
@@ -912,31 +922,28 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "custom-modal-content" }, [
+                  _c("div", { staticClass: "text-center" }, [
+                    _vm.patient.photo
+                      ? _c("img", {
+                          staticClass: "patient-image",
+                          attrs: {
+                            src: _vm.apiPublicPath + "/" + _vm.patient.photo,
+                            alt: "Patient Photo"
+                          }
+                        })
+                      : _c("img", {
+                          staticClass: "patient-image",
+                          attrs: {
+                            src:
+                              _vm.apiPublicPath +
+                              "/images/image-not-available.png",
+                            alt: "Not Available"
+                          }
+                        })
+                  ]),
+                  _vm._v(" "),
                   _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-md-5" }, [
-                      _c("div", { staticClass: "text-center" }, [
-                        _vm.patient.photo
-                          ? _c("img", {
-                              staticClass: "patient-image",
-                              attrs: {
-                                src:
-                                  _vm.apiPublicPath + "/" + _vm.patient.photo,
-                                alt: "Patient Photo"
-                              }
-                            })
-                          : _c("img", {
-                              staticClass: "patient-image",
-                              attrs: {
-                                src:
-                                  _vm.apiPublicPath +
-                                  "/images/image-not-available.png",
-                                alt: "Not Available"
-                              }
-                            })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-7" }, [
+                    _c("div", { staticClass: "col-md-6" }, [
                       _c(
                         "table",
                         { staticClass: "table table-sm table-borderless" },
@@ -980,7 +987,29 @@ var render = function() {
                             _vm._v(" "),
                             _c("td", [_vm._v(":")]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(_vm.patient.age))])
+                            _c("td", [
+                              _vm._v(
+                                "\n                                        " +
+                                  _vm._s(
+                                    _vm.patient.age_years
+                                      ? _vm.patient.age_years + " year(s) "
+                                      : ""
+                                  ) +
+                                  "\n                                        " +
+                                  _vm._s(
+                                    _vm.patient.age_months
+                                      ? _vm.patient.age_months + " month(s) "
+                                      : ""
+                                  ) +
+                                  "\n                                        " +
+                                  _vm._s(
+                                    _vm.patient.age_days
+                                      ? _vm.patient.age_days + " day(s)"
+                                      : ""
+                                  ) +
+                                  "\n                                    "
+                              )
+                            ])
                           ]),
                           _vm._v(" "),
                           _c("tr", [
@@ -992,15 +1021,23 @@ var render = function() {
                           ]),
                           _vm._v(" "),
                           _c("tr", [
-                            _c("th", [_vm._v("Phone Number")]),
+                            _c("th", [_vm._v("Phone No.")]),
                             _vm._v(" "),
                             _c("td", [_vm._v(":")]),
                             _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(_vm.patient.phone_number))])
-                          ]),
-                          _vm._v(" "),
+                          ])
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-6" }, [
+                      _c(
+                        "table",
+                        { staticClass: "table table-sm table-borderless" },
+                        [
                           _c("tr", [
-                            _c("th", [_vm._v("Phone Number 2")]),
+                            _c("th", [_vm._v("Phone No. 2")]),
                             _vm._v(" "),
                             _c("td", [_vm._v(":")]),
                             _vm._v(" "),
@@ -1015,24 +1052,22 @@ var render = function() {
                             _c("td", [_vm._v(":")]),
                             _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(_vm.patient.email))])
-                          ])
-                        ]
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row mt-4" }, [
-                    _c("div", { staticClass: "col-md-6" }, [
-                      _c(
-                        "table",
-                        { staticClass: "table table-sm table-borderless" },
-                        [
+                          ]),
+                          _vm._v(" "),
                           _c("tr", [
                             _c("th", [_vm._v("Address")]),
                             _vm._v(" "),
                             _c("td", [_vm._v(":")]),
                             _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(_vm.patient.address))])
+                          ]),
+                          _vm._v(" "),
+                          _c("tr", [
+                            _c("th", [_vm._v("Note")]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(":")]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(_vm.patient.note))])
                           ]),
                           _vm._v(" "),
                           _c("tr", [
@@ -1051,16 +1086,8 @@ var render = function() {
                                   "\n                                    "
                               )
                             ])
-                          ])
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-6" }, [
-                      _c(
-                        "table",
-                        { staticClass: "table table-sm table-borderless" },
-                        [
+                          ]),
+                          _vm._v(" "),
                           _c("tr", [
                             _c("th", [_vm._v("Status")]),
                             _vm._v(" "),
@@ -1094,7 +1121,7 @@ var render = function() {
                           ]),
                           _vm._v(" "),
                           _c("tr", [
-                            _c("th", [_vm._v("Created By")]),
+                            _c("th", [_vm._v("Added By")]),
                             _vm._v(" "),
                             _c("td", [_vm._v(":")]),
                             _vm._v(" "),
@@ -1113,17 +1140,6 @@ var render = function() {
                         ]
                       )
                     ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "px-2 text-center mt-4" }, [
-                    _c("div", { staticClass: "font-weight-bold" }, [
-                      _c("u", [_vm._v("Note :")])
-                    ]),
-                    _vm._v(
-                      "\n                        " +
-                        _vm._s(_vm.patient.note) +
-                        "\n                    "
-                    )
                   ])
                 ]),
                 _vm._v(" "),
@@ -1206,8 +1222,6 @@ var render = function() {
                     _c("td", [_vm._v(_vm._s(patient.name))]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(patient.gender))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(patient.age))]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(patient.phone_number))]),
                     _vm._v(" "),
@@ -1324,8 +1338,6 @@ var staticRenderFns = [
         _c("th", [_vm._v("Name")]),
         _vm._v(" "),
         _c("th", [_vm._v("Gender")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Age")]),
         _vm._v(" "),
         _c("th", [_vm._v("Phone")]),
         _vm._v(" "),

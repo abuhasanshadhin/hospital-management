@@ -27,7 +27,6 @@
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Gender</th>
-                                <th>Age</th>
                                 <th>Phone</th>
                                 <th>Status</th>
                                 <th>Action</th>
@@ -44,7 +43,6 @@
                                 <td>{{ patient.code }}</td>
                                 <td>{{ patient.name }}</td>
                                 <td>{{ patient.gender }}</td>
-                                <td>{{ patient.age }}</td>
                                 <td>{{ patient.phone_number }}</td>
                                 <td>
                                     <div

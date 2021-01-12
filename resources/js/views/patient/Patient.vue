@@ -82,21 +82,40 @@
                                 <label for="" class="col-md-4 text-right"
                                     >Date of Birth</label
                                 >
-                                <div class="col-md-4 pr-0">
+                                <div class="col-md-8">
                                     <date-picker
                                         v-model.trim="patient.date_of_birth"
                                         :disabled-date="disabledAfterToday"
                                         :editable="false"
                                     ></date-picker>
                                 </div>
-                                <div class="col-md-2 text-right">
-                                    Age <span class="text-danger">*</span>
-                                </div>
-                                <div class="col-md-2 pl-0">
+                            </div>
+                            <div class="form-group row">
+                                <label for="" class="col-md-4 text-right"
+                                    >Age
+                                    <span class="text-danger">*</span></label
+                                >
+                                <div class="col-md-8 d-flex">
+                                    <div class="mr-1">Y</div>
                                     <input
                                         type="number"
-                                        v-model.number="patient.age"
+                                        v-model.number="patient.age_years"
                                         class="form-control text-center"
+                                        min="0"
+                                    />
+                                    <div class="ml-1">M</div>
+                                    <input
+                                        type="number"
+                                        v-model.number="patient.age_months"
+                                        class="form-control text-center ml-1"
+                                        min="0"
+                                    />
+                                    <div class="ml-1">D</div>
+                                    <input
+                                        type="number"
+                                        v-model.number="patient.age_days"
+                                        class="form-control text-center ml-1"
+                                        min="0"
                                     />
                                 </div>
                             </div>
@@ -145,6 +164,8 @@
                                     />
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-md-5">
                             <div class="form-group row">
                                 <label for="" class="col-md-4 text-right"
                                     >Email</label
@@ -157,8 +178,6 @@
                                     />
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-5">
                             <div class="form-group row">
                                 <label for="" class="col-md-4 text-right"
                                     >Address
@@ -306,7 +325,9 @@ export default {
                 name: "",
                 gender: "",
                 date_of_birth: "",
-                age: 0,
+                age_years: 0,
+                age_months: 0,
+                age_days: 0,
                 blood_group: "",
                 phone_number: "",
                 phone_number_2: "",
@@ -327,7 +348,10 @@ export default {
         "patient.date_of_birth": function (val) {
             if (!val) return;
             let dob = moment(val).format("YYYY-MM-DD");
-            this.patient.age = this.getAge(dob);
+            let ageObj = this.getAge(dob);
+            this.patient.age_years = ageObj.years;
+            this.patient.age_months = ageObj.months;
+            this.patient.age_days = ageObj.days;
         },
     },
     created() {
@@ -338,9 +362,7 @@ export default {
         async savePatient() {
             let props = ["name", "gender", "phone_number", "address"];
             if (V.empty(props, this.patient)) return;
-            if (this.patient.age === "") {
-                snackbar.warning("The age field is required", "topRight");
-                return;
+            if (this.patient.age_years) {
             }
 
             this.loading = this.btnDisabled = true;
@@ -354,7 +376,11 @@ export default {
 
             let patientForm = new FormData();
             Object.keys(patientInfo).map((k) => {
-                if (patientInfo[k]) patientForm.append(k, patientInfo[k]);
+                if (patientInfo[k] == null) {
+                    patientForm.append(k, "");
+                } else {
+                    patientForm.append(k, patientInfo[k]);
+                }
             });
 
             if (this.photo) patientForm.append("photo", this.photo);
@@ -401,9 +427,10 @@ export default {
             }
         },
         resetForm() {
-            Object.keys(this.patient).map((k) => (this.patient[k] = ""));
-            this.patient.age = 0;
-            this.patient.status = 1;
+            let p = this.patient;
+            Object.keys(p).map((k) => (p[k] = ""));
+            p.age_years = p.age_months = p.age_days = 0;
+            p.status = 1;
             this.photo = this.photoPreview = null;
             this.$refs.patientPhoto.value = null;
         },
@@ -422,13 +449,49 @@ export default {
             this.photo = file;
             this.photoPreview = URL.createObjectURL(file);
         },
-        getAge(fromDate) {
-            if (!fromDate) return null;
-            let dob = new Date(fromDate);
-            let monthDiff = Date.now() - dob.getTime();
-            let ageDate = new Date(monthDiff);
-            let year = ageDate.getUTCFullYear();
-            let age = Math.abs(year - 1970);
+        getAge(dateString) {
+            let now = new Date();
+            let today = new Date(now.getYear(), now.getMonth(), now.getDate());
+
+            let yearNow = now.getYear();
+            let monthNow = now.getMonth();
+            let dateNow = now.getDate();
+
+            let dob = new Date(dateString);
+
+            let yearDob = dob.getYear();
+            let monthDob = dob.getMonth();
+            let dateDob = dob.getDate();
+            let age = {};
+
+            let yearAge = yearNow - yearDob;
+            let monthAge, dateAge;
+
+            if (monthNow >= monthDob) {
+                monthAge = monthNow - monthDob;
+            } else {
+                yearAge--;
+                monthAge = 12 + monthNow - monthDob;
+            }
+
+            if (dateNow >= dateDob) {
+                dateAge = dateNow - dateDob;
+            } else {
+                monthAge--;
+                dateAge = 31 + dateNow - dateDob;
+
+                if (monthAge < 0) {
+                    monthAge = 11;
+                    yearAge--;
+                }
+            }
+
+            age = {
+                years: yearAge,
+                months: monthAge,
+                days: dateAge,
+            };
+
             return age;
         },
         disabledAfterToday(date) {
@@ -444,7 +507,7 @@ export default {
 .patient-image-preview {
     height: 150px;
     width: 150px;
-    margin-top: 30px;
+    margin-top: 50px;
     object-fit: contain;
 }
 </style>

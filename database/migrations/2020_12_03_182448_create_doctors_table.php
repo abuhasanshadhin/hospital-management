@@ -27,6 +27,7 @@ class CreateDoctorsTable extends Migration
             $table->string('specialization');
             $table->text('education')->nullable();
             $table->text('photo')->nullable();
+            $table->date('joining_date')->nullable();
             $table->boolean('status')->default(true);
             $table->unsignedInteger('created_by')->nullable();
             $table->unsignedInteger('updated_by')->nullable();

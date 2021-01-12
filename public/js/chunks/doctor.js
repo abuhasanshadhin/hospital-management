@@ -352,6 +352,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -374,6 +386,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         specialization: "",
         education: "",
         photo: null,
+        joining_date: null,
         status: 1
       },
       photoPreview: null,
@@ -429,42 +442,50 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   doctorData.date_of_birth = moment__WEBPACK_IMPORTED_MODULE_1___default()(doctorData.date_of_birth).format("YYYY-MM-DD");
                 }
 
+                if (doctorData.joining_date) {
+                  doctorData.joining_date = moment__WEBPACK_IMPORTED_MODULE_1___default()(doctorData.joining_date).format("YYYY-MM-DD");
+                }
+
                 doctorForm = new FormData();
                 Object.keys(doctorData).map(function (k) {
-                  if (doctorData[k]) doctorForm.append(k, doctorData[k]);
+                  if (doctorData[k] == null) {
+                    doctorForm.append(k, "");
+                  } else {
+                    doctorForm.append(k, doctorData[k]);
+                  }
                 });
 
                 if (!_this.doctorEditId) {
-                  _context.next = 14;
+                  _context.next = 15;
                   break;
                 }
 
                 doctorForm.append("id", _this.doctorEditId);
-                _context.next = 12;
+                _context.next = 13;
                 return _this.$store.dispatch("doctor/processDoctor", {
                   url: "update_doctor",
                   data: doctorForm
                 });
 
-              case 12:
-                _context.next = 18;
+              case 13:
+                _context.next = 19;
                 break;
 
-              case 14:
-                _context.next = 16;
+              case 15:
+                _context.next = 17;
                 return _this.$store.dispatch("doctor/processDoctor", {
                   url: "add_doctor",
                   data: doctorForm
                 });
 
-              case 16:
+              case 17:
                 res = _context.sent;
                 if (res) _this.resetForm();
 
-              case 18:
+              case 19:
                 _this.loading = _this.btnDisabled = false;
 
-              case 19:
+              case 20:
               case "end":
                 return _context.stop();
             }
@@ -531,7 +552,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this3.doctor.date_of_birth = new Date(doctor.date_of_birth);
                 }
 
-              case 13:
+                if (doctor.joining_date) {
+                  _this3.doctor.joining_date = new Date(doctor.joining_date);
+                }
+
+              case 14:
               case "end":
                 return _context2.stop();
             }
@@ -561,7 +586,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".doctor-image-preview[data-v-26d36a40] {\n  height: 150px;\n  width: 150px;\n  margin-top: 40px;\n  object-fit: contain;\n}\n", ""]);
+exports.push([module.i, ".doctor-image-preview[data-v-26d36a40] {\n  height: 150px;\n  width: 150px;\n  margin-top: 50px;\n  object-fit: contain;\n}\n", ""]);
 
 // exports
 
@@ -1335,6 +1360,34 @@ var render = function() {
                         [_c("i", { staticClass: "fa fa-plus" })]
                       )
                     ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c("label", { staticClass: "col-md-4 text-right" }, [
+                      _vm._v("Joining Date")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-md-8" },
+                      [
+                        _c("date-picker", {
+                          attrs: { editable: false },
+                          model: {
+                            value: _vm.doctor.joining_date,
+                            callback: function($$v) {
+                              _vm.$set(
+                                _vm.doctor,
+                                "joining_date",
+                                typeof $$v === "string" ? $$v.trim() : $$v
+                              )
+                            },
+                            expression: "doctor.joining_date"
+                          }
+                        })
+                      ],
+                      1
+                    )
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group row" }, [

@@ -197,6 +197,18 @@
 
                             <div class="form-group row">
                                 <label class="col-md-4 text-right"
+                                    >Joining Date</label
+                                >
+                                <div class="col-md-8">
+                                    <date-picker
+                                        v-model.trim="doctor.joining_date"
+                                        :editable="false"
+                                    ></date-picker>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-4 text-right"
                                     >Specialization
                                     <span class="text-danger">*</span></label
                                 >
@@ -347,6 +359,7 @@ export default {
                 specialization: "",
                 education: "",
                 photo: null,
+                joining_date: null,
                 status: 1,
             },
             photoPreview: null,
@@ -396,9 +409,19 @@ export default {
                 ).format("YYYY-MM-DD");
             }
 
+            if (doctorData.joining_date) {
+                doctorData.joining_date = moment(
+                    doctorData.joining_date
+                ).format("YYYY-MM-DD");
+            }
+
             let doctorForm = new FormData();
             Object.keys(doctorData).map((k) => {
-                if (doctorData[k]) doctorForm.append(k, doctorData[k]);
+                if (doctorData[k] == null) {
+                    doctorForm.append(k, "");
+                } else {
+                    doctorForm.append(k, doctorData[k]);
+                }
             });
 
             if (this.doctorEditId) {
@@ -454,6 +477,10 @@ export default {
             if (doctor.date_of_birth) {
                 this.doctor.date_of_birth = new Date(doctor.date_of_birth);
             }
+
+            if (doctor.joining_date) {
+                this.doctor.joining_date = new Date(doctor.joining_date);
+            }
         },
         disabledAfterToday(date) {
             const today = new Date();
@@ -468,7 +495,7 @@ export default {
 .doctor-image-preview {
     height: 150px;
     width: 150px;
-    margin-top: 40px;
+    margin-top: 50px;
     object-fit: contain;
 }
 </style>
