@@ -118,8 +118,8 @@ export default {
         flipWebCam() {
             if (this.webCamObj == null) return;
             this.webCamObj.flip();
-            this.stopWebCam();
-            this.openCamera();
+            // this.stopWebCam();
+            // this.openCamera();
         },
         async takePhoto() {
             if (this.webCamObj == null || !this.isWebCamStarted) return;

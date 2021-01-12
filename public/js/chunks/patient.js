@@ -129,9 +129,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     flipWebCam: function flipWebCam() {
       if (this.webCamObj == null) return;
-      this.webCamObj.flip();
-      this.stopWebCam();
-      this.openCamera();
+      this.webCamObj.flip(); // this.stopWebCam();
+      // this.openCamera();
     },
     takePhoto: function takePhoto() {
       var _this2 = this;
@@ -2436,9 +2435,14 @@ var Webcam = /*#__PURE__*/function () {
   }, {
     key: "flip",
     value: function flip() {
-      this._facingMode = this._facingMode == 'user' ? 'enviroment' : 'user';
-      this._webcamElement.style.transform = "";
-      this.selectCamera();
+      // this._facingMode = (this._facingMode == 'user') ? 'enviroment' : 'user';
+      // this._webcamElement.style.transform = "";
+      // this.selectCamera();
+      if (this._webcamElement.style.transform == "") {
+        this._webcamElement.style.transform = "scale(-1,1)";
+      } else {
+        this._webcamElement.style.transform = "";
+      }
     }
     /*
       1. Get permission from user

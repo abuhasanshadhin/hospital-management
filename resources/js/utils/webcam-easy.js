@@ -74,9 +74,15 @@ export default class Webcam {
 
     /* Change Facing mode and selected camera */
     flip() {
-        this._facingMode = (this._facingMode == 'user') ? 'enviroment' : 'user';
-        this._webcamElement.style.transform = "";
-        this.selectCamera();
+        // this._facingMode = (this._facingMode == 'user') ? 'enviroment' : 'user';
+        // this._webcamElement.style.transform = "";
+        // this.selectCamera();
+
+        if (this._webcamElement.style.transform == "") {
+            this._webcamElement.style.transform = "scale(-1,1)";
+        } else {
+            this._webcamElement.style.transform = "";
+        }
     }
 
     /*
