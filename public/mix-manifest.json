@@ -3,6 +3,7 @@
     "/css/app.css": "/css/app.css",
     "/js/chunks/acl.js": "/js/chunks/acl.js",
     "/js/chunks/acl~appointment~department~doctors~patients~prescription.js": "/js/chunks/acl~appointment~department~doctors~patients~prescription.js",
+    "/js/chunks/acl~department.js": "/js/chunks/acl~department.js",
     "/js/chunks/appointment.js": "/js/chunks/appointment.js",
     "/js/chunks/appointment-add.js": "/js/chunks/appointment-add.js",
     "/js/chunks/appointment-edit.js": "/js/chunks/appointment-edit.js",

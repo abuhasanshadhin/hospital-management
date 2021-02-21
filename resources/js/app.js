@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import axios from 'axios'
-import App from './views/App'
+import App from './pages/App'
 import routes from './routes'
 import store from './store'
 import vSelect from 'vue-select'
@@ -17,7 +17,7 @@ Vue.use(VueRouter)
 Vue.component('v-select', vSelect)
 Vue.component('date-picker', DatePicker)
 
-let domain = window.location.origin + '/hospital'
+let domain = window.location.origin
 let apiBaseURL = `${domain}/api/`
 window.publicPath = `${domain}/public`
 
@@ -48,7 +48,7 @@ window.snackbar = {
 }
 
 const router = new VueRouter({
-    base: 'hospital',
+    base: '/',
     routes,
     mode: 'history'
 })

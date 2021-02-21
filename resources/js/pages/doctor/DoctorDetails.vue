@@ -96,7 +96,7 @@
                             <div class="text-center">
                                 <b><u>Education / Degree</u></b>
                             </div>
-                            <div class="education text-center">
+                            <div class="education">
                                 {{ doctor.education }}
                             </div>
                         </div>

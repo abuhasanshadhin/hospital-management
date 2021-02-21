@@ -25,16 +25,8 @@
                                     {{ doctor.name }}
                                 </div>
                                 <div style="line-height: 1.1">
-                                    <small
-                                        class="text-uppercase"
-                                        style="font-size: 75%"
-                                    >
-                                        <b
-                                            ><i class="fa fa-building"></i>
-                                            Department :</b
-                                        >
-                                        {{ doctor.department_name }}
-                                    </small>
+                                    <b>Department :</b>
+                                    {{ doctor.department_name }}
                                 </div>
                             </div>
                             <div class="float-right">

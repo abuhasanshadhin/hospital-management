@@ -36,9 +36,11 @@
                             <div class="col-md-6">
                                 <table class="table table-sm table-borderless">
                                     <tr>
-                                        <th>Patient ID</th>
+                                        <th>Patient Code</th>
                                         <td>:</td>
-                                        <td>{{ patient.code }}</td>
+                                        <td>
+                                            <b>{{ patient.code }}</b>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th>Full Name</th>

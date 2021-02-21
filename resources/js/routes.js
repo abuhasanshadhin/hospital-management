@@ -1,50 +1,50 @@
 export default [
     {
         path: '/',
-        component: () => import(/* webpackChunkName: "dashboard" */ './views/dashboard/Index')
+        component: () => import(/* webpackChunkName: "dashboard" */ './pages/dashboard/Index')
     },
     {
         path: '/department',
-        component: () => import(/* webpackChunkName: "department" */ './views/department/DepartmentList')
+        component: () => import(/* webpackChunkName: "department" */ './pages/department/DepartmentList')
     },
     {
         path: '/doctors',
-        component: () => import(/* webpackChunkName: "doctors" */ './views/doctor/DoctorList')
+        component: () => import(/* webpackChunkName: "doctors" */ './pages/doctor/DoctorList')
     },
     {
         path: '/doctor/:id?',
-        component: () => import(/* webpackChunkName: "doctor" */ './views/doctor/Doctor')
+        component: () => import(/* webpackChunkName: "doctor" */ './pages/doctor/Doctor')
     },
     {
         path: '/patients',
-        component: () => import(/* webpackChunkName: "patients" */ './views/patient/PatientList')
+        component: () => import(/* webpackChunkName: "patients" */ './pages/patient/PatientList')
     },
     {
         path: '/patient/:id?',
-        component: () => import(/* webpackChunkName: "patient" */ './views/patient/Patient')
+        component: () => import(/* webpackChunkName: "patient" */ './pages/patient/Patient')
     },
     {
         path: '/appointment',
-        component: () => import(/* webpackChunkName: "appointment" */ './views/appointment/Index')
+        component: () => import(/* webpackChunkName: "appointment" */ './pages/appointment/Index')
     },
     {
         path: '/appointment/add',
-        component: () => import(/* webpackChunkName: "appointment-add" */ './views/appointment/Create')
+        component: () => import(/* webpackChunkName: "appointment-add" */ './pages/appointment/Create')
     },
     {
         path: '/appointment/:id/edit',
-        component: () => import(/* webpackChunkName: "appointment-edit" */ './views/appointment/Edit')
+        component: () => import(/* webpackChunkName: "appointment-edit" */ './pages/appointment/Edit')
     },
     {
         path: '/appointment/report',
-        component: () => import(/* webpackChunkName: "appointment-report" */ './views/appointment/Report')
+        component: () => import(/* webpackChunkName: "appointment-report" */ './pages/appointment/Report')
     },
     {
         path: '/prescription',
-        component: () => import(/* webpackChunkName: "prescription" */ './views/prescription/Index')
+        component: () => import(/* webpackChunkName: "prescription" */ './pages/prescription/Index')
     },
     {
         path: '/settings/acl',
-        component: () => import(/* webpackChunkName: "acl" */ './views/settings/acl/Index')
+        component: () => import(/* webpackChunkName: "acl" */ './pages/settings/acl/Index')
     },
 ]
